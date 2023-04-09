@@ -11,12 +11,13 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="my-5 form-control w-full max-w-xs">
+    <label class="label">
+      <%= form.label :name, class: "label-text" %>
+    </label>
+    <%= form.text_field :name, class: "input input-bordered w-full max-w-xs" %>
   </div>
-
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

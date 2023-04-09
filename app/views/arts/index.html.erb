@@ -5,10 +5,10 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Arts</h1>
-    <%= link_to 'New art', new_art_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to 'New art', new_art_path, class: "btn btn-primary" %>
   </div>
 
-  <div id="arts" class="min-w-full">
-    <%= render "shared/lists/arts" %>
+  <div id="arts" class="min-w-full grid grid-cols-3 gap-4">
+    <%= render @arts %>
   </div>
 </div>

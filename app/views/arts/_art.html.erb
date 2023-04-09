@@ -1,12 +1,12 @@
-<div id="<%= dom_id art %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= art.name %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this art", art, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this art', edit_art_path(art), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+<div id="<%= dom_id art %>" class="card bg-base-100 shadow-xl">
+  <div class="w-96 bg-base-100"></div>
+  <div class="card-body">
+    <h2 class="card-title"><%= art.name %></h2>
+    <div class="card-actions justify-end">
+      <% if action_name != "show" %>
+        <%= link_to "Show this art", art, class: "btn" %>
+        <%= link_to 'Edit this art', edit_art_path(art), class: "btn" %>
+      <% end %>
+    </div>
+  </div>
 </div>

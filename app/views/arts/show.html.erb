@@ -1,15 +1,13 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
+<div class="mx-auto md:w-2/3 w-full grid grid-flow-row gap-4">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
 
-    <%= render @art %>
+  <%= render @art %>
 
-    <%= link_to 'Edit this art', edit_art_path(@art), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this art', art_path(@art), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-    <%= link_to 'Back to arts', arts_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <div class="grid grid-cols-3 gap-2">
+    <%= link_to 'Edit this art', edit_art_path(@art), class: "btn w-full" %>
+    <%= button_to 'Destroy this art', art_path(@art), method: :delete, class: "btn btn-error w-full" %>
+    <%= link_to 'Back to arts', arts_path, class: "btn w-full" %>
   </div>
 </div>
