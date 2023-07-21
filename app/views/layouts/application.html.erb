@@ -6,14 +6,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js", integrity: "sha512-bcfltY+lNLlNxz38yBBm/HLaUB1gTV6I0e+fahbF9pS6roIdzUytozWdnFV8ZnM6cSAG5EbmO0ag0a/fLZSG4Q==", crossorigin: "anonymous", referrerpolicy: "no-referrer" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <%= render "shared/components/navbar" %>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="flex pt-16 min-h-screen">
       <%= yield %>
     </main>
   </body>

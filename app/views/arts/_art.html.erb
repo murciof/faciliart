@@ -4,8 +4,8 @@
     <h2 class="card-title"><%= art.name %></h2>
     <div class="card-actions justify-end">
       <% if action_name != "show" %>
-        <%= link_to "Show this art", art, class: "btn" %>
-        <%= link_to 'Edit this art', edit_art_path(art), class: "btn" %>
+        <%= link_to "Show this art", art, class: "btn", data: {turbo: false} %>
+        <%= link_to 'Edit this art', edit_art_path(art), class: "btn", data: {turbo: false} %>
       <% end %>
     </div>
   </div>

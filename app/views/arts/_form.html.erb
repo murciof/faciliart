@@ -1,3 +1,15 @@
+<script>
+  function setup() {
+    var canvas = createCanvas(400,400)
+    canvas.parent('p5js')
+  }
+
+  function draw() {
+    background(220)
+    ellipse(50,50,80,80)
+  }
+</script>
+
 <%= form_with(model: art, class: "contents") do |form| %>
   <% if art.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -11,13 +23,29 @@
     </div>
   <% end %>
 
-  <div class="my-5 form-control w-full max-w-xs">
-    <label class="label">
-      <%= form.label :name, class: "label-text" %>
-    </label>
-    <%= form.text_field :name, class: "input input-bordered w-full max-w-xs" %>
+  <div class="flex flex-row h-full">
+    <div class="flex form-control flex-1 gap-4 p-6">
+      <div>
+        <label class="label">
+          <%= form.label :name, class: "label-text" %>
+        </label>
+        <%= form.text_field :name, class: "input input-bordered w-full" %>
+      </div>
+      <div class="flex flex-row gap-2">
+        <% @generator_types_list.each do |generator_type_element| %>
+          <%= form.radio_button :generator_type, generator_type_element, class: "hidden peer/" + generator_type_element.downcase, id: generator_type_element.downcase %>
+          <%= label_tag generator_type_element.downcase, generator_type_element, class: "flex flex-1 btn justify-center items-center peer-checked/" + generator_type_element.downcase + ":bg-primary" %>
+        <% end %>
+      </div>
+      <div class="flex flex-row gap-2 w-full">
+        <%= form.submit class: "btn btn-primary flex-1" %>
+        <%= link_to "Back to arts", arts_path, class: "btn flex-1" %>
+      </div>
+    </div>
+    <div class="flex justify-center items-center flex-1 bg-black">
+      <div id="p5js">
+      </div>
+    </div>
   </div>
-  <div class="inline">
-    <%= form.submit class: "btn btn-primary" %>
-  </div>
+  
 <% end %>

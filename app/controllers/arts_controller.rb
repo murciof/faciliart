@@ -1,5 +1,5 @@
 class ArtsController < ApplicationController
-  before_action :set_art, only: %i[ show edit update destroy ]
+  before_action :set_art, only: %i[show edit update destroy]
 
   # GET /arts or /arts.json
   def index
@@ -7,16 +7,17 @@ class ArtsController < ApplicationController
   end
 
   # GET /arts/1 or /arts/1.json
-  def show
-  end
+  def show; end
 
   # GET /arts/new
   def new
     @art = Art.new
+    @generator_types_list = %w[Line Curve Polygon]
   end
 
   # GET /arts/1/edit
   def edit
+    @generator_types_list = %w[Line Curve Polygon]
   end
 
   # POST /arts or /arts.json
@@ -25,7 +26,7 @@ class ArtsController < ApplicationController
 
     respond_to do |format|
       if @art.save
-        format.html { redirect_to art_url(@art), notice: "Art was successfully created." }
+        format.html { redirect_to art_url(@art), notice: 'Art was successfully created.' }
         format.json { render :show, status: :created, location: @art }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class ArtsController < ApplicationController
   def update
     respond_to do |format|
       if @art.update(art_params)
-        format.html { redirect_to art_url(@art), notice: "Art was successfully updated." }
+        format.html { redirect_to art_url(@art), notice: 'Art was successfully updated.' }
         format.json { render :show, status: :ok, location: @art }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +53,20 @@ class ArtsController < ApplicationController
     @art.destroy
 
     respond_to do |format|
-      format.html { redirect_to arts_url, notice: "Art was successfully destroyed." }
+      format.html { redirect_to arts_url, notice: 'Art was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_art
-      @art = Art.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def art_params
-      params.require(:art).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_art
+    @art = Art.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def art_params
+    params.require(:art).permit(:name, :generator_type)
+  end
 end

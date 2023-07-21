@@ -23,5 +23,9 @@ module.exports = {
   ],
   daisyui: {
     themes: ["light"],
-  }
+  },
+  safelist: [
+    'peer-checked/line:bg-primary','peer-checked/curve:bg-primary','peer-checked/polygon:bg-primary',
+  ],
+  
 }
