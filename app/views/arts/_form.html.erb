@@ -32,9 +32,9 @@
         <%= form.text_field :name, class: "input input-bordered w-full" %>
       </div>
       <div class="flex flex-row gap-2">
-        <% @generator_types_list.each do |generator_type_element| %>
-          <%= form.radio_button :generator_type, generator_type_element, class: "hidden peer/" + generator_type_element.downcase, id: generator_type_element.downcase %>
-          <%= label_tag generator_type_element.downcase, generator_type_element, class: "flex flex-1 btn justify-center items-center peer-checked/" + generator_type_element.downcase + ":bg-primary" %>
+        <% ArtsController::GENERATOR_TYPES.each do |element| %>
+          <%= form.radio_button :generator_type, element, class: "hidden peer/" + element.downcase, id: element.downcase %>
+          <%= label_tag element.downcase, element, class: "flex flex-1 btn justify-center items-center peer-checked/" + element.downcase + ":bg-primary" %>
         <% end %>
       </div>
       <div class="flex flex-row gap-2 w-full">

@@ -1,6 +1,8 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: %i[show edit update destroy]
 
+  GENERATOR_TYPES = %w[Line Curve Polygon].freeze
+
   # GET /arts or /arts.json
   def index
     @arts = Art.all
@@ -12,13 +14,10 @@ class ArtsController < ApplicationController
   # GET /arts/new
   def new
     @art = Art.new
-    @generator_types_list = %w[Line Curve Polygon]
   end
 
   # GET /arts/1/edit
-  def edit
-    @generator_types_list = %w[Line Curve Polygon]
-  end
+  def edit; end
 
   # POST /arts or /arts.json
   def create
