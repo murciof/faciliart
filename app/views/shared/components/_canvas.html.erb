@@ -1,0 +1,14 @@
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  import * as Canvas from 'lib/canvas'
+  window.ArtGenerator = ArtGenerator
+  window.Canvas = Canvas
+</script>
+
+<script type="application/javascript">
+  function setup() {
+    var canvas = createCanvas(400,400)
+    canvas.parent('p5js')
+    background(255)
+  }
+</script>
