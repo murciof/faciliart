@@ -6,10 +6,25 @@
 </script>
 
 <script type="application/javascript">
+  var layers = new Array()
+
   function setup() {
     var canvas = createCanvas(400,400)
     canvas.parent('p5js')
     background(255)
+  }
+  // TODO - REFACTOR
+  var points_slider_element = document.getElementById("slider-points")
+  var points_value_element = document.getElementById("slider-points-value")
+  var stroke_slider_element = document.getElementById("slider-stroke")
+  var stroke_value_element = document.getElementById("slider-stroke-value")
+  points_value_element.innerHTML = points_slider_element.value
+  points_slider_element.oninput = function () {
+    points_value_element.innerHTML = this.value
+  }
+  stroke_value_element.innerHTML = stroke_slider_element.value
+  stroke_slider_element.oninput = function () {
+    stroke_value_element.innerHTML = this.value
   }
 </script>
 
