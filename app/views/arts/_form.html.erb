@@ -2,7 +2,6 @@
   <% if art.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(art.errors.count, "error") %> prohibited this art from being saved:</h2>
-
       <ul>
         <% art.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="flex flex-row h-full">
     <div class="flex form-control flex-1 gap-4 p-6">
       <div class="flex flex-col gap-1">
@@ -41,7 +39,6 @@
           </div>
         </div>
       </div>
-      
       <%= link_to "Generate art", "javascript:void(0)", onClick: "ArtGenerator.create_layer(layers)", class: "btn" %>
       <div class="flex flex-col gap-2" id="layers">
       </div>
@@ -58,5 +55,4 @@
       <%= render "shared/components/canvas" %>
     </div>
   </div>
-  
 <% end %>

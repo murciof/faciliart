@@ -2,12 +2,10 @@
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
-
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Arts</h1>
     <%= link_to 'New art', new_art_path, class: "btn btn-primary", data: {turbo: false} %>
   </div>
-
   <div id="arts" class="min-w-full grid grid-cols-3 gap-4">
     <%= render @arts %>
   </div>
