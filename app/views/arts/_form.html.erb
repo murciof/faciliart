@@ -1,3 +1,11 @@
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  import * as Canvas from 'lib/canvas'
+  import * as Input from 'lib/input'
+  window.ArtGenerator = ArtGenerator
+  window.Canvas = Canvas
+  window.Input = Input
+</script>
 <%= form_with(model: art, class: "contents") do |form| %>
   <% if art.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -23,20 +31,8 @@
       </div>
       <div id="parameters">
         <div class="flex flex-col gap-4" id="parameters-line">
-          <div class="flex flex-col gap-1">
-            <label class="label-text">Points</label>
-            <div class="flex flex-row items-center gap-4">
-              <input type="range" min="0" max="100" value="50" class="range" id="slider-points" />
-              <div class="w-4 label-text" id="slider-points-value"></div>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1">
-            <label class="label-text">Stroke</label>
-            <div class="flex flex-row items-center gap-4">
-              <input type="range" min="1" max="10" value="1" class="range" step="1" id="slider-stroke" />
-              <div class="w-4 label-text" id="slider-stroke-value"></div>
-            </div>
-          </div>
+          <%= render "shared/components/input/slider", min: 0, max: 100, value: 50, step: nil, element: "points" %>
+          <%= render "shared/components/input/slider", min: 1, max: 10, value: 50, step: 1, element: "stroke" %>
         </div>
       </div>
       <%= link_to "Generate art", "javascript:void(0)", onClick: "ArtGenerator.create_layer(layers)", class: "btn" %>

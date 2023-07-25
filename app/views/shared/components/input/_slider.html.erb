@@ -1,0 +1,12 @@
+<div class="flex flex-col gap-1">
+  <%= label_tag "slider-" + element, element.capitalize, class: "label-text" %>
+  <div class="flex flex-row items-center gap-4">
+    <%= content_tag :input, class: "range", type: "range", id: "slider-" + element, min: min, max: max, value: value, step: step, oninput: "Input.refresh_slider_value(this.value, this.id)" do; end %>
+    <%= content_tag :div, class: "w-4 label-text", id: "slider-" + element + "-value", min: min, max: max, value: value, step: step do; end %>
+  </div>
+</div>
+<script>
+  this['slider-' + '<%= element %>'] = document.getElementById('slider-' + '<%= element %>')
+  this['slider-' + '<%= element %>' + '-value'] = document.getElementById('slider-' + '<%= element %>' + '-value')
+  this['slider-' + '<%= element %>' + '-value'].innerHTML = this['slider-' + '<%= element %>'].value
+</script>
