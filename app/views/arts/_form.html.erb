@@ -2,9 +2,11 @@
   import * as ArtGenerator from 'lib/art_generator'
   import * as Canvas from 'lib/canvas'
   import * as Input from 'lib/input'
+  import * as UserInterface from 'lib/user_interface'
   window.ArtGenerator = ArtGenerator
   window.Canvas = Canvas
   window.Input = Input
+  window.UserInterface = UserInterface
 </script>
 <%= form_with(model: art, class: "contents") do |form| %>
   <% if art.errors.any? %>
@@ -24,16 +26,25 @@
         <%= form.text_field :name, class: "input input-bordered w-full" %>
       </div>
       <div class="flex flex-row gap-2">
-        <% ArtsController::GENERATOR_TYPES.each do |element| %>
-          <%= form.radio_button :generator_type, element, class: "hidden peer/" + element.downcase, id: element.downcase %>
-          <%= label_tag element.downcase, element, class: "flex flex-1 btn justify-center items-center peer-checked/" + element.downcase + ":bg-primary" %>
+        <% ArtsController::GENERATORS.each do |generator| %>
+          <%= form.radio_button :generator_type, generator[:generator], class: "hidden peer/" + generator[:generator], id: generator[:generator], onClick: 'UserInterface.switch_category_visibility("parameters","' + generator[:generator] + '")' %>
+          <%= label_tag generator[:generator], generator[:generator], class: "flex flex-1 btn justify-center items-center peer-checked/" + generator[:generator] + ":bg-primary" %>
         <% end %>
       </div>
       <div id="parameters">
-        <div class="flex flex-col gap-4" id="parameters-line">
-          <%= render "shared/components/input/slider", min: 0, max: 100, value: 50, step: nil, element: "points" %>
-          <%= render "shared/components/input/slider", min: 1, max: 10, value: 50, step: 1, element: "stroke" %>
-        </div>
+        <% ArtsController::GENERATORS.each do |generator| %>
+          <%= content_tag :div, class: "hidden flex-col gap-4", id: "parameters-" + generator[:generator] do %>
+            <% generator[:sliders].each do |slider| %>
+              <%= render "shared/components/input/slider",
+              min: slider[:min],
+              max: slider[:max],
+              value: slider[:value],
+              step: slider[:step],
+              generator: generator[:generator],
+              element: slider[:element] %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
       <%= link_to "Generate art", "javascript:void(0)", onClick: "ArtGenerator.create_layer(layers)", class: "btn" %>
       <div class="flex flex-col gap-2" id="layers">

@@ -1,7 +1,18 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: %i[show edit update destroy]
 
-  GENERATOR_TYPES = %w[Line Curve Polygon].freeze
+  GENERATORS = [{ generator: 'line',
+                  sliders: [{ element: 'points', min: '2', max: '100', value: '50' },
+                            { element: 'stroke', min: '1', max: '10', value: '50',
+                              step: '1' }] },
+                { generator: 'curve',
+                  sliders: [{ element: 'points', min: '4', max: '100', value: '50' },
+                            { element: 'stroke', min: '1', max: '10', value: '50',
+                              step: '1' }] },
+                { generator: 'polygon',
+                  sliders: [{ element: 'points', min: '3', max: '100', value: '50' },
+                            { element: 'stroke', min: '1', max: '10', value: '50',
+                              step: '1' }] }].freeze
 
   # GET /arts or /arts.json
   def index
