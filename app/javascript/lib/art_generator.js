@@ -1,5 +1,5 @@
 export function get_checked_generator() {
-  let generators_element = document.getElementsByName("art[generator_type]")
+  let generators_element = document.getElementsByName('art[generator_type]')
   for (let i = 0; i < generators_element.length; i++) {
     if (generators_element[i].checked) {
       var generator = generators_element[i].value
@@ -10,9 +10,9 @@ export function get_checked_generator() {
 }
 
 export function get_parameters(generator) {
-  const regex = RegExp("\\b(\\w+)$")
+  const regex = RegExp('\\b(\\w+)$')
   let parameters_elements = document.querySelectorAll(
-    "input[id^=parameter-" + generator + "]"
+    'input[id^=parameter-' + generator + ']'
   )
   let parameters_names = []
   for (let i = 0; i < parameters_elements.length; i++) {
@@ -39,8 +39,8 @@ export function generate_coordinates(points) {
 export function create_layer(layers) {
   let generator = get_checked_generator()
   let parameters = get_parameters(generator)
-  let data_element = document.getElementById("data")
-  if (typeof generator !== "undefined") {
+  let data_element = document.getElementById('data')
+  if (typeof generator !== 'undefined') {
     layers.push({
       generator: generator,
       coordinates: generate_coordinates(parameters.points),
@@ -53,7 +53,7 @@ export function create_layer(layers) {
 }
 
 export function delete_layer(layers, index) {
-  let data_element = document.getElementById("data")
+  let data_element = document.getElementById('data')
   layers.splice(index, 1)
   data_element.innerHTML = JSON.stringify(layers)
   render_layer_buttons(layers)
@@ -65,30 +65,30 @@ export function render_layers(layers) {
   background(255)
   for (let i = 0; i < layers.length; i++) {
     switch (layers[i].generator) {
-      case "line":
+      case 'line':
         draw_lines(layers[i].coordinates)
-      case "curve":
+      case 'curve':
       /* TODO - Fix Bug
       draw_curves(layers[i].coordinates)
       */
-      case "polygon":
+      case 'polygon':
       //
     }
   }
 }
 
 export function render_layer_buttons(layers) {
-  let layers_element = document.getElementById("layers")
-  layers_element.innerHTML = ""
+  let layers_element = document.getElementById('layers')
+  layers_element.innerHTML = ''
   for (let i = 0; i < layers.length; i++) {
     layers_element.innerHTML +=
       '<a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(layers, ' +
       i +
       ')" class="btn btn-outline w-full" id=layer-' +
       i +
-      ">" +
+      '>' +
       layers[i].generator +
-      "</a>"
+      '</a>'
   }
 }
 
