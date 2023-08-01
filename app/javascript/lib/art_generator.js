@@ -67,12 +67,13 @@ export function render_layers(layers) {
     switch (layers[i].generator) {
       case 'line':
         draw_lines(layers[i].coordinates)
+        break
       case 'curve':
-      /* TODO - Fix Bug
-      draw_curves(layers[i].coordinates)
-      */
+        draw_curves(layers[i].coordinates)
+        break
       case 'polygon':
-      //
+        draw_polygon(layers[i].coordinates)
+        break
     }
   }
 }
@@ -93,31 +94,30 @@ export function render_layer_buttons(layers) {
 }
 
 export function draw_lines(coordinates) {
-  for (let i = 0; i < coordinates.length - 1; i++) {
-    line(
-      coordinates[i].x,
-      coordinates[i].y,
-      coordinates[i + 1].x,
-      coordinates[i + 1].y
-    )
+  beginShape()
+  noFill()
+  for (let i = 0; i < coordinates.length; i++) {
+    vertex(coordinates[i].x, coordinates[i].y)
   }
+  endShape()
 }
 
 export function draw_curves(coordinates) {
-  for (let i = 0; i < coordinates.length - 3; i++) {
-    curve(
-      coordinates[i].x,
-      coordinates[i].y,
-      coordinates[i + 1].x,
-      coordinates[i + 1].y,
-      coordinates[i + 2].x,
-      coordinates[i + 2].y,
-      coordinates[i + 3].x,
-      coordinates[i + 3].y
-    )
+  beginShape()
+  noFill()
+  for (let i = 0; i < coordinates.length; i++) {
+    curveVertex(coordinates[i].x, coordinates[i].y)
   }
+  endShape()
 }
 
 export function draw_polygon(coordinates) {
-  //
+  beginShape()
+  noFill()
+  vertex(coordinates[0].x, coordinates[0].y)
+  for (let i = 0; i < coordinates.length; i++) {
+    vertex(coordinates[i].x, coordinates[i].y)
+  }
+  vertex(coordinates[0].x, coordinates[0].y)
+  endShape()
 }
