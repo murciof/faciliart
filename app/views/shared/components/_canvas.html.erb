@@ -1,10 +1,14 @@
 <script type="application/javascript">
-  var layers = new Array()
-
+  let data_element = document.getElementById('data')
+  let layers = new Array()
+  if(data_element.innerHTML.length != 0){
+    layers = JSON.parse(data_element.innerHTML)
+  }
   function setup() {
     var canvas = createCanvas(400,400)
     canvas.parent('p5js')
     background(255)
+    ArtGenerator.render_layers(layers)
   }
 </script>
 <div id="p5js">
