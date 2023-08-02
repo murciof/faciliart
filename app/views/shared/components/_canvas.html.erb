@@ -1,5 +1,6 @@
 <script type="application/javascript">
   var <%= id %>_layers = new Array()
+  var <%= id %>_p5 = 1
   <% if art_data.length > 0 %>
     <%= id %>_layers = JSON.parse(<%= art_data.to_json.html_safe %>)
   <% else %>
@@ -11,13 +12,17 @@
 
   var <%= id %>_p5init = p5 => {
     p5.setup = function() {
-      let canvas = p5.createCanvas(400,400)      
+      let canvas = p5.createCanvas(400,400)
+      <% if isStatic %>
+        ArtGenerator.render_layers(<%= id %>_layers, p5)
+      <% end %>
     }
-    p5.draw = function(){
-      ArtGenerator.render_layers(<%= id %>_layers, p5)
-    }
+    <% unless isStatic %>
+      p5.draw = function() {
+        ArtGenerator.render_layers(<%= id %>_layers, p5)
+      }
+    <% end %>
   }
-
-  new p5(<%= id %>_p5init, "<%= id %>" + "-p5js")
+  new p5(<%= id %>_p5init, "<%= id %>" + "_p5js")
 </script>
-<%= content_tag :div, id: id + "-p5js" do; end %>
+<%= content_tag :div, id: id + "_p5js" do; end %>

@@ -36,7 +36,7 @@ export function generate_coordinates(points) {
   return coordinates
 }
 
-export function create_layer(layers, p5) {
+export function create_layer(layers) {
   let generator = get_checked_generator()
   let parameters = get_parameters(generator)
   let data_element = document.getElementById('data')
@@ -48,7 +48,6 @@ export function create_layer(layers, p5) {
     })
     data_element.innerHTML = JSON.stringify(layers)
     render_layer_buttons(layers)
-    render_layers(layers, p5)
   }
 }
 
@@ -57,7 +56,6 @@ export function delete_layer(layers, index) {
   layers.splice(index, 1)
   data_element.innerHTML = JSON.stringify(layers)
   render_layer_buttons(layers)
-  render_layers(layers)
 }
 
 export function render_layers(layers, p5) {

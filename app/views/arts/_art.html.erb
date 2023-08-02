@@ -10,7 +10,7 @@
 </script>
 
 <%= link_to art, class: "flex justify-center items-center bg-black shadow-xl", id: (dom_id art), data: {turbo: false} do %>
-  <%= render "shared/components/canvas", art_data: art.data, id: (dom_id art) %>
+  <%= render "shared/components/canvas", art_data: art.data, id: (dom_id art), isStatic: true %>
 <% end %>
 
 <% if false %>
