@@ -84,13 +84,15 @@ export function render_layer_buttons(layers) {
   layers_element.innerHTML = ''
   for (let i = 0; i < layers.length; i++) {
     layers_element.innerHTML +=
-      '<a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_layers, ' +
+      '<div id=layer-' +
       i +
-      ')" class="btn btn-outline w-full" id=layer-' +
-      i +
-      '>' +
+      ' class="flex flex-row justify-between"><div>' +
       layers[i].generator +
-      '</a>'
+      '</div><div class="flex flex-row gap-2"><a href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_layers, ' +
+      i +
+      ')">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_layers, ' +
+      i +
+      ')">Del</a></div></div>'
   }
 }
 
