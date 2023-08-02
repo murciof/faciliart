@@ -1,15 +1,23 @@
 <script type="application/javascript">
-  let data_element = document.getElementById('data')
-  let layers = new Array()
-  if(data_element.innerHTML.length != 0){
-    layers = JSON.parse(data_element.innerHTML)
+  var <%= id %>_layers = new Array()
+  <% if art_data.length > 0 %>
+    <%= id %>_layers = JSON.parse(<%= art_data.to_json.html_safe %>)
+  <% else %>
+    let data_element = document.getElementById('data')
+    if(data_element.innerHTML.length != 0){
+      <%= id %>_layers = JSON.parse(data_element.innerHTML)
+    }
+  <% end %>
+
+  var <%= id %>_p5init = p5 => {
+    p5.setup = function() {
+      let canvas = p5.createCanvas(400,400)      
+    }
+    p5.draw = function(){
+      ArtGenerator.render_layers(<%= id %>_layers, p5)
+    }
   }
-  function setup() {
-    var canvas = createCanvas(400,400)
-    canvas.parent('p5js')
-    background(255)
-    ArtGenerator.render_layers(layers)
-  }
+
+  new p5(<%= id %>_p5init, "<%= id %>" + "-p5js")
 </script>
-<div id="p5js">
-</div>
+<%= content_tag :div, id: id + "-p5js" do; end %>

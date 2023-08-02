@@ -46,7 +46,7 @@
           <% end %>
         <% end %>
       </div>
-      <%= link_to "Generate art", "javascript:void(0)", onClick: "ArtGenerator.create_layer(layers)", class: "btn" %>
+      <%= link_to "Generate art", "javascript:void(0)", onClick: "ArtGenerator.create_layer(art_editor_layers, art_editor_p5init)", class: "btn" %>
       <div class="flex flex-col gap-2" id="layers">
       </div>
       <div class="flex flex-col gap-1">
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="flex justify-center items-center flex-1 bg-black overflow-auto">
-      <%= render "shared/components/canvas" %>
+      <%= render "shared/components/canvas", art_data: [], id: "art_editor" %>
     </div>
   </div>
 <% end %>

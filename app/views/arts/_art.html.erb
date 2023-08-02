@@ -1,3 +1,19 @@
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  import * as Canvas from 'lib/canvas'
+  import * as Input from 'lib/input'
+  import * as UserInterface from 'lib/user_interface'
+  window.ArtGenerator = ArtGenerator
+  window.Canvas = Canvas
+  window.Input = Input
+  window.UserInterface = UserInterface
+</script>
+
+<%= link_to art, class: "flex justify-center items-center bg-black shadow-xl", id: (dom_id art), data: {turbo: false} do %>
+  <%= render "shared/components/canvas", art_data: art.data, id: (dom_id art) %>
+<% end %>
+
+<% if false %>
 <div id="<%= dom_id art %>" class="card bg-base-100 shadow-xl">
   <div class="w-96 bg-base-100"></div>
   <div class="card-body">
@@ -10,3 +26,4 @@
     </div>
   </div>
 </div>
+<% end %>

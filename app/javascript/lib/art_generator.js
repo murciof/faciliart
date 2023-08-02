@@ -36,7 +36,7 @@ export function generate_coordinates(points) {
   return coordinates
 }
 
-export function create_layer(layers) {
+export function create_layer(layers, p5) {
   let generator = get_checked_generator()
   let parameters = get_parameters(generator)
   let data_element = document.getElementById('data')
@@ -48,7 +48,7 @@ export function create_layer(layers) {
     })
     data_element.innerHTML = JSON.stringify(layers)
     render_layer_buttons(layers)
-    render_layers(layers)
+    render_layers(layers, p5)
   }
 }
 
@@ -60,21 +60,24 @@ export function delete_layer(layers, index) {
   render_layers(layers)
 }
 
-export function render_layers(layers) {
-  clear()
-  background(255)
+export function render_layers(layers, p5) {
+  p5.clear()
+  p5.background(255)
   for (let i = 0; i < layers.length; i++) {
+    p5.beginShape()
+    p5.noFill()
     switch (layers[i].generator) {
       case 'line':
-        draw_lines(layers[i].coordinates)
+        draw_lines(layers[i].coordinates, p5)
         break
       case 'curve':
-        draw_curves(layers[i].coordinates)
+        draw_curves(layers[i].coordinates, p5)
         break
       case 'polygon':
-        draw_polygon(layers[i].coordinates)
+        draw_polygon(layers[i].coordinates, p5)
         break
     }
+    p5.endShape()
   }
 }
 
@@ -83,7 +86,7 @@ export function render_layer_buttons(layers) {
   layers_element.innerHTML = ''
   for (let i = 0; i < layers.length; i++) {
     layers_element.innerHTML +=
-      '<a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(layers, ' +
+      '<a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_layers, ' +
       i +
       ')" class="btn btn-outline w-full" id=layer-' +
       i +
@@ -93,31 +96,22 @@ export function render_layer_buttons(layers) {
   }
 }
 
-export function draw_lines(coordinates) {
-  beginShape()
-  noFill()
+export function draw_lines(coordinates, p5) {
   for (let i = 0; i < coordinates.length; i++) {
-    vertex(coordinates[i].x, coordinates[i].y)
+    p5.vertex(coordinates[i].x, coordinates[i].y)
   }
-  endShape()
 }
 
-export function draw_curves(coordinates) {
-  beginShape()
-  noFill()
+export function draw_curves(coordinates, p5) {
   for (let i = 0; i < coordinates.length; i++) {
-    curveVertex(coordinates[i].x, coordinates[i].y)
+    p5.curveVertex(coordinates[i].x, coordinates[i].y)
   }
-  endShape()
 }
 
-export function draw_polygon(coordinates) {
-  beginShape()
-  noFill()
-  vertex(coordinates[0].x, coordinates[0].y)
+export function draw_polygon(coordinates, p5) {
+  p5.vertex(coordinates[0].x, coordinates[0].y)
   for (let i = 0; i < coordinates.length; i++) {
-    vertex(coordinates[i].x, coordinates[i].y)
+    p5.vertex(coordinates[i].x, coordinates[i].y)
   }
-  vertex(coordinates[0].x, coordinates[0].y)
-  endShape()
+  p5.vertex(coordinates[0].x, coordinates[0].y)
 }
