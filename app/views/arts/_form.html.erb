@@ -1,12 +1,14 @@
 <script type="module">
   import * as ArtGenerator from 'lib/art_generator'
-  import * as Canvas from 'lib/canvas'
   import * as Input from 'lib/input'
   import * as UserInterface from 'lib/user_interface'
   window.ArtGenerator = ArtGenerator
-  window.Canvas = Canvas
   window.Input = Input
   window.UserInterface = UserInterface
+  <% if action_name == 'edit' %>
+    UserInterface.update_editor_fields(JSON.parse(<%= art.data.to_json.html_safe %>))
+    ArtGenerator.render_layer_buttons(JSON.parse(<%= art.data.to_json.html_safe %>))
+  <% end %>
 </script>
 <%= form_with(model: art, class: "contents") do |form| %>
   <% if art.errors.any? %>
@@ -26,6 +28,20 @@
           <%= form.label :name, class: "label-text" %>
           <%= form.text_field :name, class: "input input-bordered w-full" %>
         </div>
+        <div class="flex flex-row gap-4">
+          <div class="flex-col gap-1 flex-1">
+          <%= label_tag "parameter-width-label", "Width", class: "label-text" %>
+          <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-width", oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
+          </div>
+          <div class="flex-col gap-1 flex-1">
+          <%= label_tag "parameter-height-label", "Height", class: "label-text" %>
+          <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-height", oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
+          </div>
+        </div>
+        <div class="flex-col gap-1">
+          <%= label_tag "parameter-bg-label", "Background Color", class: "label-text" %>
+          <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-bg", oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
+          </div>
         <div class="flex flex-col gap-2" id="layers">
         </div>
         <%= link_to "New layer", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_main", "art_editor_generators")', class: "btn" %>
@@ -43,7 +59,8 @@
           <%= content_tag :div, class: "hidden flex-col gap-4", id: "parameters-" + generator[:generator] do %>
             <%= content_tag :div, class: "hidden flex-col gap-4", id: "parameters-" + generator[:generator] do %>
             <% end %>
-            <div class="text-2xl font-bold">Create <%= generator[:generator] %></div>
+            <div id="art_editor_parameters_create" class="hidden text-2xl font-bold">Create <%= generator[:generator] %></div>
+            <div id="art_editor_parameters_edit" class="hidden text-2xl font-bold">Edit <%= generator[:generator] %></div>
             <% generator[:sliders].each do |slider| %>
               <%= render "shared/components/input/slider",
               min: slider[:min],
@@ -56,8 +73,8 @@
           <% end %>
         <% end %>
         <div class="flex flex-row gap-2">
-          <%= link_to "Create layer", "javascript:void(0)", onClick: 'ArtGenerator.create_layer(art_editor_layers, art_editor_p5init);UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden flex-1", id: "art_editor_create_layer" %>
-          <%= link_to "Update layer", "javascript:void(0)", onClick: 'ArtGenerator.create_layer(art_editor_layers, art_editor_p5init);UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden flex-1", id: "art_editor_update_layer" %>
+          <%= link_to "Create layer", "javascript:void(0)", onClick: 'ArtGenerator.create_layer(art_editor_data, art_editor_p5init);UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden flex-1", id: "art_editor_create_layer" %>
+          <%= link_to "Update layer", "javascript:void(0)", onClick: 'ArtGenerator.create_layer(art_editor_data, art_editor_p5init);UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden flex-1", id: "art_editor_update_layer" %>
           <%= link_to "Back", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden btn-outline flex-1", id: "art_editor_back_to_main" %>
           <%= link_to "Back", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_generators")', class: "hidden btn-outline flex-1", id: "art_editor_back_to_generators" %>
         </div>

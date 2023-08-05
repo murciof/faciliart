@@ -53,6 +53,10 @@ export function render_action_buttons(operation) {
 
 export function render_layer_creator(generator) {
   switch_element_visibility('art_editor_generators', 'art_editor_parameters')
+  switch_element_visibility(
+    'art_editor_parameters_edit',
+    'art_editor_parameters_create'
+  )
   switch_element_with_prefix_visibility('parameters', generator)
   let points_element = document.getElementById(
     'parameter-' + generator + '-points'
@@ -62,9 +66,13 @@ export function render_layer_creator(generator) {
   render_action_buttons('create')
 }
 
-export function render_layer_editor(layers, index) {
-  let layer = layers[index]
+export function render_layer_editor(data, index) {
+  let layer = data['layers'][index]
   switch_element_visibility('art_editor_main', 'art_editor_parameters')
+  switch_element_visibility(
+    'art_editor_parameters_create',
+    'art_editor_parameters_edit'
+  )
   switch_element_with_prefix_visibility('parameters', layer.generator)
 
   for (let i = 0; i < Object.keys(layer.parameters).length; i++) {
@@ -82,4 +90,15 @@ export function render_layer_editor(layers, index) {
     points_element.disabled = true
   }
   render_action_buttons('edit')
+}
+
+export function update_editor_fields(data) {
+  console.log('test')
+  let width_element = document.getElementById('parameter-width')
+  let height_element = document.getElementById('parameter-height')
+  let bg_element = document.getElementById('parameter-bg')
+
+  width_element.value = data.general.width
+  height_element.value = data.general.height
+  bg_element.value = data.general.bg
 }

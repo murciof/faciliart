@@ -36,61 +36,77 @@ export function generate_coordinates(points) {
   return coordinates
 }
 
-export function create_layer(layers) {
+export function update_general_properties(data) {
+  let data_element = document.getElementById('data')
+  let width = document.getElementById('parameter-width').value
+  let height = document.getElementById('parameter-height').value
+  let bg = document.getElementById('parameter-bg').value
+
+  data['general'] = { width: width, height: height, bg: bg }
+
+  data_element.innerHTML = JSON.stringify(data)
+}
+
+export function create_layer(data) {
   let generator = get_checked_generator()
   let parameters = get_parameters(generator)
   let data_element = document.getElementById('data')
   if (typeof generator !== 'undefined') {
-    layers.push({
+    data['layers'].push({
       generator: generator,
       coordinates: generate_coordinates(parameters.points),
       parameters: parameters,
     })
-    data_element.innerHTML = JSON.stringify(layers)
-    render_layer_buttons(layers)
+    console.log(data)
+    data_element.innerHTML = JSON.stringify(data)
+    render_layer_buttons(data)
   }
 }
 
-export function delete_layer(layers, index) {
+export function delete_layer(data, index) {
   let data_element = document.getElementById('data')
-  layers.splice(index, 1)
-  data_element.innerHTML = JSON.stringify(layers)
-  render_layer_buttons(layers)
+  data['layers'].splice(index, 1)
+  data_element.innerHTML = JSON.stringify(data)
+  render_layer_buttons(data)
 }
 
-export function render_layers(layers, p5) {
+export function render_layers(data, bg, p5) {
   p5.clear()
-  p5.background(255)
-  for (let i = 0; i < layers.length; i++) {
+  if (bg) {
+    p5.background(bg)
+  } else {
+    p5.background(255)
+  }
+  for (let i = 0; i < data['layers'].length; i++) {
     p5.beginShape()
     p5.noFill()
-    switch (layers[i].generator) {
+    switch (data['layers'][i].generator) {
       case 'line':
-        draw_lines(layers[i].coordinates, p5)
+        draw_lines(data['layers'][i].coordinates, p5)
         break
       case 'curve':
-        draw_curves(layers[i].coordinates, p5)
+        draw_curves(data['layers'][i].coordinates, p5)
         break
       case 'polygon':
-        draw_polygon(layers[i].coordinates, p5)
+        draw_polygon(data['layers'][i].coordinates, p5)
         break
     }
     p5.endShape()
   }
 }
 
-export function render_layer_buttons(layers) {
+export function render_layer_buttons(data) {
   let layers_element = document.getElementById('layers')
   layers_element.innerHTML = ''
-  for (let i = 0; i < layers.length; i++) {
+  for (let i = 0; i < data['layers'].length; i++) {
     layers_element.innerHTML +=
       '<div id=layer-' +
       i +
       ' class="flex flex-row justify-between"><div>' +
-      layers[i].generator +
-      '</div><div class="flex flex-row gap-2"><a href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_layers, ' +
+      data['layers'][i].generator +
+      '</div><div class="flex flex-row gap-2"><a href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_data, ' +
       i +
-      ')">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_layers, ' +
+      ')">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
       i +
       ')">Del</a></div></div>'
   }

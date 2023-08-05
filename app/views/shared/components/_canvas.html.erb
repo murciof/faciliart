@@ -1,25 +1,33 @@
 <script type="application/javascript">
-  var <%= id %>_layers = new Array()
+  var <%= id %>_data = {general: {}, layers: [] }
   var <%= id %>_p5 = 1
   <% if art_data.length > 0 %>
-    <%= id %>_layers = JSON.parse(<%= art_data.to_json.html_safe %>)
+    <%= id %>_data = JSON.parse(<%= art_data.to_json.html_safe %>)
   <% else %>
     let data_element = document.getElementById('data')
     if(data_element.innerHTML.length != 0){
-      <%= id %>_layers = JSON.parse(data_element.innerHTML)
+      <%= id %>_data = JSON.parse(data_element.innerHTML)
     }
   <% end %>
-
   var <%= id %>_p5init = p5 => {
     p5.setup = function() {
-      let canvas = p5.createCanvas(400,400)
+      if(<%= id %>_data.general.width && <%= id %>_data.general.height){
+        let canvas = p5.createCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height)
+      } else {
+        let canvas = p5.createCanvas(400,400)
+      }
       <% if isStatic %>
-        ArtGenerator.render_layers(<%= id %>_layers, p5)
+        ArtGenerator.render_layers(<%= id %>_data, <%= id %>_data.general.bg,p5)
       <% end %>
     }
     <% unless isStatic %>
       p5.draw = function() {
-        ArtGenerator.render_layers(<%= id %>_layers, p5)
+        if(<%= id %>_data.general.width && <%= id %>_data.general.height){
+          p5.resizeCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height)
+        } else {
+          p5.resizeCanvas(400, 400)
+        }
+        ArtGenerator.render_layers(<%= id %>_data, <%= id %>_data.general.bg, p5)
       }
     <% end %>
   }
