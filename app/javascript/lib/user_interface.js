@@ -61,7 +61,12 @@ export function render_layer_creator(generator) {
   let points_element = document.getElementById(
     'parameter-' + generator + '-points'
   )
+  let points_element_value = document.getElementById(
+    'parameter-' + layer.generator + '-points-value'
+  )
   points_element.disabled = false
+  points_element.classList.remove('opacity-25')
+  points_element_value.classList.add('opacity-75')
 
   render_action_buttons('create')
 }
@@ -87,7 +92,12 @@ export function render_layer_editor(data, index) {
     let points_element = document.getElementById(
       'parameter-' + layer.generator + '-points'
     )
+    let points_element_value = document.getElementById(
+      'parameter-' + layer.generator + '-points-value'
+    )
     points_element.disabled = true
+    points_element.classList.add('opacity-25')
+    points_element_value.classList.add('opacity-75')
   }
   render_action_buttons('edit')
 }
