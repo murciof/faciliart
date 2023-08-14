@@ -57,10 +57,12 @@
       <div class="hidden flex-col flex-1 gap-2" id="art_editor_parameters">
         <% ArtsController::GENERATORS.each do |generator| %>
           <%= content_tag :div, class: "hidden flex-col gap-4", id: "parameters-" + generator[:generator] do %>
-            <%= content_tag :div, class: "hidden flex-col gap-4", id: "parameters-" + generator[:generator] do %>
+            <%= content_tag :div, class: "hidden text-2xl font-bold", id: "art_editor_parameters_" + generator[:generator] + "_create" do %>
+              Create <%= generator[:generator] %>
             <% end %>
-            <div id="art_editor_parameters_create" class="hidden text-2xl font-bold">Create <%= generator[:generator] %></div>
-            <div id="art_editor_parameters_edit" class="hidden text-2xl font-bold">Edit <%= generator[:generator] %></div>
+            <%= content_tag :div, class: "hidden text-2xl font-bold", id: "art_editor_parameters_" + generator[:generator] + "_edit" do %>
+              Edit <%= generator[:generator] %>
+            <% end %>
             <% generator[:sliders].each do |slider| %>
               <%= render "shared/components/input/slider",
               min: slider[:min],

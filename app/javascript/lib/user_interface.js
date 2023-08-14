@@ -54,8 +54,8 @@ export function render_action_buttons(operation) {
 export function render_layer_creator(generator) {
   switch_element_visibility('art_editor_generators', 'art_editor_parameters')
   switch_element_visibility(
-    'art_editor_parameters_edit',
-    'art_editor_parameters_create'
+    'art_editor_parameters_' + generator + '_edit',
+    'art_editor_parameters_' + generator + '_create'
   )
   switch_element_with_prefix_visibility('parameters', generator)
   let points_element = document.getElementById(
@@ -75,8 +75,8 @@ export function render_layer_editor(data, index) {
   let layer = data['layers'][index]
   switch_element_visibility('art_editor_main', 'art_editor_parameters')
   switch_element_visibility(
-    'art_editor_parameters_create',
-    'art_editor_parameters_edit'
+    'art_editor_parameters_' + layer.generator + '_create',
+    'art_editor_parameters_' + layer.generator + '_edit'
   )
   switch_element_with_prefix_visibility('parameters', layer.generator)
 
