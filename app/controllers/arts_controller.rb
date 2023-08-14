@@ -3,15 +3,15 @@ class ArtsController < ApplicationController
 
   GENERATORS = [{ generator: 'line',
                   sliders: [{ element: 'points', min: '2', max: '100', value: '50' },
-                            { element: 'stroke', min: '1', max: '10', value: '50',
+                            { element: 'stroke', min: '1', max: '10', value: '1',
                               step: '1' }] },
                 { generator: 'curve',
                   sliders: [{ element: 'points', min: '4', max: '100', value: '50' },
-                            { element: 'stroke', min: '1', max: '10', value: '50',
+                            { element: 'stroke', min: '1', max: '10', value: '1',
                               step: '1' }] },
                 { generator: 'polygon',
                   sliders: [{ element: 'points', min: '3', max: '100', value: '50' },
-                            { element: 'stroke', min: '1', max: '10', value: '50',
+                            { element: 'stroke', min: '1', max: '10', value: '1',
                               step: '1' }] }].freeze
 
   # GET /arts or /arts.json
