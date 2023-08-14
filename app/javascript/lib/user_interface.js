@@ -66,7 +66,7 @@ export function render_layer_creator(generator) {
   )
   points_element.disabled = false
   points_element.classList.remove('opacity-25')
-  points_element_value.classList.add('opacity-75')
+  points_element_value.classList.remove('opacity-75')
 
   render_action_buttons('create')
 }
