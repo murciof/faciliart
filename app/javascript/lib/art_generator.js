@@ -20,7 +20,11 @@ export function get_parameters(generator) {
   }
   let parameters = []
   for (let i = 0; i < parameters_names.length; i++) {
-    parameters[parameters_names[i]] = parameters_elements[i].value
+    if (parameters_elements[i].type == 'checkbox') {
+      parameters[parameters_names[i]] = parameters_elements[i].checked
+    } else {
+      parameters[parameters_names[i]] = parameters_elements[i].value
+    }
   }
   return Object.assign({}, parameters)
 }
@@ -57,7 +61,6 @@ export function create_layer(data) {
       coordinates: generate_coordinates(parameters.points),
       parameters: parameters,
     })
-    console.log(data)
     data_element.innerHTML = JSON.stringify(data)
     render_layer_buttons(data)
   }
@@ -78,8 +81,22 @@ export function render_layers(data, bg, p5) {
     p5.background(255)
   }
   for (let i = 0; i < data['layers'].length; i++) {
+    let color = ''
+    if (data['layers'][i].parameters.color != '') {
+      color = data['layers'][i].parameters.color
+    } else {
+      color = '#000000'
+    }
     p5.beginShape()
-    p5.noFill()
+
+    if (data['layers'][i].parameters.fill) {
+      p5.fill(color)
+    } else {
+      p5.noFill()
+    }
+
+    p5.stroke(color)
+    p5.strokeWeight(data['layers'][i].parameters.stroke)
     switch (data['layers'][i].generator) {
       case 'line':
         draw_lines(data['layers'][i].coordinates, p5)
