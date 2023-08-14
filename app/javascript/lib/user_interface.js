@@ -62,7 +62,7 @@ export function render_layer_creator(generator) {
     'parameter-' + generator + '-points'
   )
   let points_element_value = document.getElementById(
-    'parameter-' + layer.generator + '-points-value'
+    'parameter-' + generator + '-points-value'
   )
   points_element.disabled = false
   points_element.classList.remove('opacity-25')
