@@ -102,13 +102,13 @@ export function render_layer_buttons(data) {
     layers_element.innerHTML +=
       '<div id=layer-' +
       i +
-      ' class="flex flex-row justify-between"><div>' +
+      ' class="flex flex-col"><hr class="border-t border-black/20 mb-2 w-full"/><div class="flex flex-row justify-between"><div>' +
       data['layers'][i].generator +
       '</div><div class="flex flex-row gap-2"><a href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_data, ' +
       i +
       ')">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
       i +
-      ')">Del</a></div></div>'
+      ')">Del</a></div></div></div>'
   }
 }
 
