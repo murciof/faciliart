@@ -29,12 +29,12 @@ export function get_parameters(generator) {
   return Object.assign({}, parameters)
 }
 
-export function generate_coordinates(points) {
+export function generate_coordinates(points, width, height) {
   let coordinates = new Array()
   for (let i = 0; i < points; i++) {
     coordinates.push({
-      x: Math.floor(Math.random() * (400 - 0) + 0),
-      y: Math.floor(Math.random() * (400 - 0) + 0),
+      x: Math.floor(Math.random() * (width - 0) + 0),
+      y: Math.floor(Math.random() * (height - 0) + 0),
     })
   }
   return coordinates
@@ -58,11 +58,39 @@ export function create_layer(data) {
   if (typeof generator !== 'undefined') {
     data['layers'].push({
       generator: generator,
-      coordinates: generate_coordinates(parameters.points),
+      coordinates: generate_coordinates(
+        parameters.points,
+        data.general.width ? data.general.width : 400,
+        data.general.height ? data.general.height : 400
+      ),
       parameters: parameters,
     })
     data_element.innerHTML = JSON.stringify(data)
     render_layer_buttons(data)
+  }
+}
+
+export function update_layer(data, index) {
+  for (
+    let i = 0;
+    i < Object.keys(data['layers'][index].parameters).length;
+    i++
+  ) {
+    let element = document.getElementById(
+      'parameter-' +
+        data['layers'][index].generator +
+        '-' +
+        Object.keys(data['layers'][index].parameters)[i]
+    )
+    if (element.type == 'checkbox') {
+      data['layers'][index].parameters[
+        Object.keys(data['layers'][index].parameters)[i]
+      ] = element.checked
+    } else {
+      data['layers'][index].parameters[
+        Object.keys(data['layers'][index].parameters)[i]
+      ] = element.value
+    }
   }
 }
 
@@ -123,7 +151,9 @@ export function render_layer_buttons(data) {
       data['layers'][i].generator +
       '</div><div class="flex flex-row gap-2"><a href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_data, ' +
       i +
-      ')">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
+      ');art_editor_layer_index = ' +
+      i +
+      '">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
       i +
       ')">Del</a></div></div></div>'
   }
