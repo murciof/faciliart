@@ -103,7 +103,6 @@ export function render_layer_editor(data, index) {
 }
 
 export function update_editor_fields(data) {
-  console.log('test')
   let width_element = document.getElementById('parameter-width')
   let height_element = document.getElementById('parameter-height')
   let bg_element = document.getElementById('parameter-bg')
