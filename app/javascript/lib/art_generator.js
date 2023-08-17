@@ -54,7 +54,6 @@ export function update_general_properties(data) {
 export function create_layer(data) {
   let generator = get_checked_generator()
   let parameters = get_parameters(generator)
-  let data_element = document.getElementById('data')
   if (typeof generator !== 'undefined') {
     data['layers'].push({
       generator: generator,
@@ -65,7 +64,7 @@ export function create_layer(data) {
       ),
       parameters: parameters,
     })
-    data_element.innerHTML = JSON.stringify(data)
+    update_data_field(data)
     render_layer_buttons(data)
   }
 }
@@ -92,6 +91,12 @@ export function update_layer(data, index) {
       ] = element.value
     }
   }
+  update_data_field(data)
+}
+
+function update_data_field(data) {
+  let data_element = document.getElementById('data')
+  data_element.innerHTML = JSON.stringify(data)
 }
 
 export function delete_layer(data, index) {
