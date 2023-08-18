@@ -1,6 +1,11 @@
 <script type="application/javascript">
   var <%= id %>_data = {general: {}, layers: [] }
-  var <%= id %>_p5 = 1
+  var <%= id %>_canvas
+  <% if isStatic %>
+    var <%= id %>_img
+    //var <%= id %>_img_element = document.getElementById(String(<%= id %>_p5js_img))
+    //console.log(<%= id %>_img_element)
+  <% end %>
   <% if art_data.length > 0 %>
     <%= id %>_data = JSON.parse(<%= art_data.to_json.html_safe %>)
   <% else %>
@@ -12,12 +17,14 @@
   var <%= id %>_p5init = p5 => {
     p5.setup = function() {
       if(<%= id %>_data.general.width && <%= id %>_data.general.height){
-        let canvas = p5.createCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height)
+        <%= id %>_canvas = p5.createCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height)
       } else {
-        let canvas = p5.createCanvas(400,400)
+        <%= id %>_canvas = p5.createCanvas(400,400)
       }
       <% if isStatic %>
         ArtGenerator.render_layers(<%= id %>_data, <%= id %>_data.general.bg,p5)
+        <%= id %>_img = <%= id %>_canvas.canvas.toDataURL("image/png")
+        <%= id %>_p5js_img.innerHTML = '<img class="w-full h-full object-cover" src="' + <%= id %>_img + '">'
       <% end %>
     }
     <% unless isStatic %>
@@ -33,4 +40,10 @@
   }
   new p5(<%= id %>_p5init, "<%= id %>" + "_p5js")
 </script>
-<%= content_tag :div, id: id + "_p5js" do; end %>
+<% if isStatic %>
+  <%= content_tag :div, class: "hidden", id: id + "_p5js" do; end %>
+  <%= content_tag :div, class: "w-full h-full", id: id + "_p5js_img" do; end %>
+  
+<% else %>
+  <%= content_tag :div, id: id + "_p5js" do; end %>
+<% end %>

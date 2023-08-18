@@ -7,21 +7,6 @@
   window.UserInterface = UserInterface
 </script>
 
-<%= link_to art, class: "flex justify-center items-center bg-black shadow-xl", id: (dom_id art) do %>
+<%= link_to art, class: "bg-black shadow-xl w-64 h-64", id: (dom_id art) do %>
   <%= render "shared/components/canvas", art_data: art.data, id: (dom_id art), isStatic: true %>
-<% end %>
-
-<% if false %>
-<div id="<%= dom_id art %>" class="card bg-base-100 shadow-xl">
-  <div class="w-96 bg-base-100"></div>
-  <div class="card-body">
-    <h2 class="card-title"><%= art.name %></h2>
-    <div class="card-actions justify-end">
-      <% if action_name != "show" %>
-        <%= link_to "Show this art", art, class: "btn" %>
-        <%= link_to 'Edit this art', edit_art_path(art), class: "btn" %>
-      <% end %>
-    </div>
-  </div>
-</div>
 <% end %>
