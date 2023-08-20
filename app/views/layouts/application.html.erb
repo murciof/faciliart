@@ -13,6 +13,8 @@
   </head>
   <body>
     <%= render "shared/components/navbar" %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <main class="flex pt-16 min-h-screen">
       <%= yield %>
     </main>
