@@ -5,7 +5,7 @@ module.exports = {
     './public/*.html',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
-    './app/views/**/*.{erb,haml,html,slim}'
+    './app/views/**/*.{erb,haml,html,slim}',
   ],
   theme: {
     extend: {
@@ -19,13 +19,14 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/container-queries'),
-    require('daisyui')
+    require('daisyui'),
   ],
   daisyui: {
-    themes: ["light"],
+    themes: false,
   },
   safelist: [
-    'peer-checked/line:bg-primary','peer-checked/curve:bg-primary','peer-checked/polygon:bg-primary',
+    'peer-checked/line:bg-primary',
+    'peer-checked/curve:bg-primary',
+    'peer-checked/polygon:bg-primary',
   ],
-  
 }

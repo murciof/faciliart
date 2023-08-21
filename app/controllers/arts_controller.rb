@@ -33,7 +33,7 @@ class ArtsController < ApplicationController
   # POST /arts or /arts.json
   def create
     @art = Art.new(art_params)
-
+    @art.user_id = current_user.id
     respond_to do |format|
       if @art.save
         format.html { redirect_to art_url(@art), notice: 'Art was successfully created.' }
