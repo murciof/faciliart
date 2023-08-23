@@ -17,14 +17,26 @@
   var <%= id %>_p5init = p5 => {
     p5.setup = function() {
       if(<%= id %>_data.general.width && <%= id %>_data.general.height){
-        <%= id %>_canvas = p5.createCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height)
+        <% if isSVG %>
+          <%= id %>_canvas = p5.createCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height, p5.SVG)
+        <% else %>
+          <%= id %>_canvas = p5.createCanvas(<%= id %>_data.general.width,<%= id %>_data.general.height)
+        <% end %>
       } else {
-        <%= id %>_canvas = p5.createCanvas(400,400)
+        <% if isSVG %>
+          <%= id %>_canvas = p5.createCanvas(400,400, p5.SVG)
+        <% else %>
+          <%= id %>_canvas = p5.createCanvas(400,400)
+        <% end %>
       }
       <% if isStatic %>
         ArtGenerator.render_layers(<%= id %>_data, <%= id %>_data.general.bg,p5)
-        <%= id %>_img = <%= id %>_canvas.canvas.toDataURL("image/png")
-        <%= id %>_p5js_img.innerHTML = '<img class="w-full h-full object-cover" src="' + <%= id %>_img + '">'
+        <% if isSVG %>
+          <%= id %>_canvas.id("<%= id %>_p5js_canvas")
+        <% else %>
+          <%= id %>_img = <%= id %>_canvas.canvas.toDataURL("image/png")
+          <%= id %>_p5js_img.innerHTML = '<img class="w-full h-full object-cover" src="' + <%= id %>_img + '">'
+        <% end %>
       <% end %>
     }
     <% unless isStatic %>
@@ -39,11 +51,23 @@
     <% end %>
   }
   new p5(<%= id %>_p5init, "<%= id %>" + "_p5js")
+  <% if isStatic and isSVG %>
+    setTimeout(() => {
+      let <%= id %>_canvas_element = document.getElementById("<%= id %>_p5js_canvas")
+      <%= id %>_canvas_element.removeAttribute("style")
+      <%= id %>_canvas_element.classList.add("w-full", "h-full")
+      let <%= id %>_svg_element = document.getElementsByTagName("svg")
+      <%= id %>_svg_element[0].removeAttribute("height")
+      <%= id %>_svg_element[0].removeAttribute("width")
+      <%= id %>_svg_element[0].setAttribute("style", "height: inherit")
+     }, 100);
+  <% end %>
 </script>
-<% if isStatic %>
+<% if isStatic and not isSVG %>
   <%= content_tag :div, class: "hidden", id: id + "_p5js" do; end %>
   <%= content_tag :div, class: "w-full h-full", id: id + "_p5js_img" do; end %>
-  
+<% elsif isStatic and isSVG %>
+  <%= content_tag :div, class: "flex justify-center", id: id + "_p5js" do; end %>
 <% else %>
   <%= content_tag :div, id: id + "_p5js" do; end %>
 <% end %>
