@@ -1,3 +1,23 @@
+<div class="w-full flex flex-col items-center gap-4 p-6">
+  <div class="flex flex-col gap-4 items-center text-center">
+    <div class="avatar placeholder">
+      <div class="bg-neutral-focus text-neutral-content rounded-full w-24">
+        <span class="text-3xl"><%= @user.name.first %></span>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="text-2xl font-bold"><%= @user.name %></div>
+      <div class="text-lg">Account created on <%= @user.created_at.to_date %></div>
+    </div>
+  </div>
+  <div id="arts" class="w-3/4 flex flex-row flex-wrap gap-4">
+  <% Art.where(user_id: @user).each do |art| %>
+    <%= render "shared/components/graphics/art_icon", art: art %>
+    <% end %>
+  </div>
+</div>
+
+<% if false %>
 <div class="mx-auto md:w-2/3 w-full flex">
   <div class="mx-auto">
     <% if notice.present? %>
@@ -13,3 +33,4 @@
     <%= link_to 'Back to users', users_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
+<% end %>

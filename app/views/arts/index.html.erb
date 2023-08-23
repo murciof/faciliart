@@ -7,6 +7,8 @@
     <%= link_to 'New art', new_art_path, class: "btn btn-primary" %>
   </div>
   <div id="arts" class="min-w-full flex flex-row flex-wrap gap-4">
-    <%= render @arts %>
+    <% @arts.each do |art| %>
+      <%= render "shared/components/graphics/art_icon", art: art %>
+    <% end %>
   </div>
 </div>
