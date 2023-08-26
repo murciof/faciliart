@@ -10,7 +10,7 @@
       <div class="text-lg">Account created on <%= @user.created_at.to_date %></div>
     </div>
   </div>
-  <div id="arts" class="w-3/4 flex flex-row flex-wrap gap-4">
+  <div id="arts" class="w-3/4 flex flex-row flex-wrap justify-center gap-4">
   <% Art.where(user_id: @user).each do |art| %>
     <%= render "shared/components/graphics/art_icon", art: art %>
     <% end %>
