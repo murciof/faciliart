@@ -6,7 +6,8 @@
   window.Input = Input
   window.UserInterface = UserInterface
 </script>
-
-<div class="w-full">
+<div class="w-full h-screen pt-16">
+  <div class="h-full w-full flex">
   <%= render "shared/components/graphics/canvas", art_data: art.data, id: (dom_id art), isStatic: true, isSVG: true %>
-</div>
+  </div>
+<div>

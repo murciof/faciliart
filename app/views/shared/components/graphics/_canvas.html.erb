@@ -59,7 +59,7 @@
       let <%= id %>_svg_element = document.getElementsByTagName("svg")
       <%= id %>_svg_element[0].removeAttribute("height")
       <%= id %>_svg_element[0].removeAttribute("width")
-      <%= id %>_svg_element[0].setAttribute("style", "height: inherit")
+      <%= id %>_svg_element[0].setAttribute("style", "height: inherit; width: inherit")
      }, 100);
   <% end %>
 </script>
@@ -67,7 +67,7 @@
   <%= content_tag :div, class: "hidden", id: id + "_p5js" do; end %>
   <%= content_tag :div, class: "w-full h-full", id: id + "_p5js_img" do; end %>
 <% elsif isStatic and isSVG %>
-  <%= content_tag :div, class: "flex justify-center", id: id + "_p5js" do; end %>
+  <%= content_tag :div, class: "w-full h-full", id: id + "_p5js" do; end %>
 <% else %>
   <%= content_tag :div, id: id + "_p5js" do; end %>
 <% end %>
