@@ -1,23 +1,41 @@
 <div class="flex flex-row h-screen">
-  <div class="flex flex-col w-1/3 pt-24 pb-6 px-6 gap-4">
-    <div class="flex flex-col gap-2 text-center items-center">
-      <div class="text-2xl font-bold"><%= @art.name %></div>
-      <div><%= @art.created_at.to_date %></div>
-      <%= link_to user_path(User.find(@art.user_id)), class: "flex flex-row gap-3 items-center" do %>
-        <div class="avatar placeholder">
-          <div class="bg-neutral-focus text-neutral-content rounded-full w-10">
-            <span class="text-base"><%= (User.find(@art.user_id)).name.first %></span>
+  <div class="w-1/3 h-full pt-16">
+  <div class="h-full overflow-y-auto">
+    <div class="flex flex-col m-6 gap-4">
+      <div class="flex flex-col gap-2 text-center items-center">
+        <div class="text-2xl font-bold"><%= @art.name %></div>
+        <div><%= @art.created_at.to_date %></div>
+        <%= link_to user_path(User.find(@art.user_id)), class: "flex flex-row gap-3 items-center" do %>
+          <div class="avatar placeholder">
+            <div class="bg-neutral-focus text-neutral-content rounded-full w-10">
+              <span class="text-base"><%= (User.find(@art.user_id)).name.first %></span>
+            </div>
           </div>
+          <div class="text-lg"><%= User.find(@art.user_id).name %></div>
+        <% end %>
+      </div>
+      <hr class="border-t border-black/20 mb-2 w-full"/>
+      <div class="text-lg font-bold">Comments</div>
+      <%= form_with model: @comment, url: art_comments_path(@art.id), class: "flex flex-col gap-2" do |form| %>
+        <div>
+          <%= form.label :content, class: "label-text" %>
+          <%= form.text_area :content, class: "textarea textarea-bordered w-full", id: "content" %>
         </div>
-        <div class="text-lg"><%= User.find(@art.user_id).name %></div>
+        <%= form.submit class: "btn btn-primary" %>
       <% end %>
-    </div>
-    <div class="flex flex-col gap-2">
-      <%= link_to 'Edit this art', edit_art_path(@art), class: "btn w-full" %>
-      <%= button_to 'Destroy this art', art_path(@art), method: :delete, class: "btn btn-error w-full" %>
-      <%= link_to 'Back to arts', arts_path, class: "btn w-full" %>
+      <% @comments.each do |comment| %>
+        <%= render "shared/components/comment", comment: comment %>
+      <% end %>
+      <div class="flex flex-col gap-2">
+        <%= link_to 'Edit this art', edit_art_path(@art), class: "btn w-full" %>
+        <%= button_to 'Destroy this art', art_path(@art), method: :delete, class: "btn btn-error w-full" %>
+        <%= link_to 'Back to arts', arts_path, class: "btn w-full" %>
+      </div>
     </div>
   </div>
+    
+  </div>
+  
   <div class="flex justify-center items-center flex-1 bg-black overflow-auto">
     <%= render "shared/components/graphics/art_full", art: @art %>
   </div>

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :comments
   resources :users
   root 'arts#index'
-  resources :arts
+  resources :arts do
+    resources :comments, only: [:create]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

@@ -20,7 +20,10 @@ class ArtsController < ApplicationController
   end
 
   # GET /arts/1 or /arts/1.json
-  def show; end
+  def show
+    @comments = Comment.all.where(art_id: @art.id)
+    @comment = Comment.new
+  end
 
   # GET /arts/new
   def new
