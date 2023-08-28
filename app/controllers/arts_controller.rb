@@ -63,11 +63,14 @@ class ArtsController < ApplicationController
 
   # DELETE /arts/1 or /arts/1.json
   def destroy
-    @art.destroy
-
-    respond_to do |format|
-      format.html { redirect_to arts_url, notice: 'Art was successfully destroyed.' }
-      format.json { head :no_content }
+    if user_signed_in? && current_user.id == @art.user_id
+      @art.destroy
+      respond_to do |format|
+        format.html { redirect_to arts_url, notice: 'Art was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:alert] = 'User not authorized'
     end
   end
 

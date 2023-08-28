@@ -52,11 +52,14 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    @comment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
+    if user_signed_in? && current_user.id == @comment.user_id
+      @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:alert] = 'User not authorized'
     end
   end
 
