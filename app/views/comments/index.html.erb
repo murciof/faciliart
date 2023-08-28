@@ -1,14 +1,44 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Comments</h1>
-    <%= link_to 'New comment', new_comment_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
-
-  <div id="comments" class="min-w-full">
-    <%= render @comments %>
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  window.ArtGenerator = ArtGenerator
+</script>
+<div class="w-full flex justify-center pt-24">
+  <div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Art</th>
+          <th>Content</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+          <tr>
+            <td><%= link_to User.find(comment.user_id) do %><%= User.find(comment.user_id).name %><% end %></td>
+            <td>
+              <%= link_to Art.find(comment.art_id), class: "flex flex-row gap-4 items-center" do %>
+                <%= content_tag :div, class: "bg-black w-16 h-16 shrink-0", id: "art_" + comment.art_id.to_s + "_comment_" + comment.id.to_s do %>
+                  <%= render "shared/components/graphics/canvas", art_data: Art.find(comment.art_id).data, id: "art_" + comment.art_id.to_s + "_comment_" + comment.id.to_s, isStatic: true, isSVG: false %>
+                <% end %>
+                <% if Art.find(comment.art_id).name? %>
+                  <div><%= Art.find(comment.art_id).name %></div>
+                <% else %>
+                  <div>No name</div>
+                <% end %>
+              <% end %>
+              
+            </td>
+            <td class="max-w-[24rem] whitespace-normal break-words"><%= comment.content %></td>
+            <td>
+              <div class="flex flex-row gap-2">
+                <%= button_to "Delete", comment_path(comment), method: :delete, class: "btn btn-outline" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

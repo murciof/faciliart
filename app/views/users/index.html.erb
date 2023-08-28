@@ -1,3 +1,36 @@
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  window.ArtGenerator = ArtGenerator
+</script>
+<div class="w-full flex justify-center pt-24">
+  <div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user do %><%= user.name %><% end %></td>
+            <td><%= user.email %></td>
+            <td>
+              <div class="flex flex-row gap-2">
+                <%= button_to "Delete", user_path(user), method: :delete, class: "btn btn-outline" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<% if false %>
 <div class="w-full">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
@@ -12,3 +45,4 @@
     <%= render @users %>
   </div>
 </div>
+<% end %>

@@ -1,0 +1,16 @@
+<div class="flex flex-col gap-1">
+  <div class="flex flex-row justify-between items-center">
+    <%= link_to user_path(User.find(art.user_id)), class: "flex flex-row gap-3 items-center" do %>
+      <div class="avatar placeholder">
+        <div class="bg-neutral-focus text-neutral-content rounded-full w-6">
+          <span class="text-xs"><%= (User.find(art.user_id)).name.first %></span>
+        </div>
+      </div>
+      <div class="text-sm font-bold"><%= User.find(art.user_id).name %></div>
+    <% end %>
+    <div class="text-xs">
+      <%= art.created_at.to_date %>
+    </div>
+  </div>
+  <div class="text-sm break-all"><%= comment.content %></div>
+</div>

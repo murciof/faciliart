@@ -1,3 +1,7 @@
+<script type="module">
+  import * as UserInterface from 'lib/user_interface'
+  window.UserInterface = UserInterface
+</script>
 <div class="w-full flex flex-col items-center gap-4 pt-24">
   <div class="flex flex-col gap-4 items-center text-center">
     <div class="avatar placeholder">
@@ -10,27 +14,20 @@
       <div class="text-lg">Account created on <%= @user.created_at.to_date %></div>
     </div>
   </div>
-  <div id="arts" class="w-3/4 flex flex-row flex-wrap justify-center gap-4">
-  <% Art.where(user_id: @user).each do |art| %>
-    <%= render "shared/components/graphics/art_icon", art: art %>
-    <% end %>
+  <div class="flex flex-row gap-4">
+    <button id="arts_btn" class="btn btn-neutral" onClick='UserInterface.switch_element_visibility("comments", "arts");UserInterface.switch_button_fill("arts_btn")'>Arts</button>
+    <button id="comments_btn" class="btn btn-outline" onClick='UserInterface.switch_element_visibility("arts", "comments");UserInterface.switch_button_fill("comments_btn")'>Comments</button>
   </div>
-</div>
-
-<% if false %>
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
-
-    <%= render @user %>
-
-    <%= link_to 'Edit this user', edit_user_path(@user), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this user', user_path(@user), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+  <div class="w-3/4">
+    <div id="arts" class="w-full flex flex-row flex-wrap justify-center gap-4">
+      <% Art.where(user_id: @user).each do |art| %>
+        <%= render "shared/components/graphics/art_icon", art: art %>
+      <% end %>
     </div>
-    <%= link_to 'Back to users', users_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div id="comments" class="hidden w-full flex-col items-center gap-4">
+      <% Comment.where(user_id: @user).each do |comment| %>
+        <%= render "shared/components/social/comment_profile", comment: comment %>
+      <% end %>
+    </div>
   </div>
 </div>
-<% end %>

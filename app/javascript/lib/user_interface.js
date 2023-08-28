@@ -23,6 +23,17 @@ export function switch_element_visibility(to_hidden, to_show) {
   element_to_show.classList.replace('hidden', 'flex')
 }
 
+export function switch_button_fill(to_fill) {
+  let elements_to_outline = document.querySelectorAll('[id$=_btn]')
+  let element_to_fill = document.getElementById(to_fill)
+
+  for (let i = 0; i < elements_to_outline.length; i++) {
+    elements_to_outline[i].classList.replace('btn-neutral', 'btn-outline')
+  }
+
+  element_to_fill.classList.replace('btn-outline', 'btn-neutral')
+}
+
 export function render_action_buttons(operation) {
   let art_editor_create_layer_element = document.getElementById(
     'art_editor_create_layer'
