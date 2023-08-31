@@ -2,56 +2,61 @@
   import * as ArtGenerator from 'lib/art_generator'
   window.ArtGenerator = ArtGenerator
 </script>
-  <div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
-    <table class="table">
-      <thead>
+<div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
+  <table class="table">
+    <thead>
+      <tr>
+        <% if isAdmin %>
+          <th>User</th>
+        <% end %>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Art</th>
+        <th>Item</th>
+        <th>Size</th>
+        <th>Price</th>
+        <% if isAdmin %>
+          <th>Actions</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.each do |order| %>
         <tr>
           <% if isAdmin %>
-            <th>User</th>
+            <td><%= link_to User.find(order.user_id) do %><%= User.find(order.user_id).name %><% end %></td>
           <% end %>
-          <th>Id</th>
-          <th>Date</th>
-          <th>Art</th>
-          <th>Item</th>
-          <th>Size</th>
-          <th>Price</th>
+          <td>#<%= order.item_id %></td>
+          <td><%= order.created_at.to_date %></td>
+          <td>
+            <%= link_to Art.find(order.art_id), class: "flex flex-row gap-4 items-center" do %>
+              <%= content_tag :div,
+                  class: "bg-black w-16 h-16 shrink-0",
+                  id: "art_" + order.art_id.to_s + "_order_" + order.id.to_s do %>
+                <%= render "shared/components/graphics/canvas",
+                    art_data: Art.find(order.art_id).data, id: "art_" + order.art_id.to_s + "_order_" + order.id.to_s,
+                    isStatic: true,
+                    isSVG: false %>
+              <% end %>
+              <% if Art.find(order.art_id).name? %>
+                <div><%= Art.find(order.art_id).name %></div>
+              <% else %>
+                <div>No name</div>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= Item.find(order.item_id).name %></td>
+          <td><%= ItemSize.find(order.item_size_id).size %></td>
+          <td><%= ItemSize.find(order.item_size_id).price %></td>
           <% if isAdmin %>
-            <th>Actions</th>
+            <td>
+              <div class="flex flex-row gap-2">
+                <%= button_to "Delete", order_path(order), method: :delete, class: "btn btn-outline" %>
+              </div>
+            </td>
           <% end %>
         </tr>
-      </thead>
-      <tbody>
-        <% orders.each do |order| %>
-          <tr>
-            <% if isAdmin %>
-              <td><%= link_to User.find(order.user_id) do %><%= User.find(order.user_id).name %><% end %></td>
-            <% end %>
-            <td>#<%= order.item_id %></td>
-            <td><%= order.created_at.to_date %></td>
-            <td>
-              <%= link_to Art.find(order.art_id), class: "flex flex-row gap-4 items-center" do %>
-                <%= content_tag :div, class: "bg-black w-16 h-16 shrink-0", id: "art_" + order.art_id.to_s + "_order_" + order.id.to_s do %>
-                  <%= render "shared/components/graphics/canvas", art_data: Art.find(order.art_id).data, id: "art_" + order.art_id.to_s + "_order_" + order.id.to_s, isStatic: true, isSVG: false %>
-                <% end %>
-                <% if Art.find(order.art_id).name? %>
-                  <div><%= Art.find(order.art_id).name %></div>
-                <% else %>
-                  <div>No name</div>
-                <% end %>
-              <% end %>
-            </td>
-            <td><%= Item.find(order.item_id).name %></td>
-            <td><%= ItemSize.find(order.item_size_id).size %></td>
-            <td><%= ItemSize.find(order.item_size_id).price %></td>
-            <% if isAdmin %>
-              <td>
-                <div class="flex flex-row gap-2">
-                  <%= button_to "Delete", order_path(order), method: :delete, class: "btn btn-outline" %>
-                </div>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
+</div>

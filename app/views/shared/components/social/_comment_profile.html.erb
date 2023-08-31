@@ -2,10 +2,15 @@
   import * as ArtGenerator from 'lib/art_generator'
   window.ArtGenerator = ArtGenerator
 </script>
-
 <div class="flex flex-row items-center gap-4 w-[42rem] border border-neutral/50 rounded-xl p-4">
-  <%= link_to Art.find(comment.art_id), class: "bg-black w-16 h-16 shrink-0", id: "art_" + comment.art_id.to_s + "_comment_" + comment.id.to_s do %>
-    <%= render "shared/components/graphics/canvas", art_data: Art.find(comment.art_id).data, id: "art_" + comment.art_id.to_s + "_comment_" + comment.id.to_s, isStatic: true, isSVG: false %>
+  <%= link_to Art.find(comment.art_id),
+      class: "bg-black w-16 h-16 shrink-0",
+      id: "art_" + comment.art_id.to_s + "_comment_" + comment.id.to_s do %>
+    <%= render "shared/components/graphics/canvas",
+        art_data: Art.find(comment.art_id).data,
+        id: "art_" + comment.art_id.to_s + "_comment_" + comment.id.to_s,
+        isStatic: true,
+        isSVG: false %>
   <% end %>
   <div class="flex flex-1 flex-col">
     <% if Art.find(comment.art_id).name? %>

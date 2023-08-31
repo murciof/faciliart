@@ -33,44 +33,68 @@
         </div>
         <div class="flex flex-row gap-4">
           <div class="flex-1">
-          <%= label_tag "parameter-width-label", "Width", class: "label-text" %>
-          <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-width", oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
+            <%= label_tag "parameter-width-label", "Width", class: "label-text" %>
+            <%= content_tag :input,
+                class: "input input-bordered w-full",
+                id: "parameter-width",
+                oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
           </div>
           <div class="flex-1">
-          <%= label_tag "parameter-height-label", "Height", class: "label-text" %>
-          <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-height", oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
+            <%= label_tag "parameter-height-label", "Height", class: "label-text" %>
+            <%= content_tag :input,
+                class: "input input-bordered w-full",
+                id: "parameter-height",
+                oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
           </div>
         </div>
         <div>
           <%= label_tag "parameter-bg-label", "Background Color", class: "label-text" %>
-          <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-bg", oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
+          <%= content_tag :input,
+              class: "input input-bordered w-full",
+              id: "parameter-bg",
+              oninput: "ArtGenerator.update_general_properties(art_editor_data)" do; end %>
         </div>
         <div class="flex flex-col gap-2" id="layers">
         </div>
         <hr class="border-t border-black/20 mb-2 w-full"/>
-        <%= link_to "New layer", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_main", "art_editor_generators")', class: "btn" %>
+        <%= link_to "New layer", "javascript:void(0)",
+            onClick: 'UserInterface.switch_element_visibility("art_editor_main", "art_editor_generators")',
+            class: "btn" %>
       </div>
-
       <div class="hidden flex-col flex-1 gap-2" id="art_editor_generators">
         <% ArtsController::GENERATORS.each do |generator| %>
-          <%= form.radio_button :generator_type, generator[:generator], class: "hidden peer/" + generator[:generator], id: generator[:generator], onClick: 'UserInterface.render_layer_creator("' + generator[:generator] + '")' %>
+          <%= form.radio_button :generator_type,
+              generator[:generator],
+              class: "hidden peer/" + generator[:generator], id: generator[:generator],
+              onClick: 'UserInterface.render_layer_creator("' + generator[:generator] + '")' %>
           <%= label_tag generator[:generator], generator[:generator], class: "flex btn justify-center items-center" %>
         <% end %>
-        <%= link_to "Back", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_generators", "art_editor_main")', class: "btn btn-outline" %>
+        <%= link_to "Back",
+            "javascript:void(0)",
+            onClick: 'UserInterface.switch_element_visibility("art_editor_generators", "art_editor_main")',
+            class: "btn btn-outline" %>
       </div>
       <div class="hidden flex-col flex-1 gap-4" id="art_editor_parameters">
         <% ArtsController::GENERATORS.each do |generator| %>
-          <%= content_tag :div, class: "hidden flex-col gap-4", id: "parameters-" + generator[:generator] do %>
-            <%= content_tag :div, class: "hidden text-2xl font-bold", id: "art_editor_parameters_" + generator[:generator] + "_create" do %>
+          <%= content_tag :div,
+              class: "hidden flex-col gap-4",
+              id: "parameters-" + generator[:generator] do %>
+            <%= content_tag :div,
+                class: "hidden text-2xl font-bold",
+                id: "art_editor_parameters_" + generator[:generator] + "_create" do %>
               Create <%= generator[:generator] %>
             <% end %>
-            <%= content_tag :div, class: "hidden text-2xl font-bold", id: "art_editor_parameters_" + generator[:generator] + "_edit" do %>
+            <%= content_tag :div,
+                class: "hidden text-2xl font-bold",
+                id: "art_editor_parameters_" + generator[:generator] + "_edit" do %>
               Edit <%= generator[:generator] %>
             <% end %>
             <div class="flex flex-row gap-2">
               <div class="flex-1 gap-1">
                 <%= label_tag "parameter-" + generator[:generator] + "-color-label", "Color", class: "label-text" %>
-                <%= content_tag :input, class: "input input-bordered w-full", id: "parameter-" + generator[:generator] + "-color" do; end %>
+                <%= content_tag :input,
+                class: "input input-bordered w-full",
+                id: "parameter-" + generator[:generator] + "-color" do; end %>
               </div>
               <div class="flex flex-col gap-1">
                 <%= label_tag "parameter-" + generator[:generator] + "-fill-label", "Fill?", class: "label-text" %>
@@ -91,10 +115,28 @@
           <% end %>
         <% end %>
         <div class="flex flex-row gap-2">
-          <%= link_to "Create layer", "javascript:void(0)", onClick: 'ArtGenerator.create_layer(art_editor_data);UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden flex-1", id: "art_editor_create_layer" %>
-          <%= link_to "Update layer", "javascript:void(0)", onClick: 'ArtGenerator.update_layer(art_editor_data,art_editor_layer_index);UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden flex-1", id: "art_editor_update_layer" %>
-          <%= link_to "Back", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")', class: "hidden btn-outline flex-1", id: "art_editor_back_to_main" %>
-          <%= link_to "Back", "javascript:void(0)", onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_generators")', class: "hidden btn-outline flex-1", id: "art_editor_back_to_generators" %>
+          <%= link_to "Create layer",
+              "javascript:void(0)",
+              onClick: 'ArtGenerator.create_layer(art_editor_data);
+              UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")',
+              class: "hidden flex-1",
+              id: "art_editor_create_layer" %>
+          <%= link_to "Update layer", "javascript:void(0)",
+              onClick: 'ArtGenerator.update_layer(art_editor_data,art_editor_layer_index);
+              UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")',
+              class: "hidden flex-1",
+              id: "art_editor_update_layer" %>
+          <%= link_to "Back",
+              "javascript:void(0)",
+              onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")',
+              class: "hidden btn-outline flex-1",
+              id: "art_editor_back_to_main" %>
+          <%= link_to "Back",
+              "javascript:void(0)",
+              onClick: 'UserInterface.switch_element_visibility("art_editor_parameters",
+              "art_editor_generators")',
+              class: "hidden btn-outline flex-1",
+              id: "art_editor_back_to_generators" %>
         </div>
       </div>
       <div class="flex flex-col gap-1">
@@ -107,7 +149,11 @@
       </div>
     </div>
     <div class="flex justify-center items-center flex-1 bg-black overflow-auto">
-      <%= render "shared/components/graphics/canvas", art_data: [], id: "art_editor", isStatic: false, isSVG: false %>
+      <%= render "shared/components/graphics/canvas",
+          art_data: [],
+          id: "art_editor",
+          isStatic: false,
+          isSVG: false %>
     </div>
   </div>
 <% end %>

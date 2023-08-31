@@ -1,19 +1,13 @@
 <div class="flex flex-col mx-auto w-full gap-4">
-
-<div class="font-bold text-center text-2xl">Forgot your password?</div>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-<div class="flex flex-col gap-4">
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div>
-    <%= label_tag :email, "Email", class: "label-text" %>
-    <%= f.email_field :email, class: "input input-bordered w-full", autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <%= render "devise/shared/links", form: f, submit: "Reset password" %>
-  </div>
-<% end %>
+  <div class="font-bold text-center text-2xl">Forgot your password?</div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <div class="flex flex-col gap-4">
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div>
+        <%= label_tag :email, "Email", class: "label-text" %>
+        <%= f.email_field :email, class: "input input-bordered w-full", autofocus: true, autocomplete: "email" %>
+      </div>
+      <%= render "devise/shared/links", form: f, submit: "Reset password" %>
+    </div>
+  <% end %>
 </div>
-
-
