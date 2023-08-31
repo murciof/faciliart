@@ -1,0 +1,22 @@
+<div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.each do |item| %>
+        <tr>
+          <td><%= link_to item_path(item) do %><%= item.name %><% end %></td>
+          <td>
+            <div class="flex flex-row gap-2">
+              <%= button_to "Delete", item_path(item), method: :delete, class: "btn btn-outline" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

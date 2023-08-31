@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
 
+  layout 'admin'
+
   # GET /comments or /comments.json
   def index
     @comments = Comment.all

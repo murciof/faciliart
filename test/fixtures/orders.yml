@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  art: one
+  user: one
+  item: one
+  itemsize: one
+
+two:
+  art: two
+  user: two
+  item: two
+  itemsize: two

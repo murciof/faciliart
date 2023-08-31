@@ -1,0 +1,24 @@
+<div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Size</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% item_sizes.each do |item_size| %>
+        <tr>
+          <td><%= link_to item_path(Item.find(item_size.item_id)) do %><%= Item.find(item_size.item_id).name %><% end %></td>
+          <td><%= link_to item_size_path(item_size) do %><%= item_size.size %><% end %></td>
+          <td>
+            <div class="flex flex-row gap-2">
+              <%= button_to "Delete", item_size_path(item_size), method: :delete, class: "btn btn-outline" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,4 +1,5 @@
 export function switch_element_with_prefix_visibility(prefix, category) {
+  // TODO: change dash to underscore
   let elements = document.querySelectorAll('[id^=' + prefix + '-]')
   for (let i = 0; i < elements.length; i++) {
     if (
@@ -32,6 +33,17 @@ export function switch_button_fill(to_fill) {
   }
 
   element_to_fill.classList.replace('btn-outline', 'btn-neutral')
+}
+
+export function switch_section_visibility(to_show) {
+  let elements_to_hide = document.querySelectorAll('[id$=_sec]')
+  let element_to_show = document.getElementById(to_show)
+
+  for (let i = 0; i < elements_to_hide.length; i++) {
+    elements_to_hide[i].classList.replace('flex', 'hidden')
+  }
+
+  element_to_show.classList.replace('hidden', 'flex')
 }
 
 export function render_action_buttons(operation) {
@@ -121,4 +133,15 @@ export function update_editor_fields(data) {
   width_element.value = data.general.width
   height_element.value = data.general.height
   bg_element.value = data.general.bg
+}
+
+export function update_order_price(price) {
+  document.getElementById('price').innerHTML = price
+}
+
+export function uncheck_radio_with_prefix(prefix) {
+  let radio_buttons = document.querySelectorAll('[id^=' + prefix + '_]')
+  for (let i = 0; i < radio_buttons.length; i++) {
+    radio_buttons[i].checked = false
+  }
 }

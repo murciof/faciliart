@@ -1,0 +1,22 @@
+<div id="<%= dom_id item_size %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Item:</strong>
+    <%= item_size.item_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Size:</strong>
+    <%= item_size.size %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= item_size.price %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this item size", item_size, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this item size', edit_item_size_path(item_size), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

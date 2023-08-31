@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    @arts = Art.all.where(user_id: @user.id)
+    @comments = Comment.all.where(user_id: @user.id)
+    @orders = Order.all.where(user_id: @user.id)
+  end
 
   # GET /users/new
   def new

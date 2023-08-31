@@ -23,6 +23,8 @@ class ArtsController < ApplicationController
   def show
     @comments = Comment.all.where(art_id: @art.id)
     @comment = Comment.new
+    @orders = Order.all.where(art_id: @art.id)
+    @order = Order.new
   end
 
   # GET /arts/new
