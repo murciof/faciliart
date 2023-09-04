@@ -1,6 +1,7 @@
 <div align="center">
 <img src="app/assets/images/brand.svg" alt="Geniverse" height="72">
-<p style="margin-top: 18px; font-size: 18px; font-weight: bold">Generative art can be accessible</p>
+<p style="font-size:22px"></p>
+<p><strong>Generative art can be accessible</strong></p>
 </div>
 
 # What is Geniverse?
