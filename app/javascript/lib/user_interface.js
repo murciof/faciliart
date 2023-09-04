@@ -29,10 +29,9 @@ export function switch_button_fill(to_fill) {
   let element_to_fill = document.getElementById(to_fill)
 
   for (let i = 0; i < elements_to_outline.length; i++) {
-    elements_to_outline[i].classList.replace('btn-neutral', 'btn-outline')
+    elements_to_outline[i].classList.add('btn-outline')
   }
-
-  element_to_fill.classList.replace('btn-outline', 'btn-neutral')
+  element_to_fill.classList.remove('btn-outline')
 }
 
 export function switch_section_visibility(to_show) {
@@ -61,16 +60,37 @@ export function render_action_buttons(operation) {
   )
   if (operation == 'create') {
     art_editor_create_layer_element.classList.replace('hidden', 'btn')
-    art_editor_back_to_generators_element.classList.replace('hidden', 'btn')
-
     art_editor_update_layer_element.classList.replace('btn', 'hidden')
-    art_editor_back_to_main_element.classList.replace('btn', 'hidden')
+
+    art_editor_back_to_generators_element.classList.add(
+      'btn',
+      'btn-primary',
+      'btn-outline'
+    )
+    art_editor_back_to_generators_element.classList.remove('hidden')
+    art_editor_back_to_main_element.classList.add('hidden')
+    art_editor_back_to_main_element.classList.remove(
+      'btn',
+      'btn-primary',
+      'btn-outline'
+    )
   } else if (operation == 'edit') {
     art_editor_create_layer_element.classList.replace('btn', 'hidden')
-    art_editor_back_to_generators_element.classList.replace('btn', 'hidden')
-
     art_editor_update_layer_element.classList.replace('hidden', 'btn')
-    art_editor_back_to_main_element.classList.replace('hidden', 'btn')
+
+    art_editor_back_to_generators_element.classList.add('hidden')
+    art_editor_back_to_generators_element.classList.remove(
+      'btn',
+      'btn-primary',
+      'btn-outline'
+    )
+
+    art_editor_back_to_main_element.classList.add(
+      'btn',
+      'btn-primary',
+      'btn-outline'
+    )
+    art_editor_back_to_main_element.classList.remove('hidden')
   }
 }
 

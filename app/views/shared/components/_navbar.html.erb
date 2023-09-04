@@ -1,22 +1,29 @@
-<div class="navbar bg-neutral text-neutral-content fixed z-50">
+<div class="navbar bg-base-300 px-6 fixed z-50 border-b border-neutral gap-8">
+  <div class="shrink-0">
+    <%= link_to root_path do %><%= image_tag "brand.svg", class: "h-6" %><% end %>
+  </div>
   <div class="flex-1">
-    <%= link_to "TCC Murcio", root_path, class: "btn btn-ghost normal-case text-xl" %>
+    <div class="form-control w-full">
+      <input type="text" placeholder="Search Geniverse" class="input input-bordered bg-base-300" />
+    </div>
   </div>
   <div class="flex-none">
-    <ul class="menu menu-horizontal px-1 gap-4">
-      <% if user_signed_in? %>
-        <%= link_to 'New art', new_art_path, class: "self-center" %>
-        <li tabindex="0">
-          <div><%= current_user.name %></div>
-          <ul class="p-2 bg-neutral text-neutral-content">
-            <li><%= link_to "Profile", user_path(current_user.id) %></li>
-            <li><%= button_to "Sign out", destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </li>
-      <% else %>
-        <%= link_to "Sign in", new_user_session_path %>
-        <%= link_to "Sign up", new_user_registration_path %>
-      <% end %>
-    </ul>
+    <div class="dropdown dropdown-end">
+      <ul class="menu menu-horizontal px-1 gap-4">
+        <% if user_signed_in? %>
+          <%= link_to 'New art', new_art_path, class: "btn btn-primary btn-outline" %>
+          <li tabindex="0">
+            <div class="btn btn-ghost"><%= current_user.name %></div>
+            <ul class="text-primary menu menu-sm dropdown-content mt-2 p-2 rounded-box bg-base-300 border border-neutral">
+              <li><%= link_to "Profile", user_path(current_user.id) %></li>
+              <li><%= button_to "Sign out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-outline" %>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>

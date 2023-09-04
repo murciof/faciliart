@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@400;700&display=swap');
+
+:root{
+  --nc: 0 0% 100%;
+  --sc: 0 0% 0%;
+  --bc: 0 0% 100%;
+  color-scheme: dark;
+}
+
 /*
 
 @layer components {

@@ -152,15 +152,15 @@ export function render_layer_buttons(data) {
     layers_element.innerHTML +=
       '<div id=layer-' +
       i +
-      ' class="flex flex-col"><hr class="border-t border-black/20 mb-2 w-full"/><div class="flex flex-row justify-between"><div>' +
+      ' class="flex flex-col"><hr class="border-t border-neutral mb-2 w-full"/><div class="flex flex-row justify-between"><div>' +
       data['layers'][i].generator +
-      '</div><div class="flex flex-row gap-2"><a href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_data, ' +
+      '</div><div class="flex flex-row gap-2"><a class="flex" href="javascript:void(0)" onClick="UserInterface.render_layer_editor(art_editor_data, ' +
       i +
       ');art_editor_layer_index = ' +
       i +
-      '">Edit</a><a href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
+      '"><i class="ph ph-pencil-line text-2xl"></i></a><a class="flex" href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
       i +
-      ')">Del</a></div></div></div>'
+      ')"><i class="ph ph-trash text-2xl"></a></div></div></div>'
   }
 }
 

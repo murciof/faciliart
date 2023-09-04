@@ -15,23 +15,35 @@
     </div>
   </div>
   <div class="flex flex-row gap-4">
-    <button id="arts_btn" class="btn btn-neutral"
-    onClick='UserInterface.switch_section_visibility("arts_sec");
-    UserInterface.switch_button_fill("arts_btn")'>Arts</button>
-    <button id="comments_btn" class="btn btn-outline"
+    <button
+      id="arts_btn"
+      class="btn btn-primary"
+      onClick='UserInterface.switch_section_visibility("arts_sec");
+      UserInterface.switch_button_fill("arts_btn")'>
+        Arts
+    </button>
+    <button
+    id="comments_btn"
+    class="btn btn-primary btn-outline"
     onClick='UserInterface.switch_section_visibility("comments_sec");
-    UserInterface.switch_button_fill("comments_btn")'>Comments</button>
-    <button id="orders_btn" class="btn btn-outline"
+    UserInterface.switch_button_fill("comments_btn")'>
+      Comments
+    </button>
+    <button
+    id="orders_btn"
+    class="btn btn-primary btn-outline"
     onClick='UserInterface.switch_section_visibility("orders_sec");
-    UserInterface.switch_button_fill("orders_btn")'>Orders</button>
+    UserInterface.switch_button_fill("orders_btn")'>
+      Orders
+    </button>
   </div>
   <div class="w-3/4">
-    <div id="arts_sec" class="w-full flex flex-row flex-wrap justify-center gap-4">
+    <div id="arts_sec" class="w-full flex flex-row flex-wrap justify-center gap-2">
       <% @arts.each do |art| %>
         <%= render "shared/components/graphics/art_icon", art: art %>
       <% end %>
     </div>
-    <div id="comments_sec" class="hidden w-full flex-col items-center gap-4">
+    <div id="comments_sec" class="hidden w-full flex-col items-center gap-2">
       <% @comments.each do |comment| %>
         <%= render "shared/components/social/comment_profile", comment: comment %>
       <% end %>

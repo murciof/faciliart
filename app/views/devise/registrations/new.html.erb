@@ -5,22 +5,22 @@
       <%= render "devise/shared/error_messages", resource: resource %>
       <div>
         <%= label_tag :name, "Name", class: "label-text" %>
-        <%= f.text_field :name, class: "input input-bordered w-full", autofocus: true, autocomplete: "name" %>
+        <%= f.text_field :name, class: "input input-bordered bg-base-300 w-full", autofocus: true, autocomplete: "name" %>
       </div>
       <div>
         <%= label_tag :email, "Email", class: "label-text" %>
-        <%= f.email_field :email, class: "input input-bordered w-full", autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, class: "input input-bordered bg-base-300 w-full", autofocus: true, autocomplete: "email" %>
       </div>
       <div>
         <%= label_tag :password, "Password", class: "label-text" %>
         <% if @minimum_password_length %>
           <em class="label-text">(<%= @minimum_password_length %> characters minimum)</em>
         <% end %>
-        <%= f.password_field :password, class: "input input-bordered w-full", autocomplete: "new-password" %>
+        <%= f.password_field :password, class: "input input-bordered bg-base-300 w-full", autocomplete: "new-password" %>
       </div>
       <div>
         <%= label_tag :password_confirmation, "Password confirmation", class: "label-text" %>
-        <%= f.password_field :password_confirmation, class: "input input-bordered w-full", autocomplete: "new-password" %>
+        <%= f.password_field :password_confirmation, class: "input input-bordered bg-base-300 w-full", autocomplete: "new-password" %>
       </div>
       <%= render "devise/shared/links", form: f, submit: "Sign up" %>
     </div>

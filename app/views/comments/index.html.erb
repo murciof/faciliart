@@ -4,7 +4,7 @@
 </script>
 <div class="w-full flex flex-col items-center justify-center gap-6">
   <div class="text-2xl font-bold">Comments</div>
-  <div class="border border-neutral/50 p-4 rounded-xl max-w-[64rem]">
+  <div class="border border-neutral p-4 rounded-xl max-w-[64rem]">
     <table class="table">
       <thead>
         <tr>
@@ -33,7 +33,7 @@
             <td class="max-w-[24rem] whitespace-normal break-words"><%= comment.content %></td>
             <td>
               <div class="flex flex-row gap-2">
-                <%= button_to "Delete", comment_path(comment), method: :delete, class: "btn btn-outline" %>
+                <%= button_to "Delete", comment_path(comment), method: :delete, class: "btn" %>
               </div>
             </td>
           </tr>
