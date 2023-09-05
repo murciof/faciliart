@@ -65,6 +65,9 @@ group :development do
 
   # Use solargraph
   gem 'solargraph'
+
+  # Generate documentation
+  gem 'rails-erd'
 end
 
 group :test do
@@ -76,4 +79,4 @@ end
 
 gem 'tailwindcss-rails', '~> 2.0'
 
-gem "devise", "~> 4.9"
+gem 'devise', '~> 4.9'
