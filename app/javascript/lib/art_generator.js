@@ -160,7 +160,7 @@ export function render_layer_buttons(data) {
       i +
       '"><i class="ph ph-pencil-line text-2xl"></i></a><a class="flex" href="javascript:void(0)" onClick="ArtGenerator.delete_layer(art_editor_data, ' +
       i +
-      ')"><i class="ph ph-trash text-2xl"></a></div></div></div>'
+      ')"><i class="ph ph-trash text-2xl"></i></a></div></div></div>'
   }
 }
 
