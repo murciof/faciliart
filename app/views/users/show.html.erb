@@ -45,7 +45,7 @@
   <div class="w-3/4">
     <div id="arts_sec" class="w-full flex flex-row flex-wrap justify-center gap-2">
       <% @arts.each do |art| %>
-        <%= render "shared/components/graphics/art_icon", art: art %>
+        <%= render "shared/components/graphics/art_link", art: art %>
       <% end %>
     </div>
     <div id="comments_sec" class="hidden w-full flex-col items-center gap-2">

@@ -28,7 +28,7 @@
     </div>
     <div id="arts_sec" class="hidden w-full flex-row flex-wrap justify-center gap-2">
       <% @arts.each do |art| %>
-        <%= render "shared/components/graphics/art_icon", art: art %>
+        <%= render "shared/components/graphics/art_link", art: art %>
       <% end %>
     </div>
   </div>
