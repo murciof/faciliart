@@ -4,6 +4,5 @@
 </script>
 <div class="w-full flex flex-col items-center justify-center gap-6">
   <div class="text-2xl font-bold">Orders</div>
-  <%= link_to 'New order', new_order_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   <%= render "shared/components/tables/orders", orders: @orders, isAdmin: true %>
 </div>

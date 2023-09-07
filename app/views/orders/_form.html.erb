@@ -11,21 +11,33 @@
   <% end %>
   <div class="my-5">
     <%= form.label :art_id %>
-    <%= form.text_field :art_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :art_id,
+        Art.all.map {|art| [ (art.name? ? art.name : "No name") + " - " + User.find(art.user_id).name, art.id]},
+        {include_blank: true} ,
+        class: "select input input-bordered bg-base-300 w-full" %>
   </div>
   <div class="my-5">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :user_id,
+        User.all.map {|user| [user.name, user.id]},
+        {include_blank: true} ,
+        class: "select input input-bordered bg-base-300 w-full" %>
   </div>
   <div class="my-5">
     <%= form.label :item_id %>
-    <%= form.text_field :item_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :item_id,
+        Item.all.map {|item| [item.name, item.id]},
+        {include_blank: true} ,
+        class: "select input input-bordered bg-base-300 w-full" %>
   </div>
   <div class="my-5">
     <%= form.label :item_size_id %>
-    <%= form.text_field :item_size_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :item_size_id,
+        ItemSize.all.map {|item_size| [item_size.size, item_size.id]},
+        {include_blank: true} ,
+        class: "select input input-bordered bg-base-300 w-full" %>
   </div>
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

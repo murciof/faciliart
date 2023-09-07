@@ -4,6 +4,6 @@
 </script>
 <div class="w-full flex flex-col items-center justify-center gap-6">
   <div class="text-2xl font-bold">Items</div>
-  <%= link_to 'New item', new_item_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  <%= link_to 'New item', new_item_path, class: "btn btn-primary" %>
   <%= render "shared/components/tables/items", items: @items %>
 </div>
