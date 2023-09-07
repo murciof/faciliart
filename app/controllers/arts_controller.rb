@@ -37,29 +37,37 @@ class ArtsController < ApplicationController
 
   # POST /arts or /arts.json
   def create
-    @art = Art.new(art_params)
-    @art.user_id = current_user.id
-    respond_to do |format|
-      if @art.save
-        format.html { redirect_to art_url(@art), notice: 'Art was successfully created.' }
-        format.json { render :show, status: :created, location: @art }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @art.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      @art = Art.new(art_params)
+      @art.user_id = current_user.id
+      respond_to do |format|
+        if @art.save
+          format.html { redirect_to art_url(@art), notice: 'Art was successfully created.' }
+          format.json { render :show, status: :created, location: @art }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @art.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = 'User needs to be logged in'
     end
   end
 
   # PATCH/PUT /arts/1 or /arts/1.json
   def update
-    respond_to do |format|
-      if @art.update(art_params)
-        format.html { redirect_to art_url(@art), notice: 'Art was successfully updated.' }
-        format.json { render :show, status: :ok, location: @art }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @art.errors, status: :unprocessable_entity }
+    if user_signed_in? && current_user.id == @art.user_id
+      respond_to do |format|
+        if @art.update(art_params)
+          format.html { redirect_to art_url(@art), notice: 'Art was successfully updated.' }
+          format.json { render :show, status: :ok, location: @art }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @art.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = 'User not authorized'
     end
   end
 

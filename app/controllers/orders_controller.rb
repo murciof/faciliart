@@ -21,21 +21,25 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
-    @order.art_id = params[:art_id]
-    @order.user_id = (current_user.id if user_signed_in?)
-    if ItemSize.where(id: @order.item_size_id, item_id: @order.item_id).exists?
-      respond_to do |format|
-        if @order.save
-          format.html { redirect_to order_url(@order), notice: 'Order was successfully created.' }
-          format.json { render :show, status: :created, location: @order }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @order.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      @order = Order.new(order_params)
+      @order.art_id = params[:art_id]
+      @order.user_id = (current_user.id if user_signed_in?)
+      if ItemSize.where(id: @order.item_size_id, item_id: @order.item_id).exists?
+        respond_to do |format|
+          if @order.save
+            format.html { redirect_to order_url(@order), notice: 'Order was successfully created.' }
+            format.json { render :show, status: :created, location: @order }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @order.errors, status: :unprocessable_entity }
+          end
         end
+      else
+        flash[:alert] = 'Item and size mismatch'
       end
     else
-      flash[:alert] = 'Item and size mismatch'
+      flash[:alert] = 'User needs to be logged in'
     end
   end
 
@@ -54,11 +58,14 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    @order.destroy
-
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
+    if user_signed_in? && current_user.id == @order.user_id
+      @order.destroy
+      respond_to do |format|
+        format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:alert] = 'User not authorized'
     end
   end
 

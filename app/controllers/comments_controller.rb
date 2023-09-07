@@ -21,34 +21,42 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
-    @comment.user_id = (current_user.id if user_signed_in?)
+    if user_signed_in?
+      @comment = Comment.new(comment_params)
+      @comment.user_id = current_user.id
 
-    @comment.art_id = params[:art_id]
+      @comment.art_id = params[:art_id]
 
-    @art = Art.all.find(params[:art_id])
+      @art = Art.all.find(params[:art_id])
 
-    respond_to do |format|
-      if @comment.save && user_signed_in?
-        format.html { redirect_to art_url(@art), notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @comment.save && user_signed_in?
+          format.html { redirect_to art_url(@art), notice: 'Comment was successfully created.' }
+          format.json { render :show, status: :created, location: @comment }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = 'User needs to be logged in'
     end
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    if user_signed_in? && current_user.id == @comment.user_id
+      respond_to do |format|
+        if @comment.update(comment_params)
+          format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
+          format.json { render :show, status: :ok, location: @comment }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = 'User not authorized'
     end
   end
 
