@@ -1,0 +1,11 @@
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  window.ArtGenerator = ArtGenerator
+</script>
+<%= content_tag :div, class: "bg-black flex-1 h-full", id: (dom_id art) + "_miniature" do %>
+  <%= render "shared/components/graphics/canvas",
+      art_data: art.data,
+      id: (dom_id art) + "_miniature",
+      isStatic: true,
+      isSVG: false %>
+<% end %>

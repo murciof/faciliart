@@ -3,9 +3,9 @@
     <%= link_to root_path do %><%= image_tag "brand.svg", class: "h-6" %><% end %>
   </div>
   <div class="flex-1">
-    <div class="form-control w-full">
-      <input type="text" placeholder="Search Geniverse" class="input input-bordered bg-base-300" />
-    </div>
+    <%= form_with url: "/search", class: "form-control w-full", method: :get do |form| %>
+      <%= form.text_field :search, class: "input input-bordered bg-base-300", placeholder: "Search Geniverse", value: params[:search] %>
+    <% end %>
   </div>
   <div class="flex-none">
     <div class="dropdown dropdown-end">
@@ -20,8 +20,8 @@
             </ul>
           </li>
         <% else %>
-          <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary" %>
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary btn-outline" %>
+          <%= link_to "Sign in", new_user_session_path, class: "btn btn-primary btn-outline" %>
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-primary" %>
         <% end %>
       </ul>
     </div>

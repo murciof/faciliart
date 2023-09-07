@@ -29,13 +29,15 @@
     UserInterface.switch_button_fill("comments_btn")'>
       Comments
     </button>
-    <button
-    id="orders_btn"
-    class="btn btn-primary btn-outline"
-    onClick='UserInterface.switch_section_visibility("orders_sec");
-    UserInterface.switch_button_fill("orders_btn")'>
-      Orders
-    </button>
+    <% if user_signed_in? and current_user.id == @user.id %>
+      <button
+      id="orders_btn"
+      class="btn btn-primary btn-outline"
+      onClick='UserInterface.switch_section_visibility("orders_sec");
+      UserInterface.switch_button_fill("orders_btn")'>
+        Orders
+      </button>
+    <% end %>
   </div>
   <div class="w-3/4">
     <div id="arts_sec" class="w-full flex flex-row flex-wrap justify-center gap-2">
@@ -48,8 +50,10 @@
         <%= render "shared/components/social/comment_profile", comment: comment %>
       <% end %>
     </div>
-    <div id="orders_sec" class="hidden w-full flex-col items-center gap-4">
-      <%= render "shared/components/tables/orders", orders: @orders, isAdmin: false %>
-    </div>
+    <% if user_signed_in? and current_user.id == @user.id %>
+      <div id="orders_sec" class="hidden w-full flex-col items-center gap-4">
+        <%= render "shared/components/tables/orders", orders: @orders, isAdmin: false %>
+      </div>
+    <% end %>
   </div>
 </div>

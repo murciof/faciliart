@@ -1,0 +1,35 @@
+<script type="module">
+  import * as UserInterface from 'lib/user_interface'
+  window.UserInterface = UserInterface
+</script>
+<div class="w-full flex flex-col items-center gap-4 pt-24">
+  <div class="text-4xl font-bold">Search</div>
+  <div class="flex flex-row gap-4">
+    <button
+      id="users_btn"
+      class="btn btn-primary"
+      onClick='UserInterface.switch_section_visibility("users_sec");
+      UserInterface.switch_button_fill("users_btn")'>
+        Users
+    </button>
+    <button
+      id="arts_btn"
+      class="btn btn-primary btn-outline"
+      onClick='UserInterface.switch_section_visibility("arts_sec");
+      UserInterface.switch_button_fill("arts_btn")'>
+        Arts
+    </button>
+  </div>
+  <div class="w-3/4">
+    <div id="users_sec" class="flex w-full flex-row flex-wrap justify-center gap-2">
+    <% @users.sort{|a,b| b.name <=> a.name}.each do |user| %>
+      <%= render "shared/components/user", user: user %>
+    <% end %>
+    </div>
+    <div id="arts_sec" class="hidden w-full flex-row flex-wrap justify-center gap-2">
+      <% @arts.each do |art| %>
+        <%= render "shared/components/graphics/art_icon", art: art %>
+      <% end %>
+    </div>
+  </div>
+</div>

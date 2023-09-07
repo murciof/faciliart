@@ -1,0 +1,22 @@
+<%= link_to user_path(user.id), class: "flex flex-col border border-neutral items-center rounded-lg w-96 text-center" do %>
+  <div class="w-full bg-neutral flex flex-row flex-wrap justify-center h-36 rounded-t-lg">
+    <% Art.all.where(user_id: user.id).last(3).each do |art| %>
+      <%= render "shared/components/graphics/art_miniature", art: art %>
+    <% end %>
+  </div>
+  <div class="flex flex-col flex-1 gap-4 p-4 items-center">
+    <div class="avatar placeholder">
+      <div class="bg-neutral-focus text-neutral-content rounded-full w-16">
+        <span class="text-xl"><%= user.name.first %></span>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="text-xl font-bold"><%= user.name %></div>
+      <div class="flex flex-row gap-4 justify-center">
+        <div class="text-md"><%= Art.all.where(user_id: user.id).count %> Uploads</div>
+        <div class="text-md"><%= Order.all.where(user_id: user.id).count %> Orders</div>
+      </div>
+    </div>
+  </div>
+  
+<% end %>
