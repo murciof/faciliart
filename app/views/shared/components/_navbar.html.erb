@@ -10,8 +10,8 @@
   <div class="flex-none">
     <div class="dropdown dropdown-end">
       <ul class="menu menu-horizontal px-1 gap-4">
+        <%= link_to 'New art', new_art_path, class: "btn btn-primary btn-outline" %>
         <% if user_signed_in? %>
-          <%= link_to 'New art', new_art_path, class: "btn btn-primary btn-outline" %>
           <li tabindex="0">
             <div class="btn btn-ghost"><%= current_user.name %></div>
             <ul class="text-primary menu menu-sm dropdown-content mt-2 p-2 rounded-box bg-base-300 border border-neutral">
