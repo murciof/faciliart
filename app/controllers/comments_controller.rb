@@ -21,25 +21,30 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    if user_signed_in?
-      @comment = Comment.new(comment_params)
-      @comment.user_id = current_user.id
+    respond_to do |format|
+      if user_signed_in?
 
-      @comment.art_id = params[:art_id]
+        @comment = Comment.new(comment_params)
+        @comment.user_id = current_user.id
+        @comment.art_id = params[:art_id]
+        @art = Art.all.find(params[:art_id])
 
-      @art = Art.all.find(params[:art_id])
-
-      respond_to do |format|
         if @comment.save && user_signed_in?
-          format.html { redirect_to art_url(@art), notice: 'Comment was successfully created.' }
+          format.html do
+            flash[:success] = 'Comment was successfully created.'
+            redirect_to art_url(@art)
+          end
           format.json { render :show, status: :created, location: @comment }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @comment.errors, status: :unprocessable_entity }
         end
+      else
+        format.html do
+          flash[:error] = 'User not logged in'
+          redirect_back(fallback_location: root_path)
+        end
       end
-    else
-      flash[:alert] = 'User needs to be logged in'
     end
   end
 
@@ -62,14 +67,20 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    if user_signed_in? && current_user.id == @comment.user_id
-      @comment.destroy
-      respond_to do |format|
-        format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+    respond_to do |format|
+      if user_signed_in? && current_user.id == @comment.user_id
+        @comment.destroy
+        format.html do
+          flash[:success] = 'Comment was successfully deleted.'
+          redirect_back(fallback_location: root_path)
+        end
         format.json { head :no_content }
+      else
+        format.html do
+          flash[:error] = 'User not authorized'
+          redirect_back(fallback_location: root_path)
+        end
       end
-    else
-      flash[:alert] = 'User not authorized'
     end
   end
 

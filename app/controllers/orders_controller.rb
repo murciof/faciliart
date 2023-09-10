@@ -21,25 +21,34 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    if user_signed_in?
-      @order = Order.new(order_params)
-      @order.art_id = params[:art_id]
-      @order.user_id = (current_user.id if user_signed_in?)
-      if ItemSize.where(id: @order.item_size_id, item_id: @order.item_id).exists?
-        respond_to do |format|
+    respond_to do |format|
+      if user_signed_in?
+        @order = Order.new(order_params)
+        @order.art_id = params[:art_id]
+        @order.user_id = (current_user.id if user_signed_in?)
+        if ItemSize.where(id: @order.item_size_id, item_id: @order.item_id).exists?
           if @order.save
-            format.html { redirect_to order_url(@order), notice: 'Order was successfully created.' }
+            format.html do
+              flash[:success] = 'Order was successfully created.'
+              redirect_back(fallback_location: root_path)
+            end
             format.json { render :show, status: :created, location: @order }
           else
             format.html { render :new, status: :unprocessable_entity }
             format.json { render json: @order.errors, status: :unprocessable_entity }
           end
+        else
+          format.html do
+            flash[:error] = 'An order must have a size'
+            redirect_back(fallback_location: root_path)
+          end
         end
       else
-        flash[:alert] = 'Item and size mismatch'
+        format.html do
+          flash[:error] = 'User not logged in'
+          redirect_back(fallback_location: root_path)
+        end
       end
-    else
-      flash[:alert] = 'User needs to be logged in'
     end
   end
 

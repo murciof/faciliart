@@ -30,6 +30,9 @@ class ArtsController < ApplicationController
   # GET /arts/new
   def new
     @art = Art.new
+    return if user_signed_in?
+
+    flash[:notice] = 'User needs to be logged in to save the art'
   end
 
   # GET /arts/1/edit
@@ -37,20 +40,26 @@ class ArtsController < ApplicationController
 
   # POST /arts or /arts.json
   def create
-    if user_signed_in?
-      @art = Art.new(art_params)
-      @art.user_id = current_user.id
-      respond_to do |format|
+    respond_to do |format|
+      if user_signed_in?
+        @art = Art.new(art_params)
+        @art.user_id = current_user.id
         if @art.save
-          format.html { redirect_to art_url(@art), notice: 'Art was successfully created.' }
+          format.html do
+            flash[:success] = 'Art was successfully created.'
+            redirect_to art_url(@art)
+          end
           format.json { render :show, status: :created, location: @art }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @art.errors, status: :unprocessable_entity }
         end
+      else
+        format.html do
+          flash[:error] = 'User not logged in'
+          redirect_back(fallback_location: root_path)
+        end
       end
-    else
-      flash[:alert] = 'User needs to be logged in'
     end
   end
 

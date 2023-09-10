@@ -1,12 +1,24 @@
+<% if success %>
+  <div class="alert border border-success justify-start">
+    <i class="ph ph-check-circle text-2xl text-success"></i>
+    <span class="text-success"><%= success %></span>
+  </div>
+<% end %>
 <% if notice %>
-  <div class="alert alert-info">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    <span><%= notice %></span>
+  <div class="alert border border-info justify-start">
+    <i class="ph ph-info text-2xl text-info"></i>
+    <span class="text-info"><%= notice %></span>
   </div>
 <% end %>
 <% if alert %>
-  <div class="alert">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-    <span><%= alert %></span>
+  <div class="alert border border-warning justify-start">
+    <i class="ph ph-alert text-2xl text-warning"></i>
+    <span class="text-warning"><%= alert %></span>
+  </div>
+<% end %>
+<% if error %>
+  <div class="alert border border-error justify-start">
+    <i class="ph ph-x-circle text-2xl text-error"></i>
+    <span class="text-error"><%= error %></span>
   </div>
 <% end %>
