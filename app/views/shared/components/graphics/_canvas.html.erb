@@ -1,6 +1,7 @@
 <script type="application/javascript">
   var <%= id %>_data = {general: {}, layers: [] }
   var <%= id %>_canvas
+  var data_element
   <% if isStatic %>
     var <%= id %>_img
     //var <%= id %>_img_element = document.getElementById(String(<%= id %>_p5js_img))
@@ -9,7 +10,7 @@
   <% if art_data.length > 0 %>
     <%= id %>_data = JSON.parse(<%= art_data.to_json.html_safe %>)
   <% else %>
-    let data_element = document.getElementById('data')
+    data_element = document.getElementById('data')
     if(data_element.innerHTML.length != 0){
       <%= id %>_data = JSON.parse(data_element.innerHTML)
     }
@@ -37,6 +38,8 @@
           <%= id %>_img = <%= id %>_canvas.canvas.toDataURL("image/png")
           <%= id %>_p5js_img.innerHTML = '<img class="w-full h-full object-cover" src="' + <%= id %>_img + '">'
         <% end %>
+      <% else %>
+        <%= id %>_canvas.id("<%= id %>_p5js_canvas")
       <% end %>
     }
     <% unless isStatic %>
@@ -50,7 +53,15 @@
       }
     <% end %>
   }
-  new p5(<%= id %>_p5init, "<%= id %>" + "_p5js")
+  canvas_element = document.getElementById("<%= id %>_p5js_canvas")
+  if (canvas_element == null){
+    new p5(<%= id %>_p5init, "<%= id %>" + "_p5js")
+  } else {
+    <% unless isStatic %>
+      canvas_element.remove()
+      new p5(<%= id %>_p5init, "<%= id %>" + "_p5js")
+    <% end %>
+  }
   <% if isStatic and isSVG %>
     setTimeout(() => {
       let <%= id %>_canvas_element = document.getElementById("<%= id %>_p5js_canvas")
