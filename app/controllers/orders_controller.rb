@@ -67,14 +67,12 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    if user_signed_in? && current_user.id == @order.user_id
-      @order.destroy
-      respond_to do |format|
-        format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else
-      flash[:alert] = 'User not authorized'
+    return unless user_signed_in? && (current_user.id == @order.user_id || current_user.is_admin)
+
+    @order.destroy
+    respond_to do |format|
+      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

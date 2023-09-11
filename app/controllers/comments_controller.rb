@@ -50,37 +50,30 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    if user_signed_in? && current_user.id == @comment.user_id
-      respond_to do |format|
-        if @comment.update(comment_params)
-          format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
-          format.json { render :show, status: :ok, location: @comment }
-        else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @comment.errors, status: :unprocessable_entity }
-        end
+    return unless user_signed_in? && (current_user.id == @comment.user_id || current_user.is_admin)
+
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
+        format.json { render :show, status: :ok, location: @comment }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
-    else
-      flash[:alert] = 'User not authorized'
     end
   end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+    return unless user_signed_in? && (current_user.id == @comment.user_id || current_user.is_admin)
+
     respond_to do |format|
-      if user_signed_in? && current_user.id == @comment.user_id
-        @comment.destroy
-        format.html do
-          flash[:success] = 'Comment was successfully deleted.'
-          redirect_back(fallback_location: root_path)
-        end
-        format.json { head :no_content }
-      else
-        format.html do
-          flash[:error] = 'User not authorized'
-          redirect_back(fallback_location: root_path)
-        end
+      @comment.destroy
+      format.html do
+        flash[:success] = 'Comment was successfully deleted.'
+        redirect_back(fallback_location: root_path)
       end
+      format.json { head :no_content }
     end
   end
 

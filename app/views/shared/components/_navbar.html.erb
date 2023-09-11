@@ -17,6 +17,13 @@
             <ul class="text-primary menu menu-sm dropdown-content mt-2 p-2 rounded-box bg-base-300 border border-neutral">
               <li><%= link_to "Profile", user_path(current_user.id) %></li>
               <li><%= button_to "Sign out", destroy_user_session_path, method: :delete %></li>
+              <% if current_user.is_admin? %>
+                <hr class="border-t border-neutral mb-2 w-full"/>
+                <li><%= link_to "Users", users_path %></li>
+                <li><%= link_to "Orders", orders_path %></li>
+                <li><%= link_to "Items", items_path %></li>
+                <li><%= link_to "Item Sizes", item_sizes_path %></li>
+              <% end %>
             </ul>
           </li>
         <% else %>

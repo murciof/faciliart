@@ -20,7 +20,7 @@
     <% end %>
     <div class="break-all"><%= comment.content %></div>
   </div>
-  <% if user_signed_in? and comment.user_id == current_user.id %>
+  <% if user_signed_in? && (current_user.id == comment.user_id || current_user.is_admin) %>
     <%= button_to comment_path(comment), method: :delete do %><i class="ph ph-trash text-2xl"></i><% end %>
   <% end %>
 </div>

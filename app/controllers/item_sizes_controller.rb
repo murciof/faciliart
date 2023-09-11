@@ -21,6 +21,8 @@ class ItemSizesController < ApplicationController
 
   # POST /item_sizes or /item_sizes.json
   def create
+    return unless user_signed_in? && current_user.is_admin
+
     @item_size = ItemSize.new(item_size_params)
 
     respond_to do |format|
@@ -36,6 +38,8 @@ class ItemSizesController < ApplicationController
 
   # PATCH/PUT /item_sizes/1 or /item_sizes/1.json
   def update
+    return unless user_signed_in? && current_user.is_admin
+
     respond_to do |format|
       if @item_size.update(item_size_params)
         format.html { redirect_to item_size_url(@item_size), notice: 'Item size was successfully updated.' }
@@ -49,6 +53,8 @@ class ItemSizesController < ApplicationController
 
   # DELETE /item_sizes/1 or /item_sizes/1.json
   def destroy
+    return unless user_signed_in? && current_user.is_admin
+
     @item_size.destroy
 
     respond_to do |format|

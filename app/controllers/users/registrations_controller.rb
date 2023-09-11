@@ -10,9 +10,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    # Make the first user the admin
+    super do |resource|
+      if User.all.count == 1
+        resource.is_admin = true
+        resource.save
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit
