@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
   root 'arts#index'
   resources :comments, except: [:new]
@@ -8,14 +9,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     resources :orders, only: [:create]
   end
-  resources :orders, only: [:show]
-  resources :users, only: [:show]
-  scope 'admin' do
-    resources :users, except: [:show]
-    resources :items, except: [:show]
-    resources :item_sizes
-    resources :orders, except: %i[new show]
-  end
+  resources :orders, except: [:new]
+  resources :users
+  resources :items, except: [:show]
+  resources :item_sizes
 
   get '/search', to: 'search#search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
