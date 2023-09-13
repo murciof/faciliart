@@ -2,7 +2,7 @@
   import * as ArtGenerator from 'lib/art_generator'
   window.ArtGenerator = ArtGenerator
 </script>
-<%= link_to art, class: "bg-black shadow-xl w-64 h-64", id: (dom_id art) do %>
+<%= link_to art, class: "bg-black w-64 h-64", id: (dom_id art) do %>
   <%= render "shared/components/graphics/canvas",
       art_data: art.data,
       id: (dom_id art),
