@@ -14,16 +14,6 @@
   var art_editor_layer_index
 </script>
 <%= form_with(model: art, class: "contents") do |form| %>
-  <% if art.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(art.errors.count, "error") %> prohibited this art from being saved:</h2>
-      <ul>
-        <% art.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="flex flex-row pt-16 h-screen">
     <div class="flex form-control w-1/3 gap-4 p-6 bg-base-100">
       <%= render "shared/components/flash" %>
