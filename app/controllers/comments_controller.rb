@@ -36,7 +36,14 @@ class CommentsController < ApplicationController
           end
           format.json { render :show, status: :created, location: @comment }
         else
-          format.html { render :new, status: :unprocessable_entity }
+          full_error = ''
+          @comment.errors.each do |error|
+            full_error += error.full_message.to_s
+          end
+          format.html do
+            flash[:error] = "Validation error: #{full_error}"
+            redirect_back(fallback_location: root_path)
+          end
           format.json { render json: @comment.errors, status: :unprocessable_entity }
         end
       else
