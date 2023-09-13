@@ -18,44 +18,44 @@
     <div class="flex form-control w-1/3 h-full pt-16 bg-base-100">
       <div class="h-full overflow-y-auto">
         <div class="flex flex-col m-6 gap-4">
-        <%= render "shared/components/flash" %>
-      <div class="flex flex-col flex-1 gap-2" id="art_editor_main">
-        <label class="input-group">
-          <span class="input input-bordered border-r-0"><i class="ph ph-text-t text-2xl"></i></span>
-          <%= form.text_field :name, class: "input input-bordered bg-base-300 w-full", placeholder: "Name" %>
-        </label>
-        <div class="flex flex-row gap-2">
-          <label class="flex-1 input-group">
-            <span class="input input-bordered border-r-0"><i class="ph ph-arrows-horizontal text-2xl"></i></span>
-            <%= content_tag :input,
+          <%= render "shared/components/flash" %>
+          <div class="flex flex-col flex-1 gap-2" id="art_editor_main">
+            <label class="input-group">
+              <span class="input input-bordered border-r-0"><i class="ph ph-text-t text-2xl"></i></span>
+              <%= form.text_field :name, class: "input input-bordered bg-base-300 w-full", placeholder: "Name" %>
+            </label>
+            <div class="flex flex-row gap-2">
+              <label class="flex-1 input-group">
+                <span class="input input-bordered border-r-0"><i class="ph ph-arrows-horizontal text-2xl"></i></span>
+                <%= content_tag :input,
                 class: "input input-bordered bg-base-300 w-full",
                 id: "parameter-width",
                 oninput: "ArtGenerator.update_general_properties(art_editor_data)",
                 placeholder: "Width" do; end %>
-          </label>
-          <label class="flex-1 input-group">
-            <span class="input input-bordered border-r-0"><i class="ph ph-arrows-vertical text-2xl"></i></span>
-            <%= content_tag :input,
+              </label>
+              <label class="flex-1 input-group">
+                <span class="input input-bordered border-r-0"><i class="ph ph-arrows-vertical text-2xl"></i></span>
+                <%= content_tag :input,
                 class: "input input-bordered bg-base-300 w-full",
                 id: "parameter-height",
                 oninput: "ArtGenerator.update_general_properties(art_editor_data)",
                 placeholder: "Height" do; end %>
-          </label>
-        </div>
-        <div>
-          <label class="flex-1 input-group">
-            <span class="input input-bordered border-r-0"><i class="ph ph-paint-bucket text-2xl"></i></span>
-            <%= content_tag :input,
+              </label>
+            </div>
+            <div>
+              <label class="flex-1 input-group">
+                <span class="input input-bordered border-r-0"><i class="ph ph-paint-bucket text-2xl"></i></span>
+                <%= content_tag :input,
                 class: "input input-bordered bg-base-300 w-full",
                 id: "parameter-bg",
                 oninput: "ArtGenerator.update_general_properties(art_editor_data)",
                 placeholder: "Background Color" do; end %>
-          </label>
-        </div>
-        <div class="flex flex-col gap-2" id="layers">
-        </div>
-        <hr class="border-t border-neutral mb-2 w-full"/>
-        <%= link_to "New layer", "javascript:void(0)",
+              </label>
+            </div>
+            <div class="flex flex-col gap-2" id="layers">
+            </div>
+            <hr class="border-t border-neutral mb-2 w-full"/>
+            <%= link_to "New layer", "javascript:void(0)",
             onClick: 'UserInterface.switch_element_visibility("art_editor_main", "art_editor_generators")',
             class: "btn" %>
           </div>
@@ -150,15 +150,13 @@
           </div>
         </div>
       </div>
-      
     </div>
     <div class="flex-1 bg-neutral overflow-auto pt-16">
-    <div class="flex justify-center items-center h-full w-full overflow-auto"><%= render "shared/components/graphics/canvas",
+      <div class="flex justify-center items-center h-full w-full overflow-auto"><%= render "shared/components/graphics/canvas",
           art_data: [],
           id: "art_editor",
           isStatic: false,
           isSVG: false %></div>
-      
     </div>
   </div>
 <% end %>

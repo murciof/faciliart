@@ -10,21 +10,21 @@
       class="btn btn-primary"
       onClick='UserInterface.switch_section_visibility("users_sec");
       UserInterface.switch_button_fill("users_btn")'>
-        Users
+      Users
     </button>
     <button
       id="arts_btn"
       class="btn btn-primary btn-outline"
       onClick='UserInterface.switch_section_visibility("arts_sec");
       UserInterface.switch_button_fill("arts_btn")'>
-        Arts
+      Arts
     </button>
   </div>
   <div class="w-3/4">
     <div id="users_sec" class="flex w-full flex-row flex-wrap justify-center gap-2">
-    <% @users.sort{|a,b| b.name <=> a.name}.each do |user| %>
-      <%= render "shared/components/user", user: user %>
-    <% end %>
+      <% @users.sort{|a,b| b.name <=> a.name}.each do |user| %>
+        <%= render "shared/components/user", user: user %>
+      <% end %>
     </div>
     <div id="arts_sec" class="hidden w-full flex-row flex-wrap justify-center gap-2">
       <% @arts.each do |art| %>
