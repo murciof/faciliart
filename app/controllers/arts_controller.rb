@@ -51,13 +51,15 @@ class ArtsController < ApplicationController
           end
           format.json { render :show, status: :created, location: @art }
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @art.errors, status: :unprocessable_entity }
           full_error = ''
           @art.errors.each do |error|
             full_error += error.full_message.to_s
           end
-          flash[:error] = "Validation error: #{full_error}"
+          format.html do
+            flash[:error] = "Validation error: #{full_error}"
+            redirect_back(fallback_location: root_path)
+          end
+          format.json { render json: @art.errors, status: :unprocessable_entity }
         end
       else
         format.html do
