@@ -165,3 +165,14 @@ export function uncheck_radio_with_prefix(prefix) {
     radio_buttons[i].checked = false
   }
 }
+
+export function switch_navbar_menu() {
+  let button_element = document.getElementById('navbar-collapse')
+  let menu_element = document.getElementById('navbar-collapsible')
+
+  if (menu_element.classList.contains('hidden')) {
+    menu_element.classList.remove('hidden')
+  } else {
+    menu_element.classList.add('hidden')
+  }
+}
