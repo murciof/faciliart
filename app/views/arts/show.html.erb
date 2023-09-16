@@ -2,8 +2,8 @@
   import * as UserInterface from 'lib/user_interface'
   window.UserInterface = UserInterface
 </script>
-<div class="flex flex-col-reverse md:flex-row h-screen">
-  <div class="md:w-1/2 lg:w-1/3 h-1/2 md:h-full md:pt-16 bg-base-100">
+<div class="flex flex-col-reverse lg:flex-row h-screen">
+  <div class="lg:w-1/3 h-1/2 lg:h-full lg:pt-16 bg-base-100">
     <div class="h-full overflow-y-auto">
       <div class="flex flex-col m-6 gap-4">
         <%= render "shared/components/flash" %>
@@ -86,7 +86,7 @@
       </div>
     </div>
   </div>
-  <div class="flex justify-center items-center md:flex-1 bg-canvas overflow-auto">
+  <div class="flex justify-center items-center h-1/2 lg:h-full lg:flex-1 bg-canvas overflow-auto">
     <%= render "shared/components/graphics/art_full", art: @art %>
   </div>
 </div>
