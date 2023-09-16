@@ -2,7 +2,7 @@
   import * as UserInterface from 'lib/user_interface'
   window.UserInterface = UserInterface
 </script>
-<div class="w-full flex flex-col items-center gap-4 pt-24">
+<div class="w-full flex flex-col items-center gap-4 pt-24 px-8">
   <div class="flex flex-col gap-4 items-center text-center">
     <div class="avatar placeholder">
       <div class="bg-neutral-focus text-neutral-content rounded-full w-24">
@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-row gap-4">
+  <div class="flex flex-col w-full md:flex-row gap-4">
     <button
       id="arts_btn"
       class="btn btn-primary"
@@ -42,7 +42,7 @@
       </button>
     <% end %>
   </div>
-  <div class="w-3/4 flex flex-col gap-4">
+  <div class="w-full lg:w-3/4 flex flex-col gap-4">
     <div class="w-full lg:w-[42rem] self-center"><%= render "shared/components/flash" %></div>
     <div id="arts_sec" class="w-full flex flex-row flex-wrap justify-center gap-2">
       <% @arts.each do |art| %>
