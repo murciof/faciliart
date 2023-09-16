@@ -2,14 +2,14 @@
   import * as ArtGenerator from 'lib/art_generator'
   window.ArtGenerator = ArtGenerator
 </script>
-<div class="border border-neutral p-4 rounded-xl max-w-[72rem]">
+<div class="border border-neutral p-4 rounded-xl w-full overflow-x-auto lg:max-w-[72rem]">
   <table class="table">
     <thead>
       <tr>
         <% if isAdmin %>
           <th>User</th>
         <% end %>
-        <th>Id</th>
+        <th class="!relative">Id</th>
         <th>Date</th>
         <th>Art</th>
         <th>Item</th>
@@ -26,7 +26,7 @@
           <% if isAdmin %>
             <td><%= link_to User.find(order.user_id) do %><%= User.find(order.user_id).name %><% end %></td>
           <% end %>
-          <td>#<%= order.item_id %></td>
+          <td>#<%= order.id %></td>
           <td><%= order.created_at.to_date %></td>
           <td>
             <%= link_to Art.find(order.art_id), class: "flex flex-row gap-4 items-center" do %>
