@@ -43,7 +43,7 @@
     <% end %>
   </div>
   <div class="w-3/4 flex flex-col gap-4">
-    <div class="w-[42rem] self-center"><%= render "shared/components/flash" %></div>
+    <div class="w-full lg:w-[42rem] self-center"><%= render "shared/components/flash" %></div>
     <div id="arts_sec" class="w-full flex flex-row flex-wrap justify-center gap-2">
       <% @arts.each do |art| %>
         <%= render "shared/components/graphics/art_link", art: art %>
