@@ -14,8 +14,8 @@
   var art_editor_layer_index
 </script>
 <%= form_with(model: art, class: "contents") do |form| %>
-  <div class="flex flex-row h-screen">
-    <div class="flex form-control w-1/3 h-full pt-16 bg-base-100">
+  <div class="flex flex-col-reverse lg:flex-row h-screen">
+    <div class="lg:w-1/3 h-1/2 lg:h-full lg:pt-16 bg-base-100">
       <div class="h-full overflow-y-auto">
         <div class="flex flex-col m-6 gap-4">
           <%= render "shared/components/flash" %>
@@ -151,7 +151,7 @@
         </div>
       </div>
     </div>
-    <div class="flex-1 bg-neutral overflow-auto pt-16">
+    <div class="lg:flex-1 h-1/2 lg:h-full bg-neutral overflow-auto pt-16">
       <div class="flex justify-center items-center h-full w-full overflow-auto"><%= render "shared/components/graphics/canvas",
           art_data: [],
           id: "art_editor",
