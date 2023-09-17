@@ -1,0 +1,42 @@
+<dialog id="consent_modal" class="modal w-full h-full bg-base-100/50">
+  <div class="modal-box shadow-none border border-neutral">
+    <div class="font-bold text-xl">Welcome to Geniverse!</div>
+    <div class="flex flex-col py-4 gap-4">
+      <div class="font-bold">English</div>
+      <div class="flex flex-col gap-3">
+        <div>
+          This is a preview of the project developed by Murcio Filho that proposes a generative art creation using only a Graphical User Interface without the need of programming by the user.
+        </div>
+        <div>
+          Any activity on this website will be used as a research data for the Final Paper of the Design undergraduate course. If you agree with this term, click on the button <strong>"I consent"</strong>.
+        </div>
+      </div>
+      <hr class="border-neutral">
+      <div class="font-bold">Portuguese</div>
+      <div class="flex flex-col gap-3">
+        <div>
+          Este é uma prévia do projeto desenvolvido por Murcio Filho que propõe a criação de arte generativa utilizando apenas interface gráfica sem a necessidade de programação por parte do usuário.
+        </div>
+        <div>
+          Qualquer atividade realizada neste website será utilizada como dados de pesquisa para o TCC do curso de Design. Se concorda com tal termo, clique no botão <strong>"I consent"</strong>.
+        </div>
+      </div>
+    </div>
+    <div class="modal-action mt-0">
+      <button onClick="hide_modal()" class="btn btn-primary">I consent</button>
+    </div>
+  </div>
+</dialog>
+<script type="application/javascript">
+  var consent_modal_element = document.getElementById('consent_modal')
+  function show_modal(){
+    consent_modal_element.classList.add('modal-open')
+  }
+  function hide_modal(){
+    consent_modal_element.style.display = 'none'
+    sessionStorage.setItem("consent", true)
+  }
+  if(sessionStorage.getItem("consent") == null){
+    show_modal()
+  }
+</script>

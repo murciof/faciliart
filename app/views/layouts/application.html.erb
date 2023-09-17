@@ -16,6 +16,7 @@
   <body class="font-chivo">
     <%= render "shared/components/navbar" %>
     <main class="flex flex-col">
+      <%= render "shared/components/modals/consent" %>
       <% render 'shared/components/flash' %>
       <%= yield %>
     </main>
