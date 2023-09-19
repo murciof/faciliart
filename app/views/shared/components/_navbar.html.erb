@@ -31,6 +31,12 @@
                   <li><%= link_to "Orders", orders_path %></li>
                   <li><%= link_to "Items", items_path %></li>
                   <li><%= link_to "Item Sizes", item_sizes_path %></li>
+                  <hr class="border-t border-neutral mb-2 w-full"/>
+                  <% if Setting.first.present? %>
+                    <li><%= link_to "Edit settings", edit_setting_path(Setting.first) %></li>
+                  <% else %>
+                    <li><%= link_to "New setting", new_setting_path %></li>
+                  <% end %>
                 <% end %>
               </ul>
             </li>

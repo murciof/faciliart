@@ -26,6 +26,7 @@ class OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.art_id = params[:art_id]
         @order.user_id = (current_user.id if user_signed_in?)
+        @order.artist_rate = (Setting.first.present? ? Setting.first.artist_rate : 0)
         if ItemSize.where(id: @order.item_size_id, item_id: @order.item_id).exists?
           if @order.save
             format.html do

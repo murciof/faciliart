@@ -1,0 +1,5 @@
+<div class="w-full flex flex-col items-center justify-center gap-6">
+  <div class="text-2xl font-bold">Settings</div>
+  <%= link_to 'New setting', new_setting_path, class: "btn btn-primary" %>
+  <%= render "shared/components/tables/settings", settings: @settings %>
+</div>

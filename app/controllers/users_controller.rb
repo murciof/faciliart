@@ -13,6 +13,14 @@ class UsersController < ApplicationController
     @arts = Art.all.where(user_id: @user.id)
     @comments = Comment.all.where(user_id: @user.id)
     @orders = Order.all.where(user_id: @user.id)
+
+    @earnings = 0
+
+    @setting = Setting.new
+
+    Order.all.joins(art: [:user]).where(art: { user: @user }).each do |order|
+      @earnings += (ItemSize.find(order.item_size_id).price * order.artist_rate / 100)
+    end
   end
 
   # GET /users/new

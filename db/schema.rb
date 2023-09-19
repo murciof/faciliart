@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_034220) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_162532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,10 +55,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_034220) do
     t.bigint "item_size_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "artist_rate"
     t.index ["art_id"], name: "index_orders_on_art_id"
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["item_size_id"], name: "index_orders_on_item_size_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.decimal "artist_rate", default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,24 @@
+<div class="border border-neutral p-4 rounded-xl w-full lg:w-auto overflow-x-auto lg:max-w-[72rem]">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="!relative">Id</th>
+        <th>Artist rate</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% settings.each do |setting| %>
+        <tr>
+          <td><%= link_to setting do %><%= setting.id %><% end %></td>
+          <td><%= setting.artist_rate %></td>
+          <td>
+            <div class="flex flex-row gap-2">
+              <%= button_to "Delete", setting_path(setting), method: :delete, class: "btn btn-outline" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

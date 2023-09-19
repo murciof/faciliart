@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :settings, except: %i[show index]
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

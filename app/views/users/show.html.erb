@@ -15,6 +15,7 @@
         <div class="text-lg"><%= Art.all.where(user_id: @user.id).count %> Uploads</div>
         <div class="text-lg"><%= Order.all.where(user_id: @user.id).count %> Orders</div>
       </div>
+      <div class="text-lg font-bold">Earnings (fictional): $<%= @earnings %></div>
     </div>
   </div>
   <div class="flex flex-col w-full md:flex-row justify-center gap-4">
@@ -40,6 +41,13 @@
       UserInterface.switch_button_fill("orders_btn")'>
         Orders
       </button>
+      <button
+      id="earnings_btn"
+      class="btn btn-primary btn-outline"
+      onClick='UserInterface.switch_section_visibility("earnings_sec");
+      UserInterface.switch_button_fill("earnings_btn")'>
+        Earnings
+      </button>
     <% end %>
   </div>
   <div class="w-full lg:w-3/4 flex flex-col gap-4">
@@ -57,6 +65,9 @@
     <% if user_signed_in? and current_user.id == @user.id %>
       <div id="orders_sec" class="hidden w-full flex-col items-center gap-4">
         <%= render "shared/components/tables/orders", orders: @orders, isAdmin: false %>
+      </div>
+      <div id="earnings_sec" class="hidden w-full flex-col items-center gap-4">
+        <%= render "shared/components/tables/earnings", user: @user %>
       </div>
     <% end %>
   </div>

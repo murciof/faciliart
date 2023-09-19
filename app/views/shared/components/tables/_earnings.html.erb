@@ -1,0 +1,48 @@
+<script type="module">
+  import * as ArtGenerator from 'lib/art_generator'
+  window.ArtGenerator = ArtGenerator
+</script>
+<div class="border border-neutral p-4 rounded-xl w-full lg:w-auto overflow-x-auto lg:max-w-[72rem]">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="!relative">Id</th>
+        <th>Date</th>
+        <th>Art</th>
+        <th>Item</th>
+        <th>Size</th>
+        <th>Rate</th>
+        <th>Earnings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Order.all.joins(art: [:user]).where(art: {user: user}).each do |order| %>
+        <tr>
+          <td>#<%= order.id %></td>
+          <td><%= order.created_at.to_date %></td>
+          <td>
+            <%= link_to Art.find(order.art_id), class: "flex flex-row gap-4 items-center" do %>
+              <%= content_tag :div,
+                  class: "bg-black w-16 h-16 shrink-0",
+                  id: "art_" + order.art_id.to_s + "_earning_" + order.id.to_s do %>
+                <%= render "shared/components/graphics/canvas",
+                    art_data: Art.find(order.art_id).data, id: "art_" + order.art_id.to_s + "_earning_" + order.id.to_s,
+                    isStatic: true,
+                    isSVG: false %>
+              <% end %>
+              <% if Art.find(order.art_id).name? %>
+                <div><%= Art.find(order.art_id).name %></div>
+              <% else %>
+                <div>No name</div>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= Item.find(order.item_id).name %></td>
+          <td><%= ItemSize.find(order.item_size_id).size %></td>
+          <td><%= order.artist_rate %></td>
+          <td class="font-bold">$<%= (ItemSize.find(order.item_size_id).price * order.artist_rate / 100).to_s %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
