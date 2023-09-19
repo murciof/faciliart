@@ -1,8 +1,13 @@
-<script type="module">
-  import * as ArtGenerator from 'lib/art_generator'
-  window.ArtGenerator = ArtGenerator
-</script>
-<div class="w-full flex flex-col items-center justify-center gap-6">
-  <div class="text-2xl font-bold">Orders</div>
-  <%= render "shared/components/tables/orders", orders: @orders, isAdmin: true %>
-</div>
+<% if user_signed_in? && current_user.is_admin? %>
+  <script type="module">
+    import * as ArtGenerator from 'lib/art_generator'
+    window.ArtGenerator = ArtGenerator
+  </script>
+  <div class="w-full flex flex-col items-center justify-center gap-6">
+    <div class="text-2xl font-bold">Orders</div>
+    <%= render "shared/components/tables/orders", orders: @orders, isAdmin: true %>
+  </div>
+<% else %>
+  <%= render "shared/errors/401" %>
+<% end %>
+

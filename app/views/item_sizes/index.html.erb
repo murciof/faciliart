@@ -1,3 +1,4 @@
+<% if user_signed_in? && current_user.is_admin? %>
 <script type="module">
   import * as ArtGenerator from 'lib/art_generator'
   window.ArtGenerator = ArtGenerator
@@ -7,3 +8,6 @@
   <%= link_to 'New Item Size', new_item_size_path, class: "btn btn-primary" %>
   <%= render "shared/components/tables/item_sizes", item_sizes: @item_sizes %>
 </div>
+<% else %>
+  <%= render "shared/errors/401" %>
+<% end %>

@@ -1,3 +1,7 @@
+<% if user_signed_in? && current_user.id == @art.user_id %>
 <div class="w-full">
   <%= render "form", art: @art %>
 </div>
+<% else %>
+  <%= render "shared/errors/401" %>
+<% end %>
