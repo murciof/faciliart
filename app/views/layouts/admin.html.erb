@@ -14,6 +14,10 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
+    <script type="module">
+      import * as ArtGenerator from 'lib/art_generator'
+      window.ArtGenerator = ArtGenerator
+    </script>
     <%= render "shared/components/navbar" %>
     <main class="flex flex-col pt-24 px-8">
       <%= render 'shared/components/flash' %>

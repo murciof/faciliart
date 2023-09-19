@@ -14,6 +14,10 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="font-chivo">
+    <script type="module">
+      import * as ArtGenerator from 'lib/art_generator'
+      window.ArtGenerator = ArtGenerator
+    </script>
     <%= render "shared/components/navbar" %>
     <main class="flex flex-col">
       <%= render "shared/components/modals/consent" %>
