@@ -5,7 +5,7 @@
 <div class="navbar bg-base-300 px-6 fixed z-50 border-b border-neutral gap-4 lg:gap-8 flex-col lg:flex-row">
   <div class="flex flex-row w-full lg:w-auto justify-between items-center">
     <div class="shrink-0">
-      <%= link_to root_path do %><%= image_tag "brand.svg", class: "h-6" %><% end %>
+      <%= link_to root_path, data: {turbo: false} do %><%= image_tag "brand.svg", class: "h-6" %><% end %>
     </div>
     <button id="navbar-collapse" onClick="UserInterface.switch_navbar_menu()" class="flex lg:hidden btn btn-outline"><i class="ph-bold ph-list text-xl"></i></button>
   </div>
