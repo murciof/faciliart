@@ -1,6 +1,6 @@
 <div>
   <%= render "shared/components/hero" %>
-  <div class="flex flex-row flex-wrap justify-center gap-2 p-6">
+  <div class="flex flex-row flex-wrap justify-center gap-2 px-6 py-12">
     <div id="arts" class="absolute -mt-20"></div>
     <% @arts.each do |art| %>
       <%= render "shared/components/graphics/art_link", art: art %>
