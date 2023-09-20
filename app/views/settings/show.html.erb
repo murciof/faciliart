@@ -1,7 +1,6 @@
 <div class="mx-auto md:w-2/3 w-full flex">
   <div class="mx-auto">
     <%= render @setting %>
-
     <%= link_to 'Edit this setting', edit_setting_path(@setting), class: "btn btn-primary" %>
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this setting', setting_path(@setting), method: :delete, class: "btn btn-primary" %>

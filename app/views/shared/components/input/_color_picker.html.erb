@@ -9,7 +9,6 @@
   oninput: "ArtGenerator.update_general_properties(art_editor_data)",
   placeholder: placeholder do; end %>
 </label>
-
 <script>
   window["<%= id %>-pickr"] = new Pickr({
     el: '.color-picker',
@@ -49,21 +48,20 @@
             save: false,
         },
     },
-})
+  })
 
-window["<%= id %>-pickr"].on('init', instance => {
+  window["<%= id %>-pickr"].on('init', instance => {
   instance.getRoot().button.style.height = "100%"
   instance.getRoot().button.style.width = "3rem"
   instance.getRoot().app.style.backgroundColor = "#0f0f0f"
   instance.getRoot().app.style.border = "1px solid"
   instance.getRoot().app.style.borderRadius = ".5rem"
   instance.getRoot().app.style.borderColor = "#555555"
-})
+  })
 
-window["<%= id %>-pickr"].on('change', (color, source, instance) => {
+  window["<%= id %>-pickr"].on('change', (color, source, instance) => {
     let element = document.getElementById("<%= id %>")
     element.value = color.toHEXA().toString()
     ArtGenerator.update_general_properties(art_editor_data)
-})
-
+  })
 </script>
