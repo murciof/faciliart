@@ -15,7 +15,9 @@
         <div class="text-lg"><%= Art.all.where(user_id: @user.id).count %> Uploads</div>
         <div class="text-lg"><%= Order.all.where(user_id: @user.id).count %> Orders</div>
       </div>
-      <div class="text-lg font-bold">Earnings (fictional): $<%= @earnings %></div>
+      <% if user_signed_in? and current_user.id == @user.id %>
+        <div class="text-lg font-bold">Earnings (fictional): $<%= @earnings %></div>
+      <% end %>
     </div>
   </div>
   <div class="flex flex-col w-full md:flex-row justify-center gap-4">
