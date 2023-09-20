@@ -1,0 +1,69 @@
+<label class="flex-1 input-group">
+  <span class="input input-bordered border-r-0">
+    <%= content_tag :i, class: "ph text-2xl " + icon do; end %>
+  </span>
+  <div class="color-picker"></div>
+  <%= content_tag :input,
+  class: "input input-bordered bg-base-300 w-full",
+  id: id,
+  oninput: "ArtGenerator.update_general_properties(art_editor_data)",
+  placeholder: placeholder do; end %>
+</label>
+
+<script>
+  window["<%= id %>-pickr"] = new Pickr({
+    el: '.color-picker',
+    container: 'body',
+    theme: 'monolith',
+    closeOnScroll: true,
+    useAsButton: false,
+    padding: 8,
+    inline: false,
+    autoReposition: true,
+    sliders: 'h',
+    disabled: false,
+    lockOpacity: true,
+    outputPrecision: 0,
+    comparison: false,
+    default: '#ffffff',
+    swatches: null,
+    defaultRepresentation: 'HEX',
+    showAlways: false,
+    closeWithKey: 'Escape',
+    position: 'bottom-middle',
+    adjustableNumbers: true,
+    components: {
+        palette: false,
+        preview: false,
+        opacity: false,
+        hue: true,
+        interaction: {
+            hex: false,
+            rgba: false,
+            hsla: false,
+            hsva: false,
+            cmyk: false,
+            input: false,
+            cancel: false,
+            clear: false,
+            save: false,
+        },
+    },
+})
+
+window["<%= id %>-pickr"].on('init', instance => {
+  instance.getRoot().button.style.height = "100%"
+  instance.getRoot().button.style.width = "3rem"
+  instance.getRoot().app.style.backgroundColor = "#0f0f0f"
+  instance.getRoot().app.style.border = "1px solid"
+  instance.getRoot().app.style.borderRadius = ".5rem"
+  instance.getRoot().app.style.borderColor = "#555555"
+})
+
+window["<%= id %>-pickr"].on('change', (color, source, instance) => {
+    let element = document.getElementById("<%= id %>")
+    element.value = color.toHEXA().toString()
+    ArtGenerator.update_general_properties(art_editor_data)
+})
+
+</script>
