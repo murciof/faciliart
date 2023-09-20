@@ -11,11 +11,26 @@ module.exports = {
     colors: {
       canvas: '#444444',
     },
+    backgroundSize: {
+      '400%': '400% 400%',
+    },
     extend: {
       fontFamily: {
         chivo: ['Chivo', ...defaultTheme.fontFamily.sans],
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      /*
+      keyframes: {
+        'hero-animation': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '50% 0%' },
+        },
+      },
+      animation: {
+        'hero': 'hero-animation 20s ease infinite',
+      },
+      */
     },
   },
   plugins: [
