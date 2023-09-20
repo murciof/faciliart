@@ -3,7 +3,7 @@
   window.ArtGenerator = ArtGenerator
 </script>
 <%= link_to art, class: "group bg-black w-64 h-64 relative", id: (dom_id art) do %>
-  <div class="h-full w-full absolute z-50 flex flex-col justify-between text-[#FFFFFF]/0 group-hover:text-[#FFFFFF]/100 p-4 bg-[#000000]/0 group-hover:bg-[#000000]/50 select-none transition-all">
+  <div class="h-full w-full absolute z-40 flex flex-col justify-between text-[#FFFFFF]/0 group-hover:text-[#FFFFFF]/100 p-4 bg-[#000000]/0 group-hover:bg-[#000000]/50 select-none transition-all">
     <% if art.name? %>
       <div class="text-xl font-bold"><%= art.name %></div>
     <% else %>
