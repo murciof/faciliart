@@ -55,6 +55,8 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    return unless user_signed_in? && current_user.is_admin
+
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to order_url(@order), notice: 'Order was successfully updated.' }

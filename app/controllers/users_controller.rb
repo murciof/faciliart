@@ -48,6 +48,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+    return unless user_signed_in? && (current_user.id == @user.id || current_user.is_admin)
+
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: 'User was successfully updated.' }
