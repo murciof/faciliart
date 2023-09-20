@@ -1,6 +1,8 @@
 class ArtsController < ApplicationController
   before_action :set_art, only: %i[show edit update destroy]
 
+  layout 'home', only: [:index]
+
   GENERATORS = [{ generator: 'line',
                   sliders: [{ element: 'points', min: '2', max: '100', value: '50' },
                             { element: 'stroke', min: '1', max: '10', value: '1',
