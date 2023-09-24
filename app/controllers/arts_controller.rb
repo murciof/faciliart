@@ -16,7 +16,8 @@ class ArtsController < ApplicationController
 
   # GET /arts or /arts.json
   def index
-    @arts = Art.all
+    @arts = Art.all.order(created_at: :desc)
+    @arts_kaminari = Kaminari.paginate_array(@arts).page(params[:page]).per(100)
   end
 
   # GET /arts/1 or /arts/1.json
