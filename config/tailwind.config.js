@@ -43,7 +43,7 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        geniverse: {
+        faciliart: {
           primary: '#e0e0e0',
           'base-100': '#222222',
           'base-200': '#111111',

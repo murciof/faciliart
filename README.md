@@ -1,12 +1,12 @@
 <div align="center">
-<img src="app/assets/images/brand.svg" alt="Geniverse" height="72">
+<img src="app/assets/images/brand.svg" alt="Faciliart" height="72">
 <p style="font-size:22px"></p>
 <p><strong>Generative art can be accessible</strong></p>
 </div>
 
-# What is Geniverse?
+# What is Faciliart?
 
-Geniverse is a social network made on Ruby on Rails that allows the user to generate art using the web interface.
+Faciliart is a social network made on Ruby on Rails that allows the user to generate art using the web interface.
 
 # Main dependencies
 
