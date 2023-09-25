@@ -19,6 +19,7 @@
       <div class="dropdown dropdown-bottom lg:dropdown-end">
         <ul class="menu menu-vertical lg:menu-horizontal lg:px-1 gap-2 lg:gap-4">
           <%= link_to 'New art', new_art_path, class: "btn btn-ghost lg:btn-primary lg:btn-outline w-fit uppercase font-bold py-3 px-4" %>
+          <%= link_to 'Survey', "https://forms.gle/nsWNxhsgjmEwdxnEA", class: "btn btn-ghost lg:btn-primary lg:btn-outline w-fit uppercase font-bold py-3 px-4", target: "_blank" %>
           <% if user_signed_in? %>
             <li tabindex="0">
               <div class="btn btn-ghost w-fit uppercase font-bold py-3 px-4"><%= current_user.name %></div>
