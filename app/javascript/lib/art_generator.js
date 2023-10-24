@@ -56,8 +56,18 @@ export function generate_coordinates(parameters, width, height) {
       })
     }
   }
-  console.log(parameters)
   return coordinates
+}
+
+export function scan_unfinished_layer_index(data) {
+  let index
+  for (let i = 0; i < data['layers'].length; i++) {
+    if (data['layers'][i].finished == false) {
+      index = i
+      break
+    }
+  }
+  return index
 }
 
 export function update_general_properties(data) {
@@ -71,19 +81,51 @@ export function update_general_properties(data) {
   data_element.innerHTML = JSON.stringify(data)
 }
 
-export function create_layer(data) {
+export function create_layer(data, finished) {
   let generator = get_checked_generator()
   let parameters = get_parameters(generator)
   if (typeof generator !== 'undefined') {
-    data['layers'].push({
-      generator: generator,
-      coordinates: generate_coordinates(
-        parameters,
-        data.general.width ? data.general.width : 400,
-        data.general.height ? data.general.height : 400
-      ),
-      parameters: parameters,
-    })
+    if (finished) {
+      if (typeof scan_unfinished_layer_index(data) === 'undefined') {
+        data['layers'].push({
+          generator: generator,
+          coordinates: generate_coordinates(
+            parameters,
+            data.general.width ? data.general.width : 400,
+            data.general.height ? data.general.height : 400
+          ),
+          parameters: parameters,
+          finished: finished,
+        })
+      } else {
+        data['layers'][scan_unfinished_layer_index(data)].parameters =
+          parameters
+        data['layers'][scan_unfinished_layer_index(data)].finished = true
+      }
+    } else {
+      if (typeof scan_unfinished_layer_index(data) === 'undefined') {
+        data['layers'].push({
+          generator: generator,
+          coordinates: generate_coordinates(
+            parameters,
+            data.general.width ? data.general.width : 400,
+            data.general.height ? data.general.height : 400
+          ),
+          parameters: parameters,
+          finished: finished,
+        })
+      } else {
+        data['layers'][scan_unfinished_layer_index(data)].parameters =
+          parameters
+        data['layers'][scan_unfinished_layer_index(data)].coordinates =
+          generate_coordinates(
+            parameters,
+            data.general.width ? data.general.width : 400,
+            data.general.height ? data.general.height : 400
+          )
+      }
+    }
+
     update_data_field(data)
     render_layer_buttons(data)
   }
@@ -141,10 +183,12 @@ function update_data_field(data) {
 }
 
 export function delete_layer(data, index) {
-  let data_element = document.getElementById('data')
-  data['layers'].splice(index, 1)
-  data_element.innerHTML = JSON.stringify(data)
-  render_layer_buttons(data)
+  if (typeof index !== 'undefined') {
+    let data_element = document.getElementById('data')
+    data['layers'].splice(index, 1)
+    data_element.innerHTML = JSON.stringify(data)
+    render_layer_buttons(data)
+  }
 }
 
 export function render_layers(data, bg, p5) {

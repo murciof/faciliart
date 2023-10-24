@@ -54,6 +54,9 @@ export function render_action_buttons(operation) {
   let art_editor_update_layer_element = document.getElementById(
     'art_editor_update_layer'
   )
+  let art_editor_generate_element = document.getElementById(
+    'art_editor_generate'
+  )
   let art_editor_back_to_main_element = document.getElementById(
     'art_editor_back_to_main'
   )
@@ -62,37 +65,18 @@ export function render_action_buttons(operation) {
   )
   if (operation == 'create') {
     art_editor_create_layer_element.classList.replace('hidden', 'btn')
+    art_editor_generate_element.classList.replace('hidden', 'btn')
     art_editor_update_layer_element.classList.replace('btn', 'hidden')
 
-    art_editor_back_to_generators_element.classList.add(
-      'btn',
-      'btn-primary',
-      'btn-outline'
-    )
-    art_editor_back_to_generators_element.classList.remove('hidden')
-    art_editor_back_to_main_element.classList.add('hidden')
-    art_editor_back_to_main_element.classList.remove(
-      'btn',
-      'btn-primary',
-      'btn-outline'
-    )
+    art_editor_back_to_generators_element.classList.replace('btn', 'hidden')
+    art_editor_back_to_main_element.classList.replace('hidden', 'btn')
   } else if (operation == 'edit') {
     art_editor_create_layer_element.classList.replace('btn', 'hidden')
+    art_editor_generate_element.classList.replace('btn', 'hidden')
     art_editor_update_layer_element.classList.replace('hidden', 'btn')
 
-    art_editor_back_to_generators_element.classList.add('hidden')
-    art_editor_back_to_generators_element.classList.remove(
-      'btn',
-      'btn-primary',
-      'btn-outline'
-    )
-
-    art_editor_back_to_main_element.classList.add(
-      'btn',
-      'btn-primary',
-      'btn-outline'
-    )
-    art_editor_back_to_main_element.classList.remove('hidden')
+    art_editor_back_to_generators_element.classList.replace('hidden', 'btn')
+    art_editor_back_to_main_element.classList.replace('btn', 'hidden')
   }
 }
 
