@@ -16,6 +16,8 @@ export function switch_element_with_prefix_visibility(prefix, category) {
   }
 }
 
+export function disable_color_selector() {}
+
 export function switch_element_visibility(to_hidden, to_show) {
   let element_to_hidden = document.getElementById(to_hidden)
   let element_to_show = document.getElementById(to_show)
@@ -101,15 +103,16 @@ export function render_layer_creator(generator) {
     'art_editor_parameters_' + generator + '_create'
   )
   switch_element_with_prefix_visibility('parameters', generator)
-  let points_element = document.getElementById(
-    'parameter-' + generator + '-points'
+
+  let iterations_element = document.getElementById(
+    'parameter-' + generator + '-iterations'
   )
-  let points_element_value = document.getElementById(
-    'parameter-' + generator + '-points-value'
+  let iterations_element_value = document.getElementById(
+    'parameter-' + generator + '-iterations-value'
   )
-  points_element.disabled = false
-  points_element.classList.remove('opacity-25')
-  points_element_value.classList.remove('opacity-75')
+  iterations_element.disabled = false
+  iterations_element.classList.remove('opacity-25')
+  iterations_element_value.classList.remove('opacity-75')
 
   render_action_buttons('create')
 }
@@ -132,15 +135,15 @@ export function render_layer_editor(data, index) {
         ']'
     )
     element.value = layer.parameters[Object.keys(layer.parameters)[i]]
-    let points_element = document.getElementById(
-      'parameter-' + layer.generator + '-points'
+    let iterations_element = document.getElementById(
+      'parameter-' + layer.generator + '-iterations'
     )
-    let points_element_value = document.getElementById(
-      'parameter-' + layer.generator + '-points-value'
+    let iterations_element_value = document.getElementById(
+      'parameter-' + layer.generator + '-iterations-value'
     )
-    points_element.disabled = true
-    points_element.classList.add('opacity-25')
-    points_element_value.classList.add('opacity-75')
+    iterations_element.disabled = true
+    iterations_element.classList.add('opacity-25')
+    iterations_element_value.classList.add('opacity-75')
   }
   render_action_buttons('edit')
 }
@@ -167,7 +170,6 @@ export function uncheck_radio_with_prefix(prefix) {
 }
 
 export function switch_navbar_menu() {
-  let button_element = document.getElementById('navbar-collapse')
   let menu_element = document.getElementById('navbar-collapsible')
 
   if (menu_element.classList.contains('hidden')) {

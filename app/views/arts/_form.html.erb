@@ -89,6 +89,15 @@
                       placeholder: "<< Color",
                       icon: "ph-palette" %>
                   <div class="flex flex-col gap-1">
+                    <%= label_tag "parameter-" + generator[:generator] + "-random", "Random?",
+                    class: "label-text" %>
+                    <div class="flex flex-1">
+                      <%= check_box_tag "parameter-" + generator[:generator] + "-random", "random",
+                      false,
+                      class: "checkbox border bg-base-300" %>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1">
                     <%= label_tag "parameter-" + generator[:generator] + "-fill-label", "Fill?",
                     class: "label-text" %>
                     <div class="flex flex-1">
@@ -98,6 +107,13 @@
                     </div>
                   </div>
                 </div>
+                <%= render "shared/components/input/slider",
+                  min: '0',
+                  max: '10',
+                  value: '1',
+                  step: '1',
+                  generator: generator[:generator],
+                  element: 'stroke' %>
                 <% generator[:sliders].each do |slider| %>
                   <%= render "shared/components/input/slider",
                   min: slider[:min],

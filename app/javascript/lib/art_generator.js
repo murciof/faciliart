@@ -29,13 +29,32 @@ export function get_parameters(generator) {
   return Object.assign({}, parameters)
 }
 
-export function generate_coordinates(points, width, height) {
+export function generate_coordinates(parameters, width, height) {
   let coordinates = new Array()
-  for (let i = 0; i < points; i++) {
-    coordinates.push({
-      x: Math.floor(Math.random() * (width - 0) + 0),
-      y: Math.floor(Math.random() * (height - 0) + 0),
-    })
+  for (let i = 0; i < parameters.iterations; i++) {
+    if (typeof parameters.diameter === 'undefined') {
+      coordinates.push({
+        x: Math.floor(Math.random() * (width - 0) + 0),
+        y: Math.floor(Math.random() * (height - 0) + 0),
+      })
+    } else {
+      coordinates.push({
+        x: Math.floor(
+          Math.random() *
+            (width -
+              +parameters.diameter / 2 -
+              (0 + +parameters.diameter / 2)) +
+            (0 + +parameters.diameter / 2)
+        ),
+        y: Math.floor(
+          Math.random() *
+            (height -
+              +parameters.diameter / 2 -
+              (0 + +parameters.diameter / 2)) +
+            (0 + +parameters.diameter / 2)
+        ),
+      })
+    }
   }
   return coordinates
 }
@@ -58,7 +77,7 @@ export function create_layer(data) {
     data['layers'].push({
       generator: generator,
       coordinates: generate_coordinates(
-        parameters.points,
+        parameters,
         data.general.width ? data.general.width : 400,
         data.general.height ? data.general.height : 400
       ),
@@ -140,6 +159,13 @@ export function render_layers(data, bg, p5) {
       case 'polygon':
         draw_polygon(data['layers'][i].coordinates, p5)
         break
+      case 'circles':
+        draw_circles(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.diameter,
+          p5
+        )
+        break
     }
     p5.endShape()
   }
@@ -182,4 +208,10 @@ export function draw_polygon(coordinates, p5) {
     p5.vertex(coordinates[i].x, coordinates[i].y)
   }
   p5.vertex(coordinates[0].x, coordinates[0].y)
+}
+
+export function draw_circles(coordinates, diameter, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.circle(coordinates[i].x, coordinates[i].y, diameter)
+  }
 }
