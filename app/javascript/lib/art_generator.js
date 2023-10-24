@@ -12,7 +12,7 @@ export function get_checked_generator() {
 export function get_parameters(generator) {
   const regex = RegExp('\\b(\\w+)$')
   let parameters_elements = document.querySelectorAll(
-    'input[id^=parameter-' + generator + ']'
+    'input[id*=' + generator + ']'
   )
   let parameters_names = []
   for (let i = 0; i < parameters_elements.length; i++) {
@@ -56,6 +56,7 @@ export function generate_coordinates(parameters, width, height) {
       })
     }
   }
+  console.log(parameters)
   return coordinates
 }
 
@@ -89,6 +90,7 @@ export function create_layer(data) {
 }
 
 export function update_layer(data, index) {
+  /*
   for (
     let i = 0;
     i < Object.keys(data['layers'][index].parameters).length;
@@ -110,6 +112,26 @@ export function update_layer(data, index) {
       ] = element.value
     }
   }
+  */
+
+  let color_element = document.getElementById(
+    'parameter-' + data['layers'][index].generator + '-color'
+  )
+  let random_element = document.getElementById(
+    'parameter-' + data['layers'][index].generator + '-random'
+  )
+  let fill_element = document.getElementById(
+    'parameter-' + data['layers'][index].generator + '-fill'
+  )
+  let stroke_element = document.getElementById(
+    'parameter-' + data['layers'][index].generator + '-stroke'
+  )
+
+  data['layers'][index].parameters.color = color_element.value
+  data['layers'][index].parameters.random = random_element.checked
+  data['layers'][index].parameters.fill = fill_element.checked
+  data['layers'][index].parameters.stroke = stroke_element.value
+
   update_data_field(data)
 }
 

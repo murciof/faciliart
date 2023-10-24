@@ -104,15 +104,16 @@ export function render_layer_creator(generator) {
   )
   switch_element_with_prefix_visibility('parameters', generator)
 
-  let iterations_element = document.getElementById(
-    'parameter-' + generator + '-iterations'
-  )
-  let iterations_element_value = document.getElementById(
-    'parameter-' + generator + '-iterations-value'
-  )
-  iterations_element.disabled = false
-  iterations_element.classList.remove('opacity-25')
-  iterations_element_value.classList.remove('opacity-75')
+  let parameters_gendep = document.querySelectorAll('input[id*=gendep]')
+
+  for (let i = 0; i < parameters_gendep.length; i++) {
+    parameters_gendep[i].disabled = false
+    parameters_gendep[i].classList.remove('opacity-25')
+    let parameter_gendep_value = document.getElementById(
+      parameters_gendep[i].id + '-value'
+    )
+    parameter_gendep_value.classList.remove('opacity-75')
+  }
 
   render_action_buttons('create')
 }
@@ -135,15 +136,17 @@ export function render_layer_editor(data, index) {
         ']'
     )
     element.value = layer.parameters[Object.keys(layer.parameters)[i]]
-    let iterations_element = document.getElementById(
-      'parameter-' + layer.generator + '-iterations'
-    )
-    let iterations_element_value = document.getElementById(
-      'parameter-' + layer.generator + '-iterations-value'
-    )
-    iterations_element.disabled = true
-    iterations_element.classList.add('opacity-25')
-    iterations_element_value.classList.add('opacity-75')
+
+    let parameters_gendep = document.querySelectorAll('input[id*=gendep]')
+
+    for (let i = 0; i < parameters_gendep.length; i++) {
+      parameters_gendep[i].disabled = true
+      parameters_gendep[i].classList.add('opacity-25')
+      let parameter_gendep_value = document.getElementById(
+        parameters_gendep[i].id + '-value'
+      )
+      parameter_gendep_value.classList.add('opacity-25')
+    }
   }
   render_action_buttons('edit')
 }

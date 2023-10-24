@@ -1,21 +1,21 @@
 <div class="flex flex-col gap-1">
-  <%= label_tag "parameter-" + generator + "-" + element, element.capitalize, class: "label-text" %>
+  <%= label_tag "parameter-" + (gendep ? "gendep-" : '') + generator + "-" + element, element.capitalize, class: "label-text" %>
   <div class="flex flex-row items-center gap-4">
-    <%= content_tag :input, class: "range", type: "range", id: "parameter-" + generator + "-" + element, min: min, max: max, value: value, step: step, oninput: "Input.refresh_slider_value(this.value, this.id)" do; end %>
-    <%= content_tag :div, class: "w-4 label-text", id: "parameter-" + generator + "-" + element + "-value", min: min, max: max, value: value, step: step do; end %>
+    <%= content_tag :input, class: "range", type: "range", id: "parameter-" + (gendep ? "gendep-" : '') + generator + "-" + element, min: min, max: max, value: value, step: step, oninput: "Input.refresh_slider_value(this.value, this.id)" do; end %>
+    <%= content_tag :div, class: "w-4 label-text", id: "parameter-" + (gendep ? "gendep-" : '') + generator + "-" + element + "-value", min: min, max: max, value: value, step: step do; end %>
   </div>
 </div>
 <script>
-  this["parameter-" + "<%= generator %>" + "-" + "<%= element %>"] =
+  this["parameter-" + "<%= (gendep ? "gendep-" : '') + generator %>" + "-" + "<%= element %>"] =
   document.getElementById(
-    "parameter-" + "<%= generator %>" + "-" + "<%= element %>"
+    "parameter-" + "<%= (gendep ? "gendep-" : '') + generator %>" + "-" + "<%= element %>"
   )
-  this["parameter-" + "<%= generator %>" + "-" + "<%= element %>" + "-value"] =
+  this["parameter-" + "<%= (gendep ? "gendep-" : '') + generator %>" + "-" + "<%= element %>" + "-value"] =
     document.getElementById(
-      "parameter-" + "<%= generator %>" + "-" + "<%= element %>" + "-value"
+      "parameter-" + "<%= (gendep ? "gendep-" : '') + generator %>" + "-" + "<%= element %>" + "-value"
     )
   this[
-    "parameter-" + "<%= generator %>" + "-" + "<%= element %>" + "-value"
+    "parameter-" + "<%= (gendep ? "gendep-" : '') + generator %>" + "-" + "<%= element %>" + "-value"
   ].innerHTML =
-    this["parameter-" + "<%= generator %>" + "-" + "<%= element %>"].value
+    this["parameter-" + "<%= (gendep ? "gendep-" : '') + generator %>" + "-" + "<%= element %>"].value
 </script>

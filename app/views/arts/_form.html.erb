@@ -113,7 +113,8 @@
                   value: '1',
                   step: '1',
                   generator: generator[:generator],
-                  element: 'stroke' %>
+                  element: 'stroke',
+                  gendep: false %>
                 <% generator[:sliders].each do |slider| %>
                   <%= render "shared/components/input/slider",
                   min: slider[:min],
@@ -121,7 +122,8 @@
                   value: slider[:value],
                   step: slider[:step],
                   generator: generator[:generator],
-                  element: slider[:element] %>
+                  element: slider[:element],
+                  gendep: true %>
                 <% end %>
               <% end %>
             <% end %>
