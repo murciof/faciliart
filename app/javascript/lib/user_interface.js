@@ -96,7 +96,7 @@ export function render_layer_creator(generator) {
     let parameter_gendep_value = document.getElementById(
       parameters_gendep[i].id + '-value'
     )
-    parameter_gendep_value.classList.remove('opacity-75')
+    parameter_gendep_value.classList.remove('opacity-25')
   }
 
   render_action_buttons('create')
