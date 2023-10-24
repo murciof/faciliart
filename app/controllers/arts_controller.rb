@@ -3,6 +3,8 @@ class ArtsController < ApplicationController
 
   layout 'home', only: [:index]
 
+  # TODO: Change points to iterations. Breaking change
+
   GENERATORS = [{ generator: 'line',
                   sliders: [{ element: 'points', min: '2', max: '100', value: '50' }] },
                 { generator: 'curve',
@@ -11,7 +13,10 @@ class ArtsController < ApplicationController
                   sliders: [{ element: 'points', min: '3', max: '100', value: '50' }] },
                 { generator: 'circles',
                   sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
-                            { element: 'diameter', min: '1', max: '50', value: '10' }] }].freeze
+                            { element: 'diameter', min: '1', max: '50', value: '10' }] },
+                { generator: 'squares',
+                  sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
+                            { element: 'size', min: '1', max: '50', value: '10' }] }].freeze
 
   # GET /arts or /arts.json
   def index

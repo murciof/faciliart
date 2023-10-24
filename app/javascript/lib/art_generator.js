@@ -29,15 +29,10 @@ export function get_parameters(generator) {
   return Object.assign({}, parameters)
 }
 
-export function generate_coordinates(parameters, width, height) {
+export function generate_coordinates(parameters, generator, width, height) {
   let coordinates = new Array()
   for (let i = 0; i < parameters.points; i++) {
-    if (typeof parameters.diameter === 'undefined') {
-      coordinates.push({
-        x: Math.floor(Math.random() * (width - 0) + 0),
-        y: Math.floor(Math.random() * (height - 0) + 0),
-      })
-    } else {
+    if (generator === 'circles') {
       coordinates.push({
         x: Math.floor(
           Math.random() *
@@ -53,6 +48,24 @@ export function generate_coordinates(parameters, width, height) {
               (0 + +parameters.diameter / 2)) +
             (0 + +parameters.diameter / 2)
         ),
+      })
+    } else if (generator === 'squares') {
+      coordinates.push({
+        x: Math.floor(
+          Math.random() *
+            (width - +parameters.size / 2 - (0 + +parameters.size / 2)) +
+            (0 + +parameters.size / 2)
+        ),
+        y: Math.floor(
+          Math.random() *
+            (height - +parameters.size / 2 - (0 + +parameters.size / 2)) +
+            (0 + +parameters.size / 2)
+        ),
+      })
+    } else {
+      coordinates.push({
+        x: Math.floor(Math.random() * (width - 0) + 0),
+        y: Math.floor(Math.random() * (height - 0) + 0),
       })
     }
   }
@@ -91,6 +104,7 @@ export function create_layer(data, finished) {
           generator: generator,
           coordinates: generate_coordinates(
             parameters,
+            generator,
             data.general.width ? data.general.width : 400,
             data.general.height ? data.general.height : 400
           ),
@@ -108,6 +122,7 @@ export function create_layer(data, finished) {
           generator: generator,
           coordinates: generate_coordinates(
             parameters,
+            generator,
             data.general.width ? data.general.width : 400,
             data.general.height ? data.general.height : 400
           ),
@@ -120,6 +135,7 @@ export function create_layer(data, finished) {
         data['layers'][scan_unfinished_layer_index(data)].coordinates =
           generate_coordinates(
             parameters,
+            generator,
             data.general.width ? data.general.width : 400,
             data.general.height ? data.general.height : 400
           )
@@ -232,6 +248,13 @@ export function render_layers(data, bg, p5) {
           p5
         )
         break
+      case 'squares':
+        draw_squares(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.size,
+          p5
+        )
+        break
     }
     p5.endShape()
   }
@@ -279,5 +302,11 @@ export function draw_polygon(coordinates, p5) {
 export function draw_circles(coordinates, diameter, p5) {
   for (let i = 0; i < coordinates.length; i++) {
     p5.circle(coordinates[i].x, coordinates[i].y, diameter)
+  }
+}
+
+export function draw_squares(coordinates, size, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.square(coordinates[i].x, coordinates[i].y, size)
   }
 }
