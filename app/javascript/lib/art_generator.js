@@ -31,7 +31,7 @@ export function get_parameters(generator) {
 
 export function generate_coordinates(parameters, width, height) {
   let coordinates = new Array()
-  for (let i = 0; i < parameters.iterations; i++) {
+  for (let i = 0; i < parameters.points; i++) {
     if (typeof parameters.diameter === 'undefined') {
       coordinates.push({
         x: Math.floor(Math.random() * (width - 0) + 0),

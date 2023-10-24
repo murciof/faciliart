@@ -4,13 +4,13 @@ class ArtsController < ApplicationController
   layout 'home', only: [:index]
 
   GENERATORS = [{ generator: 'line',
-                  sliders: [{ element: 'iterations', min: '2', max: '100', value: '50' }] },
+                  sliders: [{ element: 'points', min: '2', max: '100', value: '50' }] },
                 { generator: 'curve',
-                  sliders: [{ element: 'iterations', min: '4', max: '100', value: '50' }] },
+                  sliders: [{ element: 'points', min: '4', max: '100', value: '50' }] },
                 { generator: 'polygon',
-                  sliders: [{ element: 'iterations', min: '3', max: '100', value: '50' }] },
+                  sliders: [{ element: 'points', min: '3', max: '100', value: '50' }] },
                 { generator: 'circles',
-                  sliders: [{ element: 'iterations', min: '1', max: '100', value: '50' },
+                  sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
                             { element: 'diameter', min: '1', max: '50', value: '10' }] }].freeze
 
   # GET /arts or /arts.json
