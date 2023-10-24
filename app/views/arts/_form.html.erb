@@ -58,10 +58,10 @@
           <div class="hidden flex-col flex-1 gap-2" id="art_editor_generators">
             <% ArtsController::GENERATORS.each do |generator| %>
               <%= form.radio_button :generator_type,
-                  generator[:generator],
-                  class: "hidden peer/" + generator[:generator], id: generator[:generator],
-                  onClick: 'UserInterface.render_layer_creator("' + generator[:generator] + '")' %>
-              <%= label_tag generator[:generator], generator[:generator], class: "flex btn justify-center items-center" %>
+                  generator[:generator].delete(' '),
+                  class: "hidden peer/" + generator[:generator].delete(' '), id: generator[:generator].delete(' '),
+                  onClick: 'UserInterface.render_layer_creator("' + generator[:generator].delete(' ') + '")' %>
+              <%= label_tag generator[:generator].delete(' '), generator[:generator], class: "flex btn justify-center items-center" %>
             <% end %>
             <%= link_to "Back",
                 "javascript:void(0)",
@@ -72,36 +72,36 @@
             <% ArtsController::GENERATORS.each do |generator| %>
               <%= content_tag :div,
                   class: "hidden flex-col gap-4",
-                  id: "parameters-" + generator[:generator] do %>
+                  id: "parameters-" + generator[:generator].delete(' ') do %>
                 <%= content_tag :div,
                     class: "hidden text-2xl font-bold",
-                    id: "art_editor_parameters_" + generator[:generator] + "_create" do %>
+                    id: "art_editor_parameters_" + generator[:generator].delete(' ') + "_create" do %>
                   Create <%= generator[:generator] %>
                 <% end %>
                 <%= content_tag :div,
                     class: "hidden text-2xl font-bold",
-                    id: "art_editor_parameters_" + generator[:generator] + "_edit" do %>
-                  Edit <%= generator[:generator] %>
+                    id: "art_editor_parameters_" + generator[:generator].delete(' ') + "_edit" do %>
+                  Edit <%= generator[:generator].delete(' ') %>
                 <% end %>
                 <div class="flex flex-row gap-2 items-end">
                   <%= render "shared/components/input/color_picker",
-                      id: "parameter-" + generator[:generator] + "-color",
+                      id: "parameter-" + generator[:generator].delete(' ') + "-color",
                       placeholder: "<< Color",
                       icon: "ph-palette" %>
                   <div class="flex flex-col gap-1">
-                    <%= label_tag "parameter-" + generator[:generator] + "-random", "Random?",
+                    <%= label_tag "parameter-" + generator[:generator].delete(' ') + "-random", "Random?",
                     class: "label-text" %>
                     <div class="flex flex-1">
-                      <%= check_box_tag "parameter-" + generator[:generator] + "-random", "random",
+                      <%= check_box_tag "parameter-" + generator[:generator].delete(' ') + "-random", "random",
                       false,
                       class: "checkbox border bg-base-300" %>
                     </div>
                   </div>
                   <div class="flex flex-col gap-1">
-                    <%= label_tag "parameter-" + generator[:generator] + "-fill-label", "Fill?",
+                    <%= label_tag "parameter-" + generator[:generator].delete(' ') + "-fill-label", "Fill?",
                     class: "label-text" %>
                     <div class="flex flex-1">
-                      <%= check_box_tag "parameter-" + generator[:generator] + "-fill", "fill",
+                      <%= check_box_tag "parameter-" + generator[:generator].delete(' ') + "-fill", "fill",
                       false,
                       class: "checkbox border bg-base-300" %>
                     </div>
@@ -112,7 +112,7 @@
                   max: '10',
                   value: '1',
                   step: '1',
-                  generator: generator[:generator],
+                  generator: generator[:generator].delete(' '),
                   element: 'stroke',
                   gendep: false %>
                 <% generator[:sliders].each do |slider| %>
@@ -121,7 +121,7 @@
                   max: slider[:max],
                   value: slider[:value],
                   step: slider[:step],
-                  generator: generator[:generator],
+                  generator: generator[:generator].delete(' '),
                   element: slider[:element],
                   gendep: true %>
                 <% end %>

@@ -13,10 +13,23 @@ class ArtsController < ApplicationController
                   sliders: [{ element: 'points', min: '3', max: '100', value: '50' }] },
                 { generator: 'circles',
                   sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
-                            { element: 'diameter', min: '1', max: '50', value: '10' }] },
-                { generator: 'squares',
+                            { element: 'diameter', min: '1', max: '100', value: '10' }] },
+                { generator: 'static squares',
                   sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
-                            { element: 'size', min: '1', max: '50', value: '10' }] }].freeze
+                            { element: 'size', min: '1', max: '100', value: '10' }] },
+                { generator: 'static rectangles',
+                  sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
+                            { element: 'width', min: '1', max: '100', value: '10' },
+                            { element: 'height', min: '1', max: '100', value: '10' }] },
+                { generator: 'animated circles',
+                  sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
+                            { element: 'limit', min: '1', max: '100', value: '10' }] },
+                { generator: 'animated squares',
+                  sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
+                            { element: 'limit', min: '1', max: '100', value: '10' }] },
+                { generator: 'animated rectangles',
+                  sliders: [{ element: 'points', min: '1', max: '100', value: '50' },
+                            { element: 'limit', min: '1', max: '100', value: '10' }] }].freeze
 
   # GET /arts or /arts.json
   def index

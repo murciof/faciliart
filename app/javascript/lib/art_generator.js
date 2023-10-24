@@ -49,7 +49,7 @@ export function generate_coordinates(parameters, generator, width, height) {
             (0 + +parameters.diameter / 2)
         ),
       })
-    } else if (generator === 'squares') {
+    } else if (generator === 'staticsquares') {
       coordinates.push({
         x: Math.floor(
           Math.random() *
@@ -60,6 +60,36 @@ export function generate_coordinates(parameters, generator, width, height) {
           Math.random() *
             (height - +parameters.size / 2 - (0 + +parameters.size / 2)) +
             (0 + +parameters.size / 2)
+        ),
+      })
+    } else if (
+      generator === 'animatedsquares' ||
+      generator === 'animatedrectangles' ||
+      generator === 'animatedcircles'
+    ) {
+      coordinates.push({
+        x: Math.floor(
+          Math.random() *
+            (width - +parameters.limit / 2 - (0 + +parameters.limit / 2)) +
+            (0 + +parameters.limit / 2)
+        ),
+        y: Math.floor(
+          Math.random() *
+            (height - +parameters.limit / 2 - (0 + +parameters.limit / 2)) +
+            (0 + +parameters.limit / 2)
+        ),
+      })
+    } else if (generator === 'staticrectangles') {
+      coordinates.push({
+        x: Math.floor(
+          Math.random() *
+            (width - +parameters.width / 2 - (0 + +parameters.width / 2)) +
+            (0 + +parameters.width / 2)
+        ),
+        y: Math.floor(
+          Math.random() *
+            (height - +parameters.height / 2 - (0 + +parameters.height / 2)) +
+            (0 + +parameters.height / 2)
         ),
       })
     } else {
@@ -248,10 +278,39 @@ export function render_layers(data, bg, p5) {
           p5
         )
         break
-      case 'squares':
-        draw_squares(
+      case 'animatedcircles':
+        draw_animated_circles(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.limit,
+          p5
+        )
+        break
+      case 'staticsquares':
+        draw_static_squares(
           data['layers'][i].coordinates,
           data['layers'][i].parameters.size,
+          p5
+        )
+        break
+      case 'animatedsquares':
+        draw_animated_squares(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.limit,
+          p5
+        )
+        break
+      case 'staticrectangles':
+        draw_static_rectangles(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.width,
+          data['layers'][i].parameters.height,
+          p5
+        )
+        break
+      case 'animatedrectangles':
+        draw_animated_rectangles(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.limit,
           p5
         )
         break
@@ -305,8 +364,45 @@ export function draw_circles(coordinates, diameter, p5) {
   }
 }
 
-export function draw_squares(coordinates, size, p5) {
+export function draw_animated_circles(coordinates, limit, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.circle(
+      coordinates[i].x,
+      coordinates[i].y,
+      Math.floor(Math.random() * (limit - 1) + 1)
+    )
+  }
+}
+
+export function draw_static_squares(coordinates, size, p5) {
   for (let i = 0; i < coordinates.length; i++) {
     p5.square(coordinates[i].x, coordinates[i].y, size)
+  }
+}
+
+export function draw_animated_squares(coordinates, limit, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.square(
+      coordinates[i].x,
+      coordinates[i].y,
+      Math.floor(Math.random() * (limit - 1) + 1)
+    )
+  }
+}
+
+export function draw_static_rectangles(coordinates, width, height, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.rect(coordinates[i].x, coordinates[i].y, width, height)
+  }
+}
+
+export function draw_animated_rectangles(coordinates, limit, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.rect(
+      coordinates[i].x,
+      coordinates[i].y,
+      Math.floor(Math.random() * (limit - 1) + 1),
+      Math.floor(Math.random() * (limit - 1) + 1)
+    )
   }
 }
