@@ -91,15 +91,6 @@
                       placeholder: "<< Color",
                       icon: "ph-palette" %>
                   <div class="flex flex-col gap-1">
-                    <%= label_tag "parameter-" + generator[:generator].delete(' ') + "-random", "Random?",
-                    class: "label-text" %>
-                    <div class="flex flex-1">
-                      <%= check_box_tag "parameter-" + generator[:generator].delete(' ') + "-random", "random",
-                      false,
-                      class: "checkbox border bg-base-300" %>
-                    </div>
-                  </div>
-                  <div class="flex flex-col gap-1">
                     <%= label_tag "parameter-" + generator[:generator].delete(' ') + "-fill-label", "Fill?",
                     class: "label-text" %>
                     <div class="flex flex-1">

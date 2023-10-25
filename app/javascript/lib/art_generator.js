@@ -32,7 +32,7 @@ export function get_parameters(generator) {
 export function generate_coordinates(parameters, generator, width, height) {
   let coordinates = new Array()
   for (let i = 0; i < parameters.points; i++) {
-    if (generator === 'circles') {
+    if (generator === 'staticcircles') {
       coordinates.push({
         x: Math.floor(
           Math.random() *
@@ -63,9 +63,8 @@ export function generate_coordinates(parameters, generator, width, height) {
         ),
       })
     } else if (
-      generator === 'animatedsquares' ||
-      generator === 'animatedrectangles' ||
-      generator === 'animatedcircles'
+      generator.startsWith('animated') ||
+      generator.startsWith('dynamic')
     ) {
       coordinates.push({
         x: Math.floor(
@@ -100,6 +99,20 @@ export function generate_coordinates(parameters, generator, width, height) {
     }
   }
   return coordinates
+}
+
+export function generate_dimensions(parameters, generator) {
+  let dimensions
+  if (generator.startsWith('dynamic')) {
+    dimensions = new Array()
+    for (let i = 0; i < parameters.points; i++) {
+      dimensions.push({
+        x: Math.floor(Math.random() * (parameters.limit - 1) + 1),
+        y: Math.floor(Math.random() * (parameters.limit - 1) + 1),
+      })
+    }
+  }
+  return dimensions
 }
 
 export function scan_unfinished_layer_index(data) {
@@ -139,6 +152,7 @@ export function create_layer(data, finished) {
             data.general.height ? data.general.height : 400
           ),
           parameters: parameters,
+          dimensions: generate_dimensions(parameters, generator),
           finished: finished,
         })
       } else {
@@ -157,11 +171,14 @@ export function create_layer(data, finished) {
             data.general.height ? data.general.height : 400
           ),
           parameters: parameters,
+          dimensions: generate_dimensions(parameters, generator),
           finished: finished,
         })
       } else {
         data['layers'][scan_unfinished_layer_index(data)].parameters =
           parameters
+        data['layers'][scan_unfinished_layer_index(data)].dimensions =
+          generate_dimensions(parameters, generator)
         data['layers'][scan_unfinished_layer_index(data)].coordinates =
           generate_coordinates(
             parameters,
@@ -205,9 +222,6 @@ export function update_layer(data, index) {
   let color_element = document.getElementById(
     'parameter-' + data['layers'][index].generator + '-color'
   )
-  let random_element = document.getElementById(
-    'parameter-' + data['layers'][index].generator + '-random'
-  )
   let fill_element = document.getElementById(
     'parameter-' + data['layers'][index].generator + '-fill'
   )
@@ -216,7 +230,6 @@ export function update_layer(data, index) {
   )
 
   data['layers'][index].parameters.color = color_element.value
-  data['layers'][index].parameters.random = random_element.checked
   data['layers'][index].parameters.fill = fill_element.checked
   data['layers'][index].parameters.stroke = stroke_element.value
 
@@ -271,10 +284,17 @@ export function render_layers(data, bg, p5) {
       case 'polygon':
         draw_polygon(data['layers'][i].coordinates, p5)
         break
-      case 'circles':
-        draw_circles(
+      case 'staticcircles':
+        draw_static_circles(
           data['layers'][i].coordinates,
           data['layers'][i].parameters.diameter,
+          p5
+        )
+        break
+      case 'dynamiccircles':
+        draw_dynamic_circles(
+          data['layers'][i].coordinates,
+          data['layers'][i].dimensions,
           p5
         )
         break
@@ -292,6 +312,13 @@ export function render_layers(data, bg, p5) {
           p5
         )
         break
+      case 'dynamicsquares':
+        draw_dynamic_squares(
+          data['layers'][i].coordinates,
+          data['layers'][i].dimensions,
+          p5
+        )
+        break
       case 'animatedsquares':
         draw_animated_squares(
           data['layers'][i].coordinates,
@@ -304,6 +331,13 @@ export function render_layers(data, bg, p5) {
           data['layers'][i].coordinates,
           data['layers'][i].parameters.width,
           data['layers'][i].parameters.height,
+          p5
+        )
+        break
+      case 'dynamicrectangles':
+        draw_dynamic_circles(
+          data['layers'][i].coordinates,
+          data['layers'][i].dimensions,
           p5
         )
         break
@@ -358,9 +392,15 @@ export function draw_polygon(coordinates, p5) {
   p5.vertex(coordinates[0].x, coordinates[0].y)
 }
 
-export function draw_circles(coordinates, diameter, p5) {
+export function draw_static_circles(coordinates, diameter, p5) {
   for (let i = 0; i < coordinates.length; i++) {
     p5.circle(coordinates[i].x, coordinates[i].y, diameter)
+  }
+}
+
+export function draw_dynamic_circles(coordinates, dimensions, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.circle(coordinates[i].x, coordinates[i].y, dimensions[i].x)
   }
 }
 
@@ -380,6 +420,12 @@ export function draw_static_squares(coordinates, size, p5) {
   }
 }
 
+export function draw_dynamic_squares(coordinates, dimensions, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.square(coordinates[i].x, coordinates[i].y, dimensions[i].x)
+  }
+}
+
 export function draw_animated_squares(coordinates, limit, p5) {
   for (let i = 0; i < coordinates.length; i++) {
     p5.square(
@@ -393,6 +439,17 @@ export function draw_animated_squares(coordinates, limit, p5) {
 export function draw_static_rectangles(coordinates, width, height, p5) {
   for (let i = 0; i < coordinates.length; i++) {
     p5.rect(coordinates[i].x, coordinates[i].y, width, height)
+  }
+}
+
+export function draw_dynamic_rectangles(coordinates, dimensions, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.rect(
+      coordinates[i].x,
+      coordinates[i].y,
+      dimensions[i].x,
+      dimensions[i].y
+    )
   }
 }
 
