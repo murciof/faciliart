@@ -1,26 +1,26 @@
 <div align="center">
-<img src="app/assets/images/brand.svg" alt="Faciliart" height="72">
-<p style="font-size:22px"></p>
-<p><strong>Generative art can be accessible</strong></p>
-
-<div align="center">
+  <img src="app/assets/images/brand.svg" alt="Faciliart" height="72">
+  <p style="font-size:22px"></p>
+  <p><strong>Generative art can be accessible</strong></p>
   
+  <div align="center">
+    
   [![Preview](https://img.shields.io/badge/Preview-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://facili.art)
-
-</div>
-
-<div align="center">
   
-![Ruby](https://img.shields.io/badge/Ruby-3.2.2-444444?style=for-the-badge&logo=ruby&labelColor=CC342D)
-![Ruby on Rails](https://img.shields.io/badge/Rails-7.0.4-444444?style=for-the-badge&logo=rubyonrails&labelColor=D30001)
-![Javascript](https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.3-444444?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=06B6D4)
-![DaisyUI](https://img.shields.io/badge/DaisyUI-2.51.5-444444?style=for-the-badge&logo=daisyui&labelColor=5A0EF8)
-![p5.js](https://img.shields.io/badge/p5.js-1.6.0-444444?style=for-the-badge&logo=processingfoundation&labelColor=006699)
-![p5.js-svg](https://img.shields.io/badge/p5.js_svg-1.5.1-444444?style=for-the-badge&logo=processingfoundation&labelColor=006699)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-
-</div>
+  </div>
+  
+  <div align="center">
+    
+  ![Ruby](https://img.shields.io/badge/Ruby-3.2.2-444444?style=for-the-badge&logo=ruby&labelColor=CC342D)
+  ![Ruby on Rails](https://img.shields.io/badge/Rails-7.0.4-444444?style=for-the-badge&logo=rubyonrails&labelColor=D30001)
+  ![Javascript](https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+  ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.3-444444?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=06B6D4)
+  ![DaisyUI](https://img.shields.io/badge/DaisyUI-2.51.5-444444?style=for-the-badge&logo=daisyui&labelColor=5A0EF8)
+  ![p5.js](https://img.shields.io/badge/p5.js-1.6.0-444444?style=for-the-badge&logo=processingfoundation&labelColor=006699)
+  ![p5.js-svg](https://img.shields.io/badge/p5.js_svg-1.5.1-444444?style=for-the-badge&logo=processingfoundation&labelColor=006699)
+  ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+  
+  </div>
 
 </div>
 
@@ -37,6 +37,20 @@ Faciliart is a social network made on Ruby on Rails that allows the user to gene
 * 🧑 Profile page with arts, comments, orders and earnings of each user
 * 🔎 Platform-wide search for users and arts
 * 🛍️ Order creation, considering informations like item price and artist rate
+
+# Screenshots
+
+**Art editor - Overview**
+![Art editor - Overview](https://github.com/murciof/faciliart/assets/8229605/4f2c2fb8-c9f6-44ea-a9b8-9d85db49148a)
+
+**Art editor - New layer parameters**
+![Art editor - New layer parameters](https://github.com/murciof/faciliart/assets/8229605/27c2834e-adc2-49b2-a599-0994afe379c7)
+
+**Art visualization**
+![Art visualization](https://github.com/murciof/faciliart/assets/8229605/73a4aa25-ebea-4fc6-9f69-df41c435bf43)
+
+**Profile page**
+![Profile page](https://github.com/murciof/faciliart/assets/8229605/cbe298c2-c525-4e08-954e-007528692f53)
 
 # Setup
 
