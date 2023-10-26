@@ -2,31 +2,41 @@
 <img src="app/assets/images/brand.svg" alt="Faciliart" height="72">
 <p style="font-size:22px"></p>
 <p><strong>Generative art can be accessible</strong></p>
+
+<div align="center">
+  
+  [![Preview](https://img.shields.io/badge/Preview-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://facili.art)
+
+</div>
+
+<div align="center">
+  
+![Ruby](https://img.shields.io/badge/Ruby-3.2.2-444444?style=for-the-badge&logo=ruby&labelColor=CC342D)
+![Ruby on Rails](https://img.shields.io/badge/Rails-7.0.4-444444?style=for-the-badge&logo=rubyonrails&labelColor=D30001)
+![Javascript](https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.3-444444?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=06B6D4)
+![DaisyUI](https://img.shields.io/badge/DaisyUI-2.51.5-444444?style=for-the-badge&logo=daisyui&labelColor=5A0EF8)
+![p5.js](https://img.shields.io/badge/p5.js-1.6.0-444444?style=for-the-badge&logo=processingfoundation&labelColor=006699)
+![p5.js-svg](https://img.shields.io/badge/p5.js_svg-1.5.1-444444?style=for-the-badge&logo=processingfoundation&labelColor=006699)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+
+</div>
+
 </div>
 
 # What is Faciliart?
 
 Faciliart is a social network made on Ruby on Rails that allows the user to generate art using the web interface.
 
-# Main dependencies
+# Features
 
-## Back-end
-
-**Ruby:** 3.2.2
-
-**Rails:** 7.0.4
-
-## Front-end
-
-**TailwindCSS:** 3.3.3
-
-**DaisyUI:** 2.51.5
-
-**p5.js:** 1.6.0
-
-## Database
-
-**PostgreSQL**
+* Generative art creation without coding via UI with the selection of pre-programmed patterns and parameters
+* Art visualization page with order and comments section
+* Art rendering on visualization page without loss of quality using the [p5js-svg](https://github.com/zenozeng/p5.js-svg) library
+* User login and registration using the [Devise](https://github.com/heartcombo/devise) library
+* Profile page with arts, comments, orders and earnings of each user
+* Platform-wide search for users and arts
+* Order creation, considering informations like item price and artist rate
 
 # Setup
 
@@ -62,6 +72,8 @@ Later, to execute the server, just run:
 ```console
 $ ./bin/dev
 ```
+
+With the application running, you can create an admin account by simply registering a new user account. The platform assigns admin privileges for the first registered user.
 
 # Troubleshooting
 
