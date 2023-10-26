@@ -30,13 +30,13 @@ Faciliart is a social network made on Ruby on Rails that allows the user to gene
 
 # Features
 
-* Generative art creation without coding via UI with the selection of pre-programmed patterns and parameters
-* Art visualization page with order and comments section
-* Art rendering on visualization page without loss of quality using the [p5js-svg](https://github.com/zenozeng/p5.js-svg) library
-* User login and registration using the [Devise](https://github.com/heartcombo/devise) library
-* Profile page with arts, comments, orders and earnings of each user
-* Platform-wide search for users and arts
-* Order creation, considering informations like item price and artist rate
+* 🎨 Generative art creation without coding via UI with the selection of pre-programmed patterns and parameters
+* 🖥️ Art visualization page with order and comments section
+* 🖥️ Art auto-resizing on visualization page without loss of quality using the [p5js-svg](https://github.com/zenozeng/p5.js-svg) library
+* ✍️ User login and registration using the [Devise](https://github.com/heartcombo/devise) library
+* 🧑 Profile page with arts, comments, orders and earnings of each user
+* 🔎 Platform-wide search for users and arts
+* 🛍️ Order creation, considering informations like item price and artist rate
 
 # Setup
 
