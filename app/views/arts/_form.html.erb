@@ -139,13 +139,13 @@
                   id: "art_editor_update_layer" %>
               <%= link_to "Back",
                   "javascript:void(0)",
-                  onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main");
-                  ArtGenerator.delete_layer(art_editor_data, ArtGenerator.scan_unfinished_layer_index(art_editor_data))',
+                  onClick: 'UserInterface.switch_element_visibility("art_editor_parameters", "art_editor_main")',
                   class: "hidden flex-1 btn-primary btn-outline",
                   id: "art_editor_back_to_generators" %>
               <%= link_to "Back",
                   "javascript:void(0)",
-                  onClick: 'UserInterface.switch_element_visibility("art_editor_parameters","art_editor_generators")',
+                  onClick: 'UserInterface.switch_element_visibility("art_editor_parameters","art_editor_generators");
+                  ArtGenerator.delete_layer(art_editor_data, ArtGenerator.scan_unfinished_layer_index(art_editor_data))',
                   class: "hidden flex-1 btn-primary btn-outline",
                   id: "art_editor_back_to_main" %>
             </div>
