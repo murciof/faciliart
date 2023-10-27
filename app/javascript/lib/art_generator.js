@@ -335,7 +335,7 @@ export function render_layers(data, bg, p5) {
         )
         break
       case 'dynamicrectangles':
-        draw_dynamic_circles(
+        draw_dynamic_rectangles(
           data['layers'][i].coordinates,
           data['layers'][i].dimensions,
           p5
@@ -343,6 +343,28 @@ export function render_layers(data, bg, p5) {
         break
       case 'animatedrectangles':
         draw_animated_rectangles(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.limit,
+          p5
+        )
+        break
+      case 'staticellipses':
+        draw_static_ellipses(
+          data['layers'][i].coordinates,
+          data['layers'][i].parameters.width,
+          data['layers'][i].parameters.height,
+          p5
+        )
+        break
+      case 'dynamicellipses':
+        draw_dynamic_ellipses(
+          data['layers'][i].coordinates,
+          data['layers'][i].dimensions,
+          p5
+        )
+        break
+      case 'animatedellipses':
+        draw_animated_ellipses(
           data['layers'][i].coordinates,
           data['layers'][i].parameters.limit,
           p5
@@ -456,6 +478,34 @@ export function draw_dynamic_rectangles(coordinates, dimensions, p5) {
 export function draw_animated_rectangles(coordinates, limit, p5) {
   for (let i = 0; i < coordinates.length; i++) {
     p5.rect(
+      coordinates[i].x,
+      coordinates[i].y,
+      Math.floor(Math.random() * (limit - 1) + 1),
+      Math.floor(Math.random() * (limit - 1) + 1)
+    )
+  }
+}
+
+export function draw_static_ellipses(coordinates, width, height, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.ellipse(coordinates[i].x, coordinates[i].y, width, height)
+  }
+}
+
+export function draw_dynamic_ellipses(coordinates, dimensions, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.ellipse(
+      coordinates[i].x,
+      coordinates[i].y,
+      dimensions[i].x,
+      dimensions[i].y
+    )
+  }
+}
+
+export function draw_animated_ellipses(coordinates, limit, p5) {
+  for (let i = 0; i < coordinates.length; i++) {
+    p5.ellipse(
       coordinates[i].x,
       coordinates[i].y,
       Math.floor(Math.random() * (limit - 1) + 1),
