@@ -260,18 +260,21 @@ export function render_layers(data, bg, p5) {
   for (let i = 0; i < data['layers'].length; i++) {
     let color = ''
     if (data['layers'][i].parameters.color != '') {
-      color = data['layers'][i].parameters.color
+      color = p5.color(data['layers'][i].parameters.color)
     } else {
-      color = '#000000'
+      color = p5.color('#000000')
     }
     p5.beginShape()
-
+    if (typeof data['layers'][i].parameters.opacity !== 'undefined') {
+      color.setAlpha(data['layers'][i].parameters.opacity)
+    } else {
+      color.setAlpha(255)
+    }
     if (data['layers'][i].parameters.fill) {
       p5.fill(color)
     } else {
       p5.noFill()
     }
-
     p5.stroke(color)
     p5.strokeWeight(data['layers'][i].parameters.stroke)
     switch (data['layers'][i].generator) {

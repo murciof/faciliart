@@ -102,6 +102,14 @@
                 </div>
                 <%= render "shared/components/input/slider",
                   min: '0',
+                  max: '255',
+                  value: '255',
+                  step: nil,
+                  generator: generator[:generator].delete(' '),
+                  element: 'opacity',
+                  gendep: false %>
+                <%= render "shared/components/input/slider",
+                  min: '0',
                   max: '10',
                   value: '1',
                   step: '1',
@@ -156,9 +164,9 @@
           </div>
           <div class="flex flex-row gap-2 w-full">
             <% if user_signed_in? %>
-              <%= form.submit class: "btn btn-primary flex-1" %>
+              <%= form.submit "Save art", class: "btn btn-primary flex-1" %>
             <% else %>
-              <%= form.submit class: "btn btn-primary flex-1", disabled: true %>
+              <%= form.submit "Save art", class: "btn btn-primary flex-1", disabled: true %>
             <% end %>
           </div>
         </div>
