@@ -218,12 +218,14 @@ export function update_layer(data, index) {
     }
   }
   */
-
   let color_element = document.getElementById(
     'parameter-' + data['layers'][index].generator + '-color'
   )
   let fill_element = document.getElementById(
     'parameter-' + data['layers'][index].generator + '-fill'
+  )
+  let opacity_element = document.getElementById(
+    'parameter-' + data['layers'][index].generator + '-opacity'
   )
   let stroke_element = document.getElementById(
     'parameter-' + data['layers'][index].generator + '-stroke'
@@ -231,6 +233,7 @@ export function update_layer(data, index) {
 
   data['layers'][index].parameters.color = color_element.value
   data['layers'][index].parameters.fill = fill_element.checked
+  data['layers'][index].parameters.opacity = opacity_element.value
   data['layers'][index].parameters.stroke = stroke_element.value
 
   update_data_field(data)
