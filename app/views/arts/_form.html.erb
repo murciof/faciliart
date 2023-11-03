@@ -86,6 +86,10 @@
                     id: "art_editor_parameters_" + generator[:generator].delete(' ') + "_edit" do %>
                   Edit <%= generator[:generator].delete(' ') %>
                 <% end %>
+                <%= content_tag :div,
+                    id: "art_editor_parameters_" + generator[:generator].delete(' ') + "_description" do %>
+                  <%= generator[:description] %>
+                <% end %>
                 <div class="flex flex-row gap-2 items-end">
                   <%= render "shared/components/input/color_picker",
                       id: "parameter-" + generator[:generator].delete(' ') + "-color",
