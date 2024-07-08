@@ -22,6 +22,12 @@
   
   </div>
 
+  <div align="center">
+    
+  ![GNU GPL](https://img.shields.io/badge/v3-444444?style=for-the-badge&logo=gnu&label=GNU%20GPL&labelColor=663366)
+
+  </div>
+
 </div>
 
 # What is Faciliart?
