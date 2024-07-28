@@ -1,0 +1,15 @@
+services:
+- type: web
+  name: faciliart
+  runtime: ruby
+  repo: https://github.com/murciof/faciliart
+  plan: free
+  envVars:
+  - key: RAILS_MASTER_KEY
+    sync: false
+  - key: WEB_CONCURRENCY
+    sync: false
+  region: ohio
+  buildCommand: "./bin/render-build.sh"
+  startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
+version: "1"
