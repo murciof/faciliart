@@ -4,14 +4,16 @@
   <p><strong>Generative art can be accessible</strong></p>
   
   <div align="center">
-    
-  [![Demonstration video (in portuguese)](https://img.shields.io/badge/Demonstration-ff0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/TlHB5s3bWMM)
+
+  [![Demonstration](https://img.shields.io/badge/Demonstration-430098?style=for-the-badge&logo=heroku&logoColor=white)](https://youtu.be/TlHB5s3bWMM)
+  
+  [![Demonstration video (in portuguese)](https://img.shields.io/badge/Video\%20\(in\%20portuguese\)-ff0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/TlHB5s3bWMM)
   
   </div>
   
   <div align="center">
     
-  ![Ruby](https://img.shields.io/badge/Ruby-3.2.2-444444?style=for-the-badge&logo=ruby&labelColor=CC342D)
+  ![Ruby](https://img.shields.io/badge/Ruby-3.3.4-444444?style=for-the-badge&logo=ruby&labelColor=CC342D)
   ![Ruby on Rails](https://img.shields.io/badge/Rails-7.0.4-444444?style=for-the-badge&logo=rubyonrails&labelColor=D30001)
   ![Javascript](https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
   ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.3-444444?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=06B6D4)
